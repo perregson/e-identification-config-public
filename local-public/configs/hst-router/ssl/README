@@ -1,0 +1,8 @@
+test-bundle.crt includes the following PEM-format certificates (in the following order):
+----
+VRK_TEST_Root_CA
+VRK_CA_for_Test_Purposes_-_G2
+VRK_TEST_Root_CA
+VRK_CA_for_Test_Purposes
+test-CA
+test-iCA

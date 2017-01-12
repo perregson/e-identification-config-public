@@ -1,0 +1,7 @@
+.idea/
+auth-config.iml
+.project
+.settings/
+.classpath
+*.iml
+*.retry

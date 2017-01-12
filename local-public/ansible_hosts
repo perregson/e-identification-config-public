@@ -1,0 +1,74 @@
+[integration-identity-providers]
+localhost ansible_connection=local
+
+[proxy-servers]
+localhost ansible_connection=local
+
+[service-providers]
+localhost ansible_connection=local
+
+[identity-providers]
+localhost ansible_connection=local
+
+[metadata-servers]
+localhost ansible_connection=local
+
+[e-identification-metadata-db-servers]
+localhost ansible_connection=local
+
+[external-routers]
+localhost ansible_connection=local
+
+[internal-routers]
+localhost ansible_connection=local
+
+[static-nginx-server]
+localhost ansible_connection=local
+
+[router-servers]
+localhost ansible_connection=local
+
+[vtj-client]
+localhost ansible_connection=local
+
+[vtj-client2]
+localhost ansible_connection=local
+
+[fake-vtj]
+localhost ansible_connection=local
+
+[metadata-psql]
+localhost ansible_connection=local
+
+[e-identification-internal-router]
+localhost ansible_connection=local
+
+[e-identification-external-router]
+localhost ansible_connection=local
+
+[e-identification-metadata-db-servers]
+localhost ansible_connection=local
+
+#[e-identification-hst-idps]
+#localhost ansible_connection=local
+
+#[e-identification-hst-router]
+#localhost ansible_connection=local
+
+[feedback-servers]
+localhost ansible_connection=local
+
+[localisations]
+localhost ansible_connection=local
+
+#[sema]
+#localhost ansible_connection=local
+
+[local]
+localhost ansible_connection=local
+
+[e-identification-mobile-idps]
+localhost ansible_connection=local
+
+[test-service]
+localhost ansible_connection=local

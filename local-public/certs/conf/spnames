@@ -1,0 +1,6 @@
+# Service Provider list
+# Generates SP metadata for following SPs. Assumes that <name>.yml found in config base directory
+#
+sp
+test-service
+# keep this last line intact

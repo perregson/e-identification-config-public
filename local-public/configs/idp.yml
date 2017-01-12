@@ -1,0 +1,47 @@
+  smetadata_location: "https://{{ int_router_host }}:{{ int_router_port }}/static/metadata/service-sp-metadata.xml"
+  smetadata_timeout: '2000'
+  smetadata_refresh_rate_minutes: '5'
+  idpconf_keystore_pass: '{{ core_idpconf_idp_keystore_pass_value }}'
+  idpconf_sealer_storepass: '{{ core_idpconf_sealer_keystore_pass_value }}'
+  idpconf_sealer_keypass: '{{ core_idpconf_sealer_keystore_pass_value }}'
+  idpconf_shibboleth_version: 'shibboleth-identity-provider-3.2.1'
+  idpconf_host: '{{ ext_router_host }}'
+  idpconf_scope: '{{ ext_router_host }}'
+  idpconf_entityid: 'https://tunnistaminen.test/idp2'
+  idpconf_displayname: "KaPA DEV IdP"
+  idpconf_displayname_fi: "KaPA DEV IdP fi"
+  idpconf_displayname_en: "KaPA DEV IdP en"
+  idpconf_displayname_sv: "KaPA DEV IdP sv"
+  idpconf_description: "KaPA DEV IdP"
+  idpconf_description_fi: "KaPA DEV IdP desc fi"
+  idpconf_description_en: "KaPA DEV IdP desc en"
+  idpconf_description_sv: "KaPA DEV IdP desc sv"
+  idpconf_kapa_image_url: "https://{{ ext_router_host }}/static/img/kapa.png"
+  idpconf_logo_height: "70"
+  idpconf_logo_width: "229"
+  idpconf_organisation_name: "KaPA e-identification development"
+  idpconf_organisation_name_fi: "KaPA e-identification development fi"
+  idpconf_organisation_name_en: "KaPA e-identification development en"
+  idpconf_organisation_name_sv: "KaPA e-identification development sv"
+  idpconf_organisation_displayname_fi: "KaPA e-identification development desc fi"
+  idpconf_organisation_displayname_en: "KaPA e-identification development desc en"
+  idpconf_organisation_displayname_sv: "KaPA e-identification development desc sv"
+  idpconf_organisation_url: "http://vm.fi/palveluarkkitehtuuri"
+  idpconf_organisation_url_fi: "http://vm.fi/palveluarkkitehtuuri"
+  idpconf_organisation_url_en: "http://vm.fi/palveluarkkitehtuuri"
+  idpconf_organisation_url_sv: "http://vm.fi/palveluarkkitehtuuri"
+  idpconf_contact_given_name: "KaPA e-identification development"
+  idpconf_contact_surname: "KaPA e-identification development"
+  idpconf_contact_email: "admin@tunnistaminen.test"
+  idpconf_subj: "/C=FI/ST=Uusimaa/L=Helsinki/O=Kapapub/OU=Kapapub/CN={{ ext_router_host }}"
+  sp_redirect_url: "/sp-secured?tid="
+  sp_login_path: "/Shibboleth.sso/Login?SAMLDS=1"
+  idpconf_error_url: "https://{{ ext_router_host }}/500/"
+  shibgen_idp_id: "pub_core_idp"
+  idpconf_access_allowed_ip_range: "\"#{ {'192.168.0.1/32', '::1/128'} }\""
+  idpconf_session_length: 'PT32M'
+  idpconf_session_slop: 'PT30M'
+  idpconf_service_sp_metadata_url: 'https://{{ int_router_host }}:{{ int_router_port }}/static/metadata/service-sp-metadata.xml'
+  idpconf_idp_shibboleth_error_tag: 'coreidpshib'
+  idpconf_idp_tomcat_error_tag: 'coreidptc'
+  idpconf_binding_path: 'idp'

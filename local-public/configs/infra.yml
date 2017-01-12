@@ -1,0 +1,162 @@
+---
+  sp_host: 'tun-pub-sp1'
+  sp_port: '8030'
+  sp_target_port: '443'
+  sp_ports: '-p {{ sp_port }}:{{ sp_target_port }}'
+  sp_container_name: 'service-provider-container'
+  sp_imagename: "service-provider:local"
+  sp_directory: "sp"
+  sp_mounts: "-v {{ deploydir }}:/data00/deploy:z -v {{ logdir }}:/data00/logs:z"
+  testsp_host: 'tun-pub-router1'
+  testsp_port: '443'
+  testsp_ports: '-p 192.168.0.3:{{ testsp_port }}:443'
+  testsp_mounts: "-v {{ deploydir }}:/data00/deploy:z -v {{ logdir }}:/data00/logs:z"
+  testsp_directory: "test-service"
+  testsp_imagename: "e-identification-test-service:local"
+  testsp_container_name: 'test-service-container'
+  idp_host: 'tun-pub-idp1'
+  idp_port: '8031'
+  idp_target_port: '8443'
+  idp_ports: '-p {{ idp_port }}:{{ idp_target_port }}'
+  idp_container_name: 'identity-provider-container'
+  idp_imagename: "identity-provider:local"
+  idp_directory: "idp"
+  idp_mounts: "-v {{ deploydir }}:/data00/deploy:z -v {{ logdir }}:/data00/logs:z"
+  proxy_host: 'tun-pub-beprx1'
+  proxy_port: '8032'
+  proxy_target_port: '8443'
+  proxy_ports: '-p {{ proxy_port }}:{{ proxy_target_port }}'
+  proxy_container_name: 'proxy-server-container'
+  proxy_imagename: "proxy-server:local"
+  proxy_directory: "proxy"
+  proxy_mounts: "-v {{ deploydir }}:/data00/deploy:z -v {{ logdir }}:/data00/logs:z"
+  metadata_host: 'tun-pub-metadata1'
+  metadata_port: '8033'
+  metadata_ports: '-p {{ metadata_port }}:8443'
+  metadata_postgres_host: 'tun-pub-metadata1'
+  metadata_postgres_port: '5432'
+  metadata_container_name: 'metadata-server-container'
+  metadata_imagename: "metadata-server:local"
+  metadata_directory: "metadata"
+  metadata_mounts: "-v {{ deploydir }}:/data00/deploy:z -v {{ logdir }}:/data00/logs:z"
+  metadata_db_container_name: 'metadata-postgres'
+  metadata_db_directory: "metadata"
+  integration_idp_host: 'tun-pub-adap1'
+  integration_idp_port: '8034'
+  integration_idp_target_port: '8443'
+  integration_idp_ports: '-p {{ integration_idp_port }}:{{ integration_idp_target_port }}'
+  integration_idp_container_name: 'integration-identity-provider-container'
+  integration_idp_imagename: "integration-identity-provider:local"
+  integration_idp_directory: "tupasidp"
+  integration_idp_mounts: "-v {{ deploydir }}:/data00/deploy:z -v {{ logdir }}:/data00/logs:z"
+  hst_idp_host: 'tun-pub-adap1'
+  hst_idp_port: '8038'
+  hst_idp_target_port: '8443'
+  hst_idp_ports: '-p {{ hst_idp_port }}:{{ hst_idp_target_port }}'
+  hst_container_name: 'hst-identity-provider-container'
+  hst_imagename: "e-identification-hst-idp:local"
+  hst_directory: "hst-idp"
+  hst_idp_mounts: "-v {{ deploydir }}:/data00/deploy:z -v {{ logdir }}:/data00/logs:z -v {{ host_crl_dir_path }}:{{ crl_dir_path }}:z -v {{ host_ica_dir_path }}:{{ ica_dir_path }}:z -v {{ host_ca_dir_path }}:{{ ca_dir_path}}:z"
+  vtj_host: 'tun-pub-beprx1'
+  vtj_host2: 'tun-pub-cache1'
+  vtj_port: '8035'
+  vtj_port2: '8044'
+  vtj_target_port: '8035'
+  vtj_ports: '  -p {{ vtj_port }}:{{ vtj_target_port }}'
+  vtj_ports2: '-p {{ vtj_port2 }}:{{ vtj_target_port }}'
+  vtj_container_name: 'vtj-client-container'
+  vtj_container_name2: 'vtj-client-container2'
+  vtj_imagename: "e-identification-vtj-client:local"
+  vtj_directory: "vtj"
+  vtj_directory2: "vtj2"
+  vtj_mounts: "-v {{ deploydir }}:/data00/deploy:z -v {{ logdir }}:/data00/logs:z"
+  static_host: 'tun-pub-cache1'
+  static_port: '8036'
+  static_ports: '-p {{ static_port }}:443'
+  static_mounts: "-v {{ deploydir }}/nginx:/etc/nginx/conf.d:z -v {{ deploydir }}/ssl:/etc/nginx/ssl:z -v {{ deploydir }}/resources/js/config.js:/usr/share/nginx/html/resources/js/config.js:z -v {{ deploydir }}/metadata:/usr/share/nginx/html/metadata:z -v {{ logdir }}:/var/log/nginx:z -v {{ deploy_root }}/{{ localisation_directory }}/localisation_files:/usr/share/nginx/html/localisation:z -v {{ deploydir }}/git-info:/usr/share/nginx/html/version.txt:z -v {{ deploydir }}/disruption_message.json:/usr/share/nginx/html/resources/js/disruption_data/disruption_message.json:z"
+  static_directory: "static"
+  static_imagename: "e-identification-static:local"
+  static_container_name: 'e-identification-static-container'
+  localisation_host: 'tun-pub-cache1'
+  localisation_port: '8070'
+  localisation_ports: '-p {{ localisation_port }}:443'
+  localisation_mounts: "-v {{ deploydir }}:/data00/deploy:z -v {{ logdir }}:/data00/logs:z"
+  localisation_directory: "localisation"
+  localisation_imagename: "e-identification-localisation-service:local"
+  localisation_container_name: 'e-identification-localisation-service-container'  
+  int_router_host: 'tun-pub-cache1'
+  int_router_port: '8037'
+  int_router_ports: '-p {{ int_router_port }}:443'
+  int_router_mounts: "-v {{ deploydir }}/nginx:/etc/nginx/conf.d:z -v {{ deploydir }}/ssl:/etc/nginx/ssl:z -v {{ logdir }}:/var/log/nginx:z"
+  int_router_directory: "internal-router"
+  int_router_imagename: "e-identification-internal-router:local"
+  int_router_container_name: 'e-identification-internal-router-container'
+  ext_router_host: 'tunnistaminen.test'
+  ext_router_internal_host: 'tun-pub-router1'
+  ext_router_port: '443'
+  ext_router_ports: '-p 192.168.0.1:{{ ext_router_port }}:443 -p 192.168.0.1:80:80'
+  ext_router_mounts: "-v {{ deploydir }}/nginx:/etc/nginx/conf.d:z -v {{ external_router_host_cert_path }}:/etc/nginx/ssl:z -v {{ deploydir }}/html:/etc/nginx/html:z -v {{ logdir }}:/var/log/nginx:z -v {{ deploydir }}/nginx_cache:/nginx_cache:Z"
+  ext_router_directory: "external-router"
+  ext_router_imagename: "e-identification-external-router:local"
+  ext_router_container_name: 'e-identification-external-router-container'
+  hst_router_host: 'kortti.tunnistaminen.test'
+  hst_router_port: '443'
+  hst_router_target_port: '443'
+  hst_router_ports: '-p 192.168.0.2:{{ hst_router_port }}:{{ hst_router_target_port }}'
+  hst_router_mounts: "   -v {{ deploydir }}/html:/html:z -v {{ deploydir }}/certcheck:/certcheck:z -v {{ deploydir }}/apache/conf/apache-hst.conf:/usr/local/apache2/conf/apache-hst.conf:z -v {{ deploydir }}/apache/conf/httpd.conf:/usr/local/apache2/conf/httpd.conf:z -v {{ hst_router_host_cert_path }}:/etc/apache/ssl:z -v {{ logdir }}:/data00/logs:z"
+  hst_router_directory: "hst-router"
+  hst_router_imagename: "e-identification-hst-router:local"
+  hst_router_container_name: 'e-identification-hst-router-container'
+  feedback_host: 'tun-pub-cache1'
+  feedback_port: '8039'
+  feedback_target_port: '8443'
+  feedback_ports: '-p {{ feedback_port }}:{{ feedback_target_port }}'
+  feedback_container_name: 'e-identification-feedback-container'
+  feedback_directory: "feedback"
+  feedback_mounts: "-v {{ deploydir }}/config:/data00/deploy/config:z -v {{ deploydir }}/ssl:/data00/deploy/ssl:z -v {{ logdir }}:/data00/logs:z"
+  feedback_imagename: "e-identification-feedback:local"
+  fake_vtj_host: 'tun-pub-beprx1'
+  fake_vtj_port: '8041'
+  fake_vtj_port2: '8043'
+  fake_vtj_ports: '  -p {{ fake_vtj_port }}:8080 -p {{ fake_vtj_port2 }}:8081'
+  fake_vtj_container_name: 'fake-vtj-container'
+  fake_vtj_imagename: "e-identification-fake-vtj:local"
+  fake_vtj_directory: "fake-vtj"
+  fake_vtj_mounts: "-v {{ deploydir }}:/data00/deploy:z -v {{ logdir }}:/data00/logs:z -v /var/run/docker.sock:/var/run/docker.sock:z -v {{ deploy_root }}/logs:/tmp/logs:z"
+  sema_host: 'tun-pub-beprx1'
+  sema_port: '8042'
+  sema_target_port: '8080'
+  sema_ports: '-p {{ sema_port }}:{{ sema_target_port }}'
+  sema_container_name: 'e-identification-sema-container'
+  sema_directory: "sema"
+  sema_mounts: "-v {{ deploydir }}:/data00/deploy:z -v {{ logdir }}:/data00/logs:z"
+  sema_imagename: "e-identification-sema:local"
+  mobile_idp_host: 'tun-pub-adap1'
+  mobile_idp_port: '8045'
+  mobile_idp_target_port: '8443'
+  mobile_idp_ports: '-p {{ mobile_idp_port }}:{{ mobile_idp_target_port }}'
+  mobile_idp_container_name: 'mobile-identity-provider-container'
+  mobile_idp_imagename: "e-identification-mobile-idp:local"
+  mobile_idp_directory: "mobile-idp"
+  mobile_idp_mounts: "-v {{ deploydir }}:/data00/deploy:z -v {{ logdir }}:/data00/logs:z"
+#
+  env: "local"
+  log_level: "DEBUG"
+  docker_registry: "dev-docker-registry.kapa.ware.fi"
+  additional_docker_configs: " --add-host tunnistaminen.test:192.168.0.1 --add-host kortti.tunnistaminen.test:192.168.0.2 --add-host {{ sp_host }}:192.168.0.1 --add-host {{ idp_host }}:192.168.0.1 --add-host {{ proxy_host }}:192.168.0.1 --add-host {{ metadata_host }}:192.168.0.1 --add-host {{ integration_idp_host }}:192.168.0.1 --add-host {{ proxy_host }}:192.168.0.1 --add-host {{ int_router_host }}:192.168.0.1 --add-host {{ int_router_host }}:192.168.0.1 {{ '--add-host ' ~ mobile_backend_mssap_host ~ ':192.168.0.10' if mobile_backend_mssap_host is defined else ''}}"
+  default_error_url: "https://{{ ext_router_host }}/500/"
+  discovery_page_path: "https://{{ ext_router_host }}/sivut/discovery-page/"
+  java_xmx_megabytes: "1024"
+  tomcat_ciphers: "TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384,TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256,TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA,TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA,TLS_DHE_RSA_WITH_AES_256_CBC_SHA256,TLS_DHE_RSA_WITH_AES_128_GCM_SHA256,TLS_DHE_RSA_WITH_AES_128_CBC_SHA256,TLS_DHE_RSA_WITH_AES_256_CBC_SHA,TLS_DHE_RSA_WITH_AES_128_CBC_SHA,TLS_RSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_128_GCM_SHA256,TLS_RSA_WITH_AES_256_CBC_SHA256,TLS_RSA_WITH_AES_128_CBC_SHA256,TLS_RSA_WITH_AES_256_CBC_SHA,TLS_RSA_WITH_AES_128_CBC_SHA"
+  nginx_ciphers: "-ALL:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-SHA384:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-SHA256:ECDHE-RSA-AES256-SHA:ECDHE-RSA-AES128-SHA:DHE-RSA-AES256-SHA256:DHE-RSA-AES128-GCM-SHA256:DHE-RSA-AES128-SHA256:DHE-RSA-AES256-SHA:DHE-RSA-AES128-SHA:AES256-GCM-SHA384:AES128-GCM-SHA256:AES256-SHA256:AES128-SHA256:AES256-SHA:AES128-SHA"
+  tomcat_threads: "500"
+  proxy_rest_url: 'https://{{ int_router_host }}:{{ int_router_port }}/proxy'
+  phase_id_time_interval: '300'
+  phase_id_time_built_interval: '60'
+  jdbc_db_url: 'jdbc:postgresql://{{ metadata_postgres_host }}:{{ metadata_postgres_port }}/metadata'
+  apro_ca_cert: "kapa-ca-pub-cert.pem"
+  apro_ssl_key: "ssl.key"
+  apro_ssl_cert: "ssl.crt"
+  shibgen_outputpath: "certs"
+  shibgen_core_idp_id: "pub_core_idp"
+  shibgen_core_sp_id: "pub_core_sp"

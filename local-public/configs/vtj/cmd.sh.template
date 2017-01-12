@@ -1,0 +1,2 @@
+#!/bin/sh
+java -Djavax.net.ssl.trustStore={{ xroad_truststore_path }} -Djavax.net.ssl.trustStorePassword={{ xroad_truststore_password }} -Dlogging.config=/logback.xml -jar e-identification-vtj-client.jar

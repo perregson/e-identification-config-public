@@ -1,0 +1,47 @@
+server {
+    root /usr/share/nginx/html;
+    server_name {{ static_host }};
+    listen 443 ssl;
+    ssl on;
+    ssl_certificate /etc/nginx/ssl/{{ apro_ssl_cert }};
+    ssl_certificate_key /etc/nginx/ssl/{{ apro_ssl_key }};
+    ssl_client_certificate /etc/nginx/ssl/{{ apro_ca_cert }};
+
+
+
+    # JSON
+    location ~* \.json$ {
+        expires 1m;
+        add_header Cache-Control "public";
+    }
+    # Media: images, fonts
+    location ~* \.(?:jpg|jpeg|gif|png|svg|woff|woff2)$ {
+        expires 7d;
+        add_header Cache-Control "public";
+    }
+
+    # Stylesheets
+    location ~* \.css$ {
+        expires 1h;
+        add_header Cache-Control "public";
+    }
+
+    # External Javascript
+    location ~ ^/resources/js/vendor/.*js$ {
+        expires 7d;
+        add_header Cache-Control "public";
+    }
+
+    # Own Javascript
+    location = /resources/js/app.js {
+        expires 10m;
+    }
+
+    location /sivut {
+        expires 10m;
+        add_header Cache-Control "public";
+        try_files $uri /sivut/index.html;
+    }
+
+}
+
