@@ -1,0 +1,15 @@
+{
+  "display" : false,
+  "fi": {
+    "message": "Suomeksi, error",
+    "date": "dd.mm.yyyy hh:mm"
+  },
+  "sv": {
+    "message": "På svenska, error",
+    "date": "dd.mm.yyyy hh:mm"
+  },
+  "en": {
+    "message": "English, error",
+    "date": "yyyy-mm-dd hh:mm"
+  }
+}

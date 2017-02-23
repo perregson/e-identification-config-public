@@ -1,0 +1,4 @@
+  transifex_location: "http://localhost/"
+  transifex_uid: 'changeme'
+  transifex_pwd: 'changeme'
+  transifex_use_outgoing_proxy_host_ipv4: "TBD.TBD.TBD.TBD"

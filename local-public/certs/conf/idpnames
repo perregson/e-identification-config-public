@@ -1,0 +1,9 @@
+# Identity Provider list
+# Generates IDP metadata for following IDPs. Assumes that <name>.yml found in config base directory
+# Prefix with - to exclude from static metadata (service-idp-metadata.xml)
+#
+-idp
+tupasidp
+hst-idp
+mobile-idp
+# keep this last line intact

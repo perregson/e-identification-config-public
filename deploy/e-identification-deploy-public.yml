@@ -1,0 +1,577 @@
+---
+# Static content Nginx playbook
+
+- hosts: static-nginx-server
+  sudo: yes
+  roles:
+    - e-identification-deploy
+  vars:
+    host: "{{ static_host }}"
+    ports: "{{ static_ports }}"
+    container_name:  "{{ static_container_name }}"
+    deploydir: "{{ deploy_root }}/{{ static_directory }}/"
+    confdir: "{{ conf_root }}/configs/{{ static_directory }}/"
+    logdir: "{{ deploy_root }}/logs/static/"
+    imagename: "{{ static_imagename }}"
+    aprovarsfile: "{{ conf_root }}/configs/static.yml"
+    infrafile: "{{ conf_root }}/configs/infra.yml"
+    mounts: "{{ static_mounts }}"
+    local_variables: "{{ conf_root }}/local_configs/local_variables.yml"
+  tags:
+    - static
+    - all
+    - all-local
+    - all-dev
+    - all-kete
+    - all-test
+
+  vars_files:
+    - "{{ local_variables }}"
+    - "{{ aprovarsfile }}"
+    - "{{ infrafile }}"
+
+# e-identification-internal-router playbook
+
+- hosts: e-identification-internal-router
+  sudo: yes
+  roles:
+    - e-identification-deploy
+  vars:
+    host: "{{ int_router_host }}"
+    ports: "{{ int_router_ports }}"
+    container_name:  "{{ int_router_container_name }}"
+    deploydir: "{{ deploy_root }}/{{ int_router_directory }}/"
+    confdir: "{{ conf_root }}/configs/{{ int_router_directory }}/"
+    logdir: "{{ deploy_root }}/logs/e-identification-internal-router/"
+    imagename: "{{ int_router_imagename }}"
+    aprovarsfile: "{{ conf_root }}/configs/internal-router.yml"
+    infrafile: "{{ conf_root }}/configs/infra.yml"
+    mounts: "{{ int_router_mounts }}"
+    local_variables: "{{ conf_root }}/local_configs/local_variables.yml"
+  tags:
+    - internal-router
+    - all-local
+    - all-dev
+    - all-kete
+    - all-test
+    - all
+
+  vars_files:
+    - "{{ local_variables }}"
+    - "{{ aprovarsfile }}"
+    - "{{ infrafile }}"
+
+# e-identification-external-router playbook
+
+- hosts: e-identification-external-router
+  sudo: yes
+  roles:
+    - e-identification-deploy
+  vars:
+    host: "{{ ext_router_host }}"
+    ports: "{{ ext_router_ports }}"
+    container_name:  "{{ ext_router_container_name }}"
+    deploydir: "{{ deploy_root }}/{{ ext_router_directory }}/"
+    confdir: "{{ conf_root }}/configs/{{ ext_router_directory }}/"
+    logdir: "{{ deploy_root }}/logs/e-identification-external-router/"
+    imagename: "{{ ext_router_imagename }}"
+    aprovarsfile: "{{ conf_root }}/configs/external-router.yml"
+    infrafile: "{{ conf_root }}/configs/infra.yml"
+    mounts: "{{ ext_router_mounts }}"
+    local_variables: "{{ conf_root }}/local_configs/local_variables.yml"
+  tags:
+    - external-router
+    - all-local
+    - all-dev
+    - all-kete
+    - all-test
+    - all
+
+  vars_files:
+    - "{{ local_variables }}"
+    - "{{ aprovarsfile }}"
+    - "{{ infrafile }}"
+
+# e-identification-hst-router playbook
+
+- hosts: e-identification-hst-router
+  sudo: yes
+  roles:
+    - e-identification-deploy
+  vars:
+    host: "{{ hst_router_host }}"
+    ports: "{{ hst_router_ports }}"
+    container_name:  "{{ hst_router_container_name }}"
+    deploydir: "{{ deploy_root }}/{{ hst_router_directory }}/"
+    confdir: "{{ conf_root }}/configs/{{ hst_router_directory }}/"
+    logdir: "{{ deploy_root }}/logs/e-identification-hst-router/"
+    imagename: "{{ hst_router_imagename }}"
+    aprovarsfile: "{{ conf_root }}/configs/hst-idp.yml"
+    infrafile: "{{ conf_root }}/configs/infra.yml"
+    mounts: "{{ hst_router_mounts }}"
+    local_variables: "{{ conf_root }}/local_configs/local_variables.yml"
+  tags:
+    - hst-router
+    - all-local
+    - all-dev
+    - all-kete
+    - all-test
+    - all
+
+  vars_files:
+    - "{{ local_variables }}"
+    - "{{ aprovarsfile }}"
+    - "{{ infrafile }}"
+
+
+- hosts: metadata-servers
+  sudo: yes
+  roles:
+    - e-identification-apro-certs
+    - e-identification-deploy
+  vars:
+    host: "{{ metadata_host }}"
+    ports: "{{ metadata_ports }}"
+    target_port: "{{ metadata_target_port }}"
+    postgres_port: "{{ metadata_postgres_port }}"
+    container_name:  "{{ metadata_container_name }}"
+    deploydir: "{{ deploy_root }}/{{ metadata_directory }}/"
+    confdir: "{{ conf_root }}/configs/{{ metadata_directory }}/"
+    logdir: "{{ deploy_root }}/logs/metadata-server/"
+    imagename: "{{ metadata_imagename }}"
+    aprovarsfile: "{{ conf_root }}/configs/metadata.yml"
+    infrafile: "{{ conf_root }}/configs/infra.yml"
+    mounts: "{{ metadata_mounts }}"
+    local_variables: "{{ conf_root }}/local_configs/local_variables.yml"
+  tags:
+    - metadata
+    - all-local
+    - all-dev
+    - all-kete
+    - all-test
+    - all
+  vars_files:
+    - "{{ local_variables }}"
+    - "{{ aprovarsfile }}"
+    - "{{ infrafile }}"
+
+
+#- hosts: local
+- hosts: proxy-servers
+  sudo: yes
+  roles:
+    - e-identification-apro-certs
+    - e-identification-deploy
+  vars:
+    host: "{{ proxy_host }}"
+    ports: "{{ proxy_ports }}"
+    target_port: "{{ proxy_target_port }}"
+    postgres_port: "{{ proxy_postgres_port }}"
+    container_name:  "{{ proxy_container_name }}"
+    deploydir: "{{ deploy_root }}/{{ proxy_directory }}/"
+    confdir: "{{ conf_root }}/configs/{{ proxy_directory }}/"
+    logdir: "{{ deploy_root }}/logs/proxy-server/"
+    imagename: "{{ proxy_imagename }}"
+    aprovarsfile: "{{ conf_root }}/configs/proxy.yml"
+    infrafile: "{{ conf_root }}/configs/infra.yml"
+    mounts: "{{ proxy_mounts }}"
+    local_variables: "{{ conf_root }}/local_configs/local_variables.yml"
+  tags:
+    - proxy
+    - all-local
+    - all-dev
+    - all-kete
+    - all-test
+    - all
+  vars_files:
+    - "{{ local_variables }}"
+    - "{{ aprovarsfile }}"
+    - "{{ infrafile }}"
+
+# Service Provider Playbook
+
+- hosts: service-providers
+  sudo: yes
+  roles:
+    - e-identification-apro-certs
+    - e-identification-deploy
+
+  vars:
+    host: "{{ sp_host }}"
+    ports: "{{ sp_ports }}"
+    target_port: "{{ sp_target_port }}"
+    postgres_port: "{{ sp_postgres_port }}"
+    container_name:  "{{ sp_container_name }}"
+    deploydir: "{{ deploy_root }}/{{ sp_directory }}/"
+    confdir: "{{ conf_root }}/configs/{{ sp_directory }}/"
+    logdir: "{{ deploy_root }}/logs/service-provider/"
+    imagename: "{{ sp_imagename }}"
+    aprovarsfile: "{{ conf_root }}/configs/sp.yml"
+    infrafile: "{{ conf_root }}/configs/infra.yml"
+    mounts: "{{ sp_mounts }}"
+    local_variables: "{{ conf_root }}/local_configs/local_variables.yml"
+  tags:
+    - sp
+    - all-local
+    - all-dev
+    - all-kete
+    - all-test
+    - all
+  vars_files:
+    - "{{ local_variables }}"
+    - "{{ aprovarsfile }}"
+    - "{{ infrafile }}"
+
+# Identity Provider Playbook
+
+- hosts: identity-providers
+  sudo: yes
+  roles:
+    - e-identification-apro-certs
+    - e-identification-deploy
+  vars:
+    host: "{{ idp_host }}"
+    ports: "{{ idp_ports }}"
+    target_port: "{{ idp_target_port }}"
+    postgres_port: "{{ idp_postgres_port }}"
+    container_name:  "{{ idp_container_name }}"
+    deploydir: "{{ deploy_root }}/{{ idp_directory }}/"
+    confdir: "{{ conf_root }}/configs/{{ idp_directory }}/"
+    logdir: "{{ deploy_root }}/logs/identity-provider/"
+    imagename: "{{ idp_imagename }}"
+    aprovarsfile: "{{ conf_root }}/configs/idp.yml"
+    infrafile: "{{ conf_root }}/configs/infra.yml"
+    mounts: "{{ idp_mounts }}"
+    local_variables: "{{ conf_root }}/local_configs/local_variables.yml"
+  tags:
+    - idp
+    - all-local
+    - all-dev
+    - all-kete
+    - all-test
+    - all
+  vars_files:
+    - "{{ local_variables }}"
+    - "{{ aprovarsfile }}"
+    - "{{ infrafile }}"
+
+# Integration Identity Provider Playbook
+
+- hosts: integration-identity-providers
+  sudo: yes
+  roles:
+    - e-identification-apro-certs
+    - e-identification-deploy
+
+  vars:
+    host: "{{ integration_idp_host }}"
+    ports: "{{ integration_idp_ports }}"
+    target_port: "{{ integration_idp_target_port }}"
+    container_name:  "{{ integration_idp_container_name }}"
+    deploydir: "{{ deploy_root }}/{{ integration_idp_directory }}/"
+    confdir: "{{ conf_root }}/configs/{{ integration_idp_directory }}/"
+    logdir: "{{ deploy_root }}/logs/identity-provider-tupasidp/"
+    imagename: "{{ integration_idp_imagename }}"
+    aprovarsfile: "{{ conf_root }}/configs/tupasidp.yml"
+    infrafile: "{{ conf_root }}/configs/infra.yml"
+    mounts: "{{ integration_idp_mounts }}"
+    local_variables: "{{ conf_root }}/local_configs/local_variables.yml"
+  tags:
+    - tupasidp
+    - all-local
+    - all-dev
+    - all-kete
+    - all-test
+    - all
+  vars_files:
+    - "{{ local_variables }}"
+    - "{{ aprovarsfile }}"
+    - "{{ infrafile }}"
+
+# Vtj-client playbook
+- hosts: vtj-client
+  sudo: yes
+  roles:
+    - e-identification-deploy
+
+  vars:
+    host: "{{ vtj_host }}"
+    ports: "{{ vtj_ports }}"
+    container_name:  "{{ vtj_container_name }}"
+    deploydir: "{{ deploy_root }}/{{ vtj_directory }}/"
+    confdir: "{{ conf_root }}/configs/{{ vtj_directory }}/"
+    logdir: "{{ deploy_root }}/logs/vtj-client/"
+    imagename: "{{ vtj_imagename }}"
+    aprovarsfile: "{{ conf_root }}/configs/vtj.yml"
+    infrafile: "{{ conf_root }}/configs/infra.yml"
+    mounts: "{{ vtj_mounts }}"
+    local_variables: "{{ conf_root }}/local_configs/local_variables.yml"
+  tags:
+    - vtj
+    - all-local
+    - all-dev
+    - all-kete
+    - all-test
+    - all
+  vars_files:
+    - "{{ local_variables }}"
+    - "{{ aprovarsfile }}"
+    - "{{ infrafile }}"
+
+# Vtj-client2 playbook
+- hosts: vtj-client2
+  sudo: yes
+  roles:
+    - e-identification-deploy
+
+  vars:
+    host: "{{ vtj_host2 }}"
+    ports: "{{ vtj_ports2 }}"
+    container_name:  "{{ vtj_container_name2 }}"
+    deploydir: "{{ deploy_root }}/{{ vtj_directory2 }}/"
+    confdir: "{{ conf_root }}/configs/{{ vtj_directory2 }}/"
+    logdir: "{{ deploy_root }}/logs/vtj-client2/"
+    imagename: "{{ vtj_imagename }}"
+    aprovarsfile: "{{ conf_root }}/configs/vtj2.yml"
+    infrafile: "{{ conf_root }}/configs/infra.yml"
+    mounts: "{{ vtj_mounts }}"
+    local_variables: "{{ conf_root }}/local_configs/local_variables.yml"
+  tags:
+    - vtj2
+    - all-local
+    - all-dev
+    - all-kete
+    - all-test
+    - all
+  vars_files:
+    - "{{ local_variables }}"
+    - "{{ aprovarsfile }}"
+    - "{{ infrafile }}"
+
+# Fake-Vtj playbook
+- hosts: fake-vtj
+  sudo: yes
+  roles:
+    - e-identification-deploy
+
+  vars:
+    host: "{{ fake_vtj_host }}"
+    ports: "{{ fake_vtj_ports }}"
+    container_name:  "{{ fake_vtj_container_name }}"
+    deploydir: "{{ deploy_root }}/{{ fake_vtj_directory }}/"
+    confdir: "{{ conf_root }}/configs/{{ fake_vtj_directory }}/"
+    logdir: "{{ deploy_root }}/logs/fake-vtj/"
+    imagename: "{{ fake_vtj_imagename }}"
+    aprovarsfile: "{{ conf_root }}/configs/fake-vtj.yml"
+    infrafile: "{{ conf_root }}/configs/infra.yml"
+    mounts: "{{ fake_vtj_mounts }}"
+    local_variables: "{{ conf_root }}/local_configs/local_variables.yml"
+  tags:
+    - fake-vtj
+    - all-local
+    - all-dev
+    - all-kete
+    - all-test
+    - all
+  vars_files:
+    - "{{ local_variables }}"
+    - "{{ aprovarsfile }}"
+    - "{{ infrafile }}"
+
+
+# HST IdP playbook
+
+- hosts: e-identification-hst-idps
+  sudo: yes
+  roles:
+    - e-identification-apro-certs
+    - e-identification-deploy
+  vars:
+    host: "{{ hst_idp_host }}"
+    ports: "{{ hst_idp_ports }}"
+    target_port: "{{ hst_idp_target_port }}"
+    postgres_port: "{{ hst_postgres_port }}"
+    container_name:  "{{ hst_container_name }}"
+    deploydir: "{{ deploy_root }}/{{ hst_directory }}/"
+    confdir: "{{ conf_root }}/configs/{{ hst_directory }}/"
+    logdir: "{{ deploy_root }}/logs/e-identification-hst-idp/"
+    imagename: "{{ hst_imagename }}"
+    aprovarsfile: "{{ conf_root }}/configs/hst-idp.yml"
+    infrafile: "{{ conf_root }}/configs/infra.yml"
+    mounts: "{{ hst_idp_mounts }}"
+    local_variables: "{{ conf_root }}/local_configs/local_variables.yml"
+  tags:
+    - hst-idp
+    - all-local
+    - all-dev
+    - all-kete
+    - all-test
+    - all
+
+  vars_files:
+    - "{{ local_variables }}"
+    - "{{ aprovarsfile }}"
+    - "{{ infrafile }}"
+
+# Feedback playbook
+
+- hosts: feedback-servers
+  sudo: yes
+  roles:
+    - e-identification-deploy
+  vars:
+    host: "{{ feedback_host }}"
+    ports: "{{ feedback_ports }}"
+    target_port: "{{ feedback_target_port }}"
+    container_name:  "{{ feedback_container_name }}"
+    deploydir: "{{ deploy_root }}/{{ feedback_directory }}/"
+    confdir: "{{ conf_root }}/configs/{{ feedback_directory }}/"
+    logdir: "{{ deploy_root }}/logs/e-identification-feedback/"
+    imagename: "{{ feedback_imagename }}"
+    aprovarsfile: "{{ conf_root }}/configs/feedback.yml"
+    infrafile: "{{ conf_root }}/configs/infra.yml"
+    mounts: "{{ feedback_mounts }}"
+    local_variables: "{{ conf_root }}/local_configs/local_variables.yml"
+  tags:
+    - feedback
+    - all-local
+    - all-dev
+    - all-kete
+    - all-test
+    - all
+
+  vars_files:
+    - "{{ local_variables }}"
+    - "{{ aprovarsfile }}"
+    - "{{ infrafile }}"
+
+# Localisation Playbook
+
+- hosts: localisations
+  sudo: yes
+  roles:
+    - e-identification-deploy
+  vars:
+    host: "{{ localisation_host }}"
+    ports: "{{ localisation_ports }}"
+    container_name:  "{{ localisation_container_name }}"
+    deploydir: "{{ deploy_root }}/{{ localisation_directory }}/"
+    confdir: "{{ conf_root }}/configs/{{ localisation_directory }}/"
+    logdir: "{{ deploy_root }}/logs/localisation/"
+    imagename: "{{ localisation_imagename }}"
+    aprovarsfile: "{{ conf_root }}/configs/localisation.yml"
+    infrafile: "{{ conf_root }}/configs/infra.yml"
+    mounts: "{{ localisation_mounts }}"
+    local_variables: "{{ conf_root }}/local_configs/local_variables.yml"
+  tags:
+    - localisation
+    - all-local
+    - all-dev
+    - all-kete
+    - all-test
+    - all
+  vars_files:
+    - "{{ local_variables }}"
+    - "{{ aprovarsfile }}"
+    - "{{ infrafile }}"
+
+# Mobile IdP playbook
+
+- hosts: e-identification-mobile-idps
+  sudo: yes
+  roles:
+    - e-identification-apro-certs
+    - e-identification-deploy
+  vars:
+    host: "{{ mobile_idp_host }}"
+    ports: "{{ mobile_idp_ports }}"
+    target_port: "{{ mobile_idp_target_port }}"
+    postgres_port: "{{ mobile_idp_postgres_port }}"
+    container_name:  "{{ mobile_idp_container_name }}"
+    deploydir: "{{ deploy_root }}/{{ mobile_idp_directory }}/"
+    confdir: "{{ conf_root }}/configs/{{ mobile_idp_directory }}/"
+    logdir: "{{ deploy_root }}/logs/e-identification-mobile-idp/"
+    imagename: "{{ mobile_idp_imagename }}"
+    aprovarsfile: "{{ conf_root }}/configs/mobile-idp.yml"
+    infrafile: "{{ conf_root }}/configs/infra.yml"
+    mounts: "{{ mobile_idp_mounts }}"
+    local_variables: "{{ conf_root }}/local_configs/local_variables.yml"
+  tags:
+    - mobile-idp
+    - all-local
+    - all-dev
+    - all-kete
+    - all-test
+    - all
+  vars_files:
+    - "{{ local_variables }}"
+    - "{{ aprovarsfile }}"
+    - "{{ infrafile }}"
+
+# Sema api
+
+- hosts: sema
+  sudo: yes
+  roles:
+    - e-identification-deploy
+  vars:
+    host: "{{ sema_host }}"
+    ports: "{{ sema_ports }}"
+    container_name:  "{{ sema_container_name }}"
+    deploydir: "{{ deploy_root }}/{{ sema_directory }}/"
+    logdir: "{{ deploy_root }}/logs/{{ sema_directory }}/"
+    confdir: "{{ conf_root }}/configs/{{ sema_directory }}/"
+    imagename: "{{ sema_imagename }}"
+    aprovarsfile: "{{ conf_root }}/configs/sema.yml"
+    infrafile: "{{ conf_root }}/configs/infra.yml"
+    mounts: "{{ sema_mounts }}"
+    local_variables: "{{ conf_root }}/local_configs/local_variables.yml"
+  tags:
+    - sema
+    - all-local
+    - all-dev
+#    - all-kete
+#    - all-test
+    - all
+  vars_files:
+    - "{{ local_variables }}"
+    - "{{ aprovarsfile }}"
+    - "{{ infrafile }}"
+
+
+# Test service
+
+- hosts: test-service
+  sudo: yes
+  roles:
+    - e-identification-apro-certs
+    - e-identification-deploy
+
+  vars:
+    host: "{{ testsp_host }}"
+    ports: "{{ testsp_ports }}"
+    target_port: "{{ testsp_target_port }}"
+    postgres_port: "{{ testsp_postgres_port }}"
+    jmx_port: "{{ testsp_jmx_port }}"
+    jmx_rmi_port: "{{ testsp_jmx_rmi_port }}"
+    container_name:  "{{ testsp_container_name }}"
+    deploydir: "{{ deploy_root }}/{{ testsp_directory }}/"
+    logdir: "{{ deploy_root }}/logs/{{ testsp_directory }}/"
+    confdir: "{{ conf_root }}/configs/{{ testsp_directory }}/"
+    imagename: "{{ testsp_imagename }}"
+    aprovarsfile: "{{ conf_root }}/configs/test-service.yml"
+    infrafile: "{{ conf_root }}/configs/infra.yml"
+    mounts: "{{ testsp_mounts }}"
+    local_variables: "{{ conf_root }}/local_configs/local_variables.yml"
+  tags:
+    - test-service
+#    - all-local
+#    - all-dev
+#    - all-kete
+#    - all-test
+#   - all
+  vars_files:
+    - "{{ local_variables }}"
+    - "{{ aprovarsfile }}"
+    - "{{ infrafile }}"
+

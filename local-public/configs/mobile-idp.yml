@@ -1,0 +1,82 @@
+---
+#Common
+  apache_ciphers: "-ALL:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-SHA384:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-SHA256:ECDHE-RSA-AES256-SHA:ECDHE-RSA-AES128-SHA:DHE-RSA-AES256-SHA256:DHE-RSA-AES128-GCM-SHA256:DHE-RSA-AES128-SHA256:DHE-RSA-AES256-SHA:DHE-RSA-AES128-SHA:AES256-GCM-SHA384:AES128-GCM-SHA256:AES256-SHA256:AES128-SHA256:AES256-SHA:AES128-SHA"
+#Identity Provider
+  idpconf_access_allowed_ip_range: "\"#{ {'192.168.0.1/32', '::1/128'} }\""
+  idpconf_host: '{{ ext_router_host }}'
+  idpconf_keystore_pass: '{{ mobile_idp_keystore_pass_value }}'
+  idpconf_sealer_storepass: '{{ mobile_idp_sealer_keystore_pass_value }}'
+  idpconf_sealer_keypass: '{{ mobile_idp_sealer_keystore_pass_value }}'
+  idpconf_shibboleth_version: 'shibboleth-identity-provider-3.2.1'
+  idpconf_core_sp_metadata_url: 'https://{{ int_router_host }}:{{ int_router_port }}/static/metadata/sp-metadata.xml'
+  idpconf_host: '{{ ext_router_host }}'
+  idpconf_scope: '{{ ext_router_host }}'
+  idpconf_entityid: 'https://{{ ext_router_host }}/mobileidp/idp1'
+  idpconf_displayname: "Kapa dev Mobile IdP"
+  idpconf_displayname_fi: "Kapa dev Mobile IdP fi"
+  idpconf_displayname_en: "Kapa dev Mobile IdP en"
+  idpconf_displayname_sv: "Kapa dev Mobile IdP sv"
+  idpconf_description: "Kapa dev Mobile IdP"
+  idpconf_description_fi: "Kapa dev Mobile IdP desc fi"
+  idpconf_description_en: "Kapa dev Mobile IdP desc en"
+  idpconf_description_sv: "Kapa dev Mobile IdP desc sv"
+  idpconf_kapa_image_url: "https://{{ ext_router_host }}/img/kapa.png"
+  idpconf_logo_height: "70"
+  idpconf_logo_width: "229"
+  idpconf_organisation_name: "Kapa development"
+  idpconf_organisation_name_fi: "Kapa development fi"
+  idpconf_organisation_name_en: "Kapa development en"
+  idpconf_organisation_name_sv: "Kapa development sv"
+  idpconf_organisation_displayname_fi: "Kapa development displ fi"
+  idpconf_organisation_displayname_en: "Kapa development displ en"
+  idpconf_organisation_displayname_sv: "Kapa development displ sv"
+  idpconf_organisation_url: "http://vm.fi/palveluarkkitehtuuri"
+  idpconf_organisation_url_fi: "http://vm.fi/palveluarkkitehtuuri"
+  idpconf_organisation_url_en: "http://vm.fi/palveluarkkitehtuuri"
+  idpconf_organisation_url_sv: "http://vm.fi/palveluarkkitehtuuri"
+  idpconf_contact_given_name: "Kapa development"
+  idpconf_contact_surname: "Kapa development"
+  idpconf_contact_email: "admin@docker.dev"
+  idpconf_subj: "/C=FI/ST=Uusimaa/L=Helsinki/O=Kapapub/OU=Kapapub/CN={{ ext_router_host }}"
+  idpconf_error_url: "https://{{ ext_router_host }}/virhe/"
+  idpconf_idp_shibboleth_error_tag: 'mobileidpshib'
+  idpconf_idp_tomcat_error_tag: 'mobileidptc'
+  idpconf_binding_path: 'mobileidp'
+#Common certs, keys
+#Shibboleth cert and metadata generation
+  shibgen_idp_id: "pub_mobileidp"
+#Mobile plugin
+  mobile_plugin_subject: "OU=Kapapub, O=Kapapub, L=Helsinki, ST=Uusimaa, C=FI, CN=kapa-mobile-plugin-dev"
+  mobile_plugin_keystoretype: "JKS"
+  mobile_plugin_keystorename: "mobile-plugin-keystore"
+  mobile_plugin_keystorepath: "/usr/share/tomcat/properties/mobile-plugin-keystore"
+  mobile_plugin_keystorepassword: "{{ mobile_plugin_keystorepassword_value }}"
+  mobile_plugin_keystorekeyname: "mobile_plugin_key"
+  mobile_plugin_keystorekeypassword: "{{ mobile_plugin_keystorekeypassword_value }}"
+  mobile_plugin_truststorepath: "/opt/kapa-ca"
+#Mobile backend
+  mobile_backend_cert_validity_days: "365"
+  mobile_backend_clientconf_name: "VRK"
+  mobile_backend_subject: "OU=Kapapub, O=Kapapub, L=Helsinki, ST=Uusimaa, C=FI, CN=kapa-mobile-backend-dev"
+  mobile_backend_mssap_host: "mssav.elisa.fi"
+  mobile_backend_mssapid: "http://mss.elisa.fi/mssURI/asiakastesti"
+  mobile_backend_mssappassword: "{{ mobile_backend_mssappassword_value }}"
+  mobile_backend_msssignatureurl: "https://mssav.elisa.fi/MSSP/SOAP/MSS_Signature"
+  mobile_backend_msspstatusurl: "https://mssav.elisa.fi/MSSP/SOAP/MSS_StatusPort"
+  mobile_backend_msspreceipturl: "https://mssav.elisa.fi/MSSP/SOAP/MSS_ReceiptPort"
+  mobile_backend_keystoretype: "JKS"
+  mobile_backend_keystorename: "mobile-backend-keystore"
+  mobile_backend_keystorepath: "/usr/share/tomcat/properties/mobile-backend-keystore"
+  mobile_backend_keystorepassword: "{{ mobile_backend_keystorepassword_value }}"
+  mobile_backend_keystorekeyname: "client"
+  mobile_backend_keystorekeypassword: "{{ mobile_backend_keystorekeypassword_value }}"
+  mobile_backend_truststoretype: "JKS"
+  mobile_backend_truststorename: "mobile-backend-truststore"
+  mobile_backend_truststorepath: "/usr/share/tomcat/properties/mobile-backend-truststore"
+  mobile_backend_truststorepassword: "{{ mobile_backend_truststorepassword_value }}"
+  mobile_backend_etsi_root_ca_file: "Elisa_Oyj_Root_CA-Gen2"
+  mobile_backend_etsi_customer_ca_file: ""
+  mobile_backend_etsi_service_ca_file: "Elisa_Oyj_Service_CA-Gen3"
+  mobile_backend_signed_cert_file: "mobile-backend.crt"
+  mobile_plugin_backend_cert_path: "mobile-idp-plugin-and-backend"
+

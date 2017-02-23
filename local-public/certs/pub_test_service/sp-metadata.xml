@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EntityDescriptor  xmlns="urn:oasis:names:tc:SAML:2.0:metadata"
+                   xmlns:ds="http://www.w3.org/2000/09/xmldsig#"
+                   xmlns:shibmd="urn:mace:shibboleth:metadata:1.0"
+                   xmlns:xml="http://www.w3.org/XML/1998/namespace"
+                   xmlns:mdui="urn:oasis:names:tc:SAML:metadata:ui"
+                   entityID="https://testipalvelu.test/sp">
+    <SPSSODescriptor AuthnRequestsSigned="true" protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol">
+        <Extensions>
+            <shibmd:Scope regexp="false">testipalvelu.test</shibmd:Scope>
+            <mdui:UIInfo>
+                <mdui:DisplayName xml:lang="fi">Testipalvelu</mdui:DisplayName>
+                <mdui:DisplayName xml:lang="en">Test service</mdui:DisplayName>
+                <mdui:DisplayName xml:lang="sv">Testservice</mdui:DisplayName>
+                <mdui:Description xml:lang="fi">Testipalvelu.</mdui:Description>
+                <mdui:Description xml:lang="en">Test service.</mdui:Description>
+                <mdui:Description xml:lang="sv">Testservice.</mdui:Description>
+                <mdui:Logo height="70" width="229">https://testipalvelu.test/static/img/kapa.png</mdui:Logo>
+            </mdui:UIInfo>
+        </Extensions>
+        <KeyDescriptor>
+            <ds:KeyInfo>
+                <ds:X509Data>
+                    <ds:X509Certificate>
+MIIDtzCCAp+gAwIBAgIJAK43HuFIY\/rCMA0GCSqGSIb3DQEBCwUAMHIxCzAJBgNVBAYTAkZJMRAwDgYDVQQIDAdVdXNpbWFhMREwDwYDVQQHDAhIZWxzaW5raTEQMA4GA1UECgwHS2FwYXB1YjEQMA4GA1UECwwHS2FwYXB1YjEaMBgGA1UEAwwRdGVzdGlwYWx2ZWx1LnRlc3QwHhcNMTcwMTExMTEyOTI3WhcNMTgwMTExMTEyOTI3WjByMQswCQYDVQQGEwJGSTEQMA4GA1UECAwHVXVzaW1hYTERMA8GA1UEBwwISGVsc2lua2kxEDAOBgNVBAoMB0thcGFwdWIxEDAOBgNVBAsMB0thcGFwdWIxGjAYBgNVBAMMEXRlc3RpcGFsdmVsdS50ZXN0MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAwuElqbu0cYCJT1ZbRJpw6GvVlC1abOWu4I+YW4khN2vycR6H6+piJrENPu\/0qcMf6WBIZsRRWD1Bdnf6RF\/JAH3KwATsFhjqsCeBJ4FNoFR9Pm5T\/5IDueaN7z9q3QdK8Lz18ocTMSXkkF\/qn7YtcG59Adq5Uvo9uKtOtOKoOdzF2pqlHbS1GT7NHDgsPjY7QPFxP0z5mNWDh0lebSoiVvXq0qXRH6sG9x5By314CaMO0tkSSWWW19pJPKpXfeX6WjceDlXF9A0jIJBmeTp4Jg7ccMAqrNFEp6n\/JHkw+T4DWCwzx\/bpNLDYeRFDAlqBa6tDHAvk2SxRdOeAvsTp3QIDAQABo1AwTjAdBgNVHQ4EFgQUieOcae51+Bh4ODj2OGzjxwidHnMwHwYDVR0jBBgwFoAUieOcae51+Bh4ODj2OGzjxwidHnMwDAYDVR0TBAUwAwEB\/zANBgkqhkiG9w0BAQsFAAOCAQEAhl0p+AJJpWJRGZEsCzBckAReh9K9qRwfwY7Jt+pbNFSN4rZAWO\/u6qQV96IeyzOG\/9lRSZoED+L6E9zjBpELIiee1G8AUlLCA+yHdZ3CZUMH0txCsROPxyHLCRFNpJ7Cx5JhZIKTtNZtNcF+f4VgPb6VwradtLCl6LGQmvT3BGBkyCjco23nY99PEkAN+XTCdRxspDSczqMRlS1ALOO8MmDf\/dOsksx9RJdBU9dlHer2K4rbcDYRRFZeeytN5UoPrvArYoJ+hBAsZ2RZzIpa0mmNpdVFnZ4kYynl4p703MhQyJ3GMX1Vwpyry3HhQoVCkNaqilKL6UIUfvw1JR+30w==
+                    </ds:X509Certificate>
+                </ds:X509Data>
+            </ds:KeyInfo>
+        </KeyDescriptor>
+        <NameIDFormat>urn:oasis:names:tc:SAML:2.0:nameid-format:transient</NameIDFormat>
+        <AssertionConsumerService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://testipalvelu.test/Shibboleth.sso/SAML2/POST" index="1"/>
+        <SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect" Location="https://testipalvelu.test/Shibboleth.sso/SLO/Redirect"/>
+    </SPSSODescriptor>
+    <Organization>
+        <OrganizationName xml:lang="fi">KaPA e-identification development fi</OrganizationName>
+        <OrganizationName xml:lang="en">KaPA e-identification development en</OrganizationName>
+        <OrganizationName xml:lang="sv">KaPA e-identification development sv</OrganizationName>
+        <OrganizationDisplayName xml:lang="fi">KaPA e-identification development desc fi</OrganizationDisplayName>
+        <OrganizationDisplayName xml:lang="en">KaPA e-identification development desc en</OrganizationDisplayName>
+        <OrganizationDisplayName xml:lang="sv">KaPA e-identification development desc sv</OrganizationDisplayName>
+        <OrganizationURL xml:lang="fi">http://vm.fi/palveluarkkitehtuuri</OrganizationURL>
+        <OrganizationURL xml:lang="en">http://vm.fi/palveluarkkitehtuuri</OrganizationURL>
+        <OrganizationURL xml:lang="sv">http://vm.fi/palveluarkkitehtuuri</OrganizationURL>
+    </Organization>
+    <ContactPerson contactType="technical">
+        <GivenName>KaPA e-identification development</GivenName>
+        <SurName>KaPA e-identification development</SurName>
+        <EmailAddress>mailto:admin@testipalvelu.test</EmailAddress>
+    </ContactPerson>
+</EntityDescriptor>

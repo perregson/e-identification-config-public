@@ -1,0 +1,107 @@
+---
+# Static content Nginx playbook
+
+- hosts: static-nginx-server
+  sudo: yes
+  vars:
+    container_name:  "{{ static_container_name }}"
+    deploydir: "{{ deploy_root }}/{{ static_directory }}/"
+    infrafile: "{{ conf_root }}/configs/infra.yml"
+    local_variables: "{{ conf_root }}/local_configs/local_variables.yml"
+  tags:
+    - static
+    - all
+    - all-local
+    - all-dev
+    - all-kete
+    - all-test
+
+  vars_files:
+    - "{{ local_variables }}"
+    - "{{ infrafile }}"
+
+  tasks:
+    - name: Copy service-sp-metadata.xml
+      copy: src={{ confdir }}/service-sp-metadata.xml dest={{ deploydir }}/metadata/
+    - name: Restart docker container
+      shell: |
+        docker stop {{ container_name }} | cat # pipecat igrores errors
+        docker start {{ container_name }}
+
+# Metadata db
+
+- hosts: e-identification-metadata-db-servers
+  sudo: yes
+  roles:
+    - e-identification-metadata-postgres
+
+  vars:
+    container_name:  "{{ metadata_db_container_name }}"
+    deploydir: "{{ deploy_root }}/{{ metadata_db_directory }}/"
+    logdir: "{{ deploy_root }}/logs/metadata-server/"
+    imagename: "{{ metadata_db_imagename }}"
+    aprovarsfile: "{{ conf_root }}/configs/metadata.yml"
+    infrafile: "{{ conf_root }}/configs/infra.yml"
+    mounts: "{{ metadata_db_mounts }}"
+    local_variables: "{{ conf_root }}/local_configs/local_variables.yml"
+  tags:
+    - metadata-db
+    - all-local
+    - all-dev
+    - all-kete
+    - all-test
+    - all
+
+  vars_files:
+    - "{{ local_variables }}"
+    - "{{ aprovarsfile }}"
+    - "{{ infrafile }}"
+      
+
+ # IdentityProvider Playbook
+
+- hosts: identity-providers
+  sudo: yes
+  vars:
+    container_name:  "{{ idp_container_name }}"
+    deploydir: "{{ deploy_root }}/{{ idp_directory }}/"
+    infrafile: "{{ conf_root }}/configs/infra.yml"
+    local_variables: "{{ conf_root }}/local_configs/local_variables.yml"
+  tags:
+    - idp
+    - all-local
+    - all-dev
+    - all-kete
+    - all-test
+    - all
+  vars_files:
+    - "{{ local_variables }}"
+    - "{{ infrafile }}"
+  tasks:
+    - name: Copy Shibboleth relying-party.xml
+      copy: src={{ confdir }}/relying-party.xml dest={{ deploydir }}/relying-party.xml
+    - name: Restart docker container
+      shell: |
+        docker stop {{ container_name }} | cat # pipecat igrores errors
+        docker start {{ container_name }}
+
+- hosts: proxy-servers
+  sudo: yes
+  vars:
+    container_name:  "{{ proxy_container_name }}"
+    infrafile: "{{ conf_root }}/configs/infra.yml"
+  tags:
+    - proxy
+    - all-local
+    - all-dev
+    - all-kete
+    - all-test
+    - all
+  vars_files:
+    - "{{ infrafile }}"
+  tasks:
+    - name: Restart docker container
+      shell: |
+        docker stop {{ container_name }} | cat # pipecat igrores errors
+        docker start {{ container_name }}
+

@@ -1,0 +1,11 @@
+---
+- name: Create necessary directories
+  file: path={{item}} state=directory mode=0755
+  with_items:
+    - "{{ deploydir }}"
+  become: yes
+
+- name: Copy truststore
+  copy: src={{ conf_root }}/{{ shibgen_outputpath }}/kapa-ca dest={{ deploydir }}/kapa-ca
+  become: yes
+

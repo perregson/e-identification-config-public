@@ -1,0 +1,3 @@
+  external_router_host_cert_path: '{{ deploydir }}/ssl'
+  pub_ssl_cert: "pub_ssl.crt"
+  pub_ssl_key: "pub_ssl.key"

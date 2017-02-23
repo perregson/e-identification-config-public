@@ -1,0 +1,28 @@
+---
+
+- name: Create deploy dir
+  file: path={{item}} state=directory mode=0755 recurse=yes
+  with_items:
+    - "{{ deploydir }}/pg_data"
+
+- name: Copy database creation script
+  template: src={{ confdir }}/create_db.sql dest={{ deploydir }}/create_db.sql
+
+- name: Stop old docker image
+  shell: docker stop {{ container_name }}
+  ignore_errors: yes
+
+- name: Remove old docker image
+  shell: docker rm {{ container_name }}
+  ignore_errors: yes
+
+- name: Run new docker image
+  shell: docker run --restart=on-failure:3 --log-opt max-size=100m --log-opt max-file=10 --name {{ container_name }} -e POSTGRES_PASSWORD={{ jdbc_password }} {{ metadata_db_mounts | default("") }} -v {{ deploydir }}/create_db.sql:/create_db.sql:z -d -p {{ metadata_postgres_port }}:5432 {{ imagename }}
+
+- name: Create DB
+  action: shell docker exec -t {{ container_name }} su - postgres -c "psql -f /create_db.sql"
+  register: result
+  until: result.rc == 0
+  retries: 60
+  delay: 1
+

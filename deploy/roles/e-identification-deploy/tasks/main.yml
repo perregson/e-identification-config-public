@@ -1,0 +1,61 @@
+---
+# Deploy container
+- name: Pull {{ docker_registry }}/{{ imagename }}
+  shell: docker pull {{ docker_registry }}/{{ imagename }}
+  when: do_not_pull_image is not defined
+  tags:
+    - restart
+
+- name: Create local tempdir
+  local_action: shell mktemp -d --tmpdir=/tmp deployXXXXXX
+  register: tempdir
+
+- name: Prepare filled directory in tempdir 
+  local_action: |
+    shell chmod 777 {{ tempdir.stdout }}
+    mkdir {{ tempdir.stdout }}/filled
+    echo {{ansible_date_time.iso8601}}| tee {{ tempdir.stdout }}/filled/git-info
+    echo Config: | tee -a {{ tempdir.stdout }}/filled/git-info
+    git -C {{ confdir }} rev-parse --abbrev-ref HEAD | tee -a {{ tempdir.stdout }}/filled/git-info
+    git -C {{ confdir }} rev-parse HEAD | tee -a {{ tempdir.stdout }}/filled/git-info
+    basename {{ conf_root }} | tee -a {{ tempdir.stdout }}/filled/git-info
+
+- name: Get templates from container to host
+  shell: |
+    mkdir -p {{ deploydir }}
+    mkdir -p {{ logdir }}
+    mkdir -p {{ tempdir.stdout }}
+    docker run --log-opt max-size=100m --log-opt max-file=10 --rm=true --entrypoint=tar -v {{ tempdir.stdout }}:/data00/templates/target:z {{ docker_registry }}/{{ imagename }} -C /data00/templates/store/ -zvcf /data00/templates/target/templates.tgz .
+  become: yes
+
+- name: Fetch template tarball
+  fetch: src={{ tempdir.stdout }}/templates.tgz dest={{ tempdir.stdout }}/templates.tgz flat=yes
+
+- name: Fill templates
+  local_action: |
+    shell tar -C {{ tempdir.stdout }}/ -zxf {{ tempdir.stdout }}/templates.tgz
+    ansible-playbook {{ tempdir.stdout }}/ansible/create_tar.yml -e conf_root={{ conf_root }} -e tempdir={{ tempdir.stdout }} -e local_variables={{ local_variables }} -e aprovarsfile={{ aprovarsfile }} -e infrafile={{ infrafile }} -e confdir={{ confdir }} -e host={{ host }}
+
+- name: Copy filled templates
+  copy: src={{ tempdir.stdout }}/filled_templates.tgz dest={{ deploydir }}
+  become: yes
+
+- name: Delete tempdir
+  local_action: file name={{ tempdir.stdout }} state=absent
+
+- name: Deploy filled templates, fill git-info and clean up
+  become: yes
+  shell: |
+    tar -C {{ deploydir }} -zxf {{ deploydir }}/filled_templates.tgz
+    echo Image: | tee -a {{ deploydir }}/git-info
+    docker inspect {{ docker_registry }}/{{ imagename }}|python -c 'import sys, json; labels=json.load(sys.stdin)[0]["Config"]["Labels"]; print labels["build-tag"] + "\n" + labels["git-branch"] + "\n" + labels["git-commit"]'| tee -a {{ deploydir }}/git-info
+    rm -rf {{ tempdir.stdout }}
+
+- name: Run new docker image
+  shell: |
+    docker stop {{ container_name }} | cat # pipecat igrores errors
+    docker rm  {{ container_name }} | cat # pipecat igrores errors
+    sudo docker run --restart=on-failure:3 --log-opt max-size=100m --log-opt max-file=10 -d {{ ports }} {{ additional_docker_configs }} --name={{ container_name }} {{ mounts }} {{ docker_registry }}/{{ imagename }}
+  tags:
+    - restart
+
