@@ -41,6 +41,8 @@
   spconf_integrationidp_entityid: "https://tunnistaminen.test/tupasidp2"
   spconf_location_mpass: "/LoginMPASS"
   spconf_entityid_mpass: "https://mpass.apro.tunnistus.fi/idp/shibboleth"
+  spconf_location_eidas1: "/LoginEIDAS1"
+  spconf_entityid_eidas1: "https://eidas-idp.test/idp/shibboleth"
   spconf_status_acl: "127.0.0.1"
   apache_ciphers: "-ALL:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-SHA384:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-SHA256:ECDHE-RSA-AES256-SHA:ECDHE-RSA-AES128-SHA:DHE-RSA-AES256-SHA256:DHE-RSA-AES128-GCM-SHA256:DHE-RSA-AES128-SHA256:DHE-RSA-AES256-SHA:DHE-RSA-AES128-SHA:AES256-GCM-SHA384:AES128-GCM-SHA256:AES256-SHA256:AES128-SHA256:AES256-SHA:AES128-SHA"
   apache_server_name: 'https://{{ ext_router_host }}:{{ ext_router_port }}'

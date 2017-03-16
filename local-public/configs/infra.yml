@@ -39,6 +39,7 @@
   metadata_imagename: "metadata-server:local"
   metadata_db_imagename: "postgres"
   metadata_directory: "metadata"
+  metadata_conf_directory: "metadata"
   metadata_mounts: "-v {{ deploydir }}:/data00/deploy:z -v {{ logdir }}:/data00/logs:z"
   metadata_db_container_name: 'metadata-postgres'
   metadata_db_directory: "metadata"
@@ -119,7 +120,8 @@
   fake_vtj_host: 'tun-pub-beprx1'
   fake_vtj_port: '8041'
   fake_vtj_port2: '8043'
-  fake_vtj_ports: '  -p {{ fake_vtj_port }}:8080 -p {{ fake_vtj_port2 }}:8081'
+  fake_vtj_controller_port: '8046'
+  fake_vtj_ports: '  -p {{ fake_vtj_port }}:8080 -p {{ fake_vtj_port2 }}:8081 -p {{ fake_vtj_controller_port }}:8082'
   fake_vtj_container_name: 'fake-vtj-container'
   fake_vtj_imagename: "e-identification-fake-vtj:local"
   fake_vtj_directory: "fake-vtj"
