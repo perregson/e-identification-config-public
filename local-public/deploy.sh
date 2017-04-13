@@ -97,8 +97,20 @@ if [ $APP = "test-service" -o $APP = "all" -o $APP = "ifconfig" ]; then
   then
     echo ${TESTSERVICE_IP} missing, running sudo ifconfig ${NET_IF}:3 ${TESTSERVICE_IP}
     sudo ifconfig ${NET_IF}:3 ${TESTSERVICE_IP}
-   fi
- fi
+  fi
+fi
+
+#vartti
+
+if [ $APP = "vartti" -o $APP = "all" -o $APP = "ifconfig" ]; then
+  VARTTI_IP="192.168.0.4"
+  if ! ping -W 1 -c 1 ${VARTTI_IP} > /dev/null
+  then
+    echo ${VARTTI_IP} missing, running sudo ifconfig ${NET_IF}:4 ${VARTTI_IP}
+    sudo ifconfig ${NET_IF}:4 ${VARTTI_IP}
+  fi
+fi
+
 
 ansible-playbook -v -i $SCRIPTPATH/ansible_hosts e-identification-deploy-public.yml  -e deploy_root=$DEPLOY_DIR -e conf_root=$SCRIPTPATH -e do_not_pull_image= --tags="$APP"
 ansible-playbook -v -i $SCRIPTPATH/ansible_hosts e-identification-metadata-update.yml -e deploy_root=$DEPLOY_DIR -e conf_root=$SCRIPTPATH -e confdir=$SCRIPTPATH/local_configs/metadata --tags="$APP"

@@ -142,11 +142,19 @@
   mobile_idp_imagename: "e-identification-mobile-idp:local"
   mobile_idp_directory: "mobile-idp"
   mobile_idp_mounts: "-v {{ deploydir }}:/data00/deploy:z -v {{ logdir }}:/data00/logs:z"
+  vartti_host: 'tun-pub-beprx1'
+  vartti_port: '8047'
+  vartti_target_port: '8443'
+  vartti_ports: ' -p {{ vartti_port }}:{{ vartti_target_port }}'
+  vartti_container_name: 'vartti-client-container'
+  vartti_imagename: "e-identification-vartti-client:local"
+  vartti_directory: "vartti"
+  vartti_mounts: "-v {{ deploydir }}:/data00/deploy:z -v {{ logdir }}:/data00/logs:z"
 #
   env: "local"
   log_level: "DEBUG"
   docker_registry: "dev-docker-registry.kapa.ware.fi"
-  additional_docker_configs: " --add-host tunnistaminen.test:192.168.0.1 --add-host kortti.tunnistaminen.test:192.168.0.2 --add-host {{ sp_host }}:192.168.0.1 --add-host {{ idp_host }}:192.168.0.1 --add-host {{ proxy_host }}:192.168.0.1 --add-host {{ metadata_host }}:192.168.0.1 --add-host {{ integration_idp_host }}:192.168.0.1 --add-host {{ proxy_host }}:192.168.0.1 --add-host {{ int_router_host }}:192.168.0.1 --add-host {{ int_router_host }}:192.168.0.1 {{ '--add-host ' ~ mobile_backend_mssap_host ~ ':192.168.0.10' if mobile_backend_mssap_host is defined else ''}}"
+  additional_docker_configs: " --add-host tunnistaminen.test:192.168.0.1 --add-host kortti.tunnistaminen.test:192.168.0.2 --add-host {{ sp_host }}:192.168.0.1 --add-host {{ idp_host }}:192.168.0.1 --add-host {{ proxy_host }}:192.168.0.1 --add-host {{ metadata_host }}:192.168.0.1 --add-host {{ integration_idp_host }}:192.168.0.1 --add-host {{ proxy_host }}:192.168.0.1 --add-host {{ int_router_host }}:192.168.0.1 --add-host {{ int_router_host }}:192.168.0.1 {{ '--add-host ' ~ mobile_backend_mssap_host ~ ':192.168.0.10' if mobile_backend_mssap_host is defined else ''}} {{ '--add-host ' ~ vartti_api_host ~ ':192.168.0.4' if vartti_api_host is defined else ''}}"
   default_error_url: "https://{{ ext_router_host }}/500/"
   discovery_page_path: "https://{{ ext_router_host }}/sivut/discovery-page/"
   java_xmx_megabytes: "1024"

@@ -76,3 +76,6 @@
   spconf_logo_width: "229"
   spconf_contact_email: 'admin@tunnistaminen.test'
   shibgen_sp_id: "pub_core_sp"
+  spconf_http_client_max_conn_per_route: "1024"
+  spconf_http_pool_max_total: "1024"
+  spconf_http_pool_default_max_per_route: "1024"

@@ -7,11 +7,12 @@
   vtj_ca: 'VRK CA for Test Purposes'
   vtj_ca_validity: '1'
   vtj_ca_blacklisted: '1'
+  xroad_protocol_version: '4.0'
   xroad_endpoint: 'http://{{ fake_vtj_host }}:{{ fake_vtj_port2 }}/'
   xroad_connectivity_keystore_path: '/data00/deploy/vtjcertstore.jks'
   xroad_truststore_path: '/data00/deploy/xroadTrustStore'
-  vtj_connection_timeout: '25000'
-  vtj_receive_timeout: '25000'
+  vtj_connection_timeout: '10000'
+  vtj_receive_timeout: '10000'
   service_object_type: 'SERVICE'
   client_object_type: 'SUBSYSTEM'
   service_sdsb_instance: 'FI-DEV'
@@ -25,3 +26,8 @@
   client_member_code: '0245437-2'
   client_subsystem_code: 'APROClient'
   vtj_server_port: '{{ vtj_target_port }}'
+
+# Testing
+  vtj_dummydata: 'false'
+  vtj_dummydata_hetu: '010191-9630'
+  vtj_dummydata_sleep: '600'

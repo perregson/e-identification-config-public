@@ -25,3 +25,16 @@
   mobile_keylen: "2048"
   mobile_plugin_cert_file: "mobile-plugin.crt"
   mobile_backend_csr_file: "mobile-backend.csr"
+  vartti_keystore_root_ca_file: 'VRK_TEST_Root_CA.pem'
+  vartti_keystore_ica_file: 'VRK_CA_for_Test_Purposes_-_G3.pem'
+  vartti_keystore_root_ca_alias: 'vrktestroot'
+  vartti_keystore_ica_alias: 'vrktestg3'
+  vartti_truststore_root_ca_file: 'VRK_TEST_Root_CA.pem'
+  vartti_truststore_ica_file: 'VRK_CA_for_Test_Purposes_-_G3.pem'
+  vartti_truststore_root_ca_alias: 'vrktestroot'
+  vartti_truststore_ica_alias: 'vrktestg3'
+  vartti_csr_file: 'vartti-client-pub.csr'
+  vartti_cert_file: 'vartti-client-pub.crt'
+  vartti_key_file: 'vartti-client-pub.key'
+  vartti_keystore_keylen: '2048'
+  vartti_keystore_subject: '/C=FI/ST=Finland/L=Helsinki/CN=tunnistaminen.test'

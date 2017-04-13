@@ -10,5 +10,6 @@
     from: noreply@suomi.fi
     subject: "Suomi.fi-tunnistaminen, palaute"
   ssl:
-    key_file: {{ apro_ssl_key }}
-    cert_file: {{ apro_ssl_cert }}
+    feedback_host_cert_path: '/data00/deploy/ssl/'
+    key_file: "{{ apro_ssl_key }}"
+    cert_file: "{{ apro_ssl_cert }}"

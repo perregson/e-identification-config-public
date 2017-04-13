@@ -66,3 +66,6 @@ localhost ansible_connection=local
 
 [test-service]
 localhost ansible_connection=local
+
+[vartti]
+localhost ansible_connection=local

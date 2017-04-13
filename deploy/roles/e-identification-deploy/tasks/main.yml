@@ -34,7 +34,7 @@
 - name: Fill templates
   local_action: |
     shell tar -C {{ tempdir.stdout }}/ -zxf {{ tempdir.stdout }}/templates.tgz
-    ansible-playbook {{ tempdir.stdout }}/ansible/create_tar.yml -e conf_root={{ conf_root }} -e tempdir={{ tempdir.stdout }} -e local_variables={{ local_variables }} -e aprovarsfile={{ aprovarsfile }} -e infrafile={{ infrafile }} -e confdir={{ confdir }} -e host={{ host }}
+    ansible-playbook {{ tempdir.stdout }}/ansible/create_tar.yml -e conf_root={{ conf_root }} -e tempdir={{ tempdir.stdout }} -e local_variables={{ local_variables }} -e aprovarsfile={{ aprovarsfile }} -e infrafile={{ infrafile }} -e confdir={{ confdir }} -e host={{ host }} {{ ' -e version=' ~ version if version is defined else '' }} {{ ' -e internal_ip=' ~ internal_ip if internal_ip is defined else '' }}
 
 - name: Copy filled templates
   copy: src={{ tempdir.stdout }}/filled_templates.tgz dest={{ deploydir }}

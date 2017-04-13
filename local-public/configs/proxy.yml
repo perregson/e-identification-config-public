@@ -13,4 +13,3 @@
   xroad_producer_id: 'TBD'
   vtj_client_url: 'https://{{ int_router_host }}:{{ int_router_port }}'
   vtj_client_dummydata: 'true'
-  satu_issuer_delimiter: "E_ID_VRK"

@@ -65,7 +65,7 @@ git clone https://github.com/vrk-kpa/e-identification-vtj-client-public.git e-id
 git clone https://github.com/vrk-kpa/sevi-identification-ui-public.git sevi-identification-ui
 ```
 
-Osassa komponenteista script/build.sh -skripteistä on poistettava käytöstä "docker pull" komento joka viittaa sisäiseen kehitysrepoon:
+Osassa komponenteista build-skripteistä on poistettava käytöstä viittaukset sisäiseen docker-repoon:
 ```
 sed --in-place "s/docker pull dev-docker/#docker pull dev-docker/g" \
  e-identification-idp-service/script/build.sh \
@@ -78,6 +78,11 @@ sed --in-place "s/docker pull dev-docker/#docker pull dev-docker/g" \
  e-identification-mobile-idp/script/build.sh \
  e-identification-proxy-service/script/build.sh \
  e-identification-integration-idp/script/build.sh
+
+sed --in-place "s/docker push dev-docker/#docker push dev-docker/g" \
+ e-identification-config-public/build/docker/tomcat/build_images.sh \
+ e-identification-config-public/build/docker/tomcat-idp-3.2.1/build_images.sh \
+ e-identification-config-public/build/docker/tomcat-apache2-shibd-sp/build_images.sh
 ```
 
 Käännä kaikki komponentit:

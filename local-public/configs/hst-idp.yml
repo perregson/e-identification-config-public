@@ -49,8 +49,8 @@
   ica_dir_path: '/opt/crt/certs/icas'
   ca_dir_path: '/opt/crt/certs/ca'
   crl_dir_path: '/opt/crt/crls'
-  satu_issuer_delimiter: "E_ID_VRK"
-  ca_ou_name_list: "Valtion kansalaisvarmenteet;Testivarmenteet;Varmennepalvelut"
+  oc_ca_cn_name_list: "VRK TEST CA for Healthcare Professionals"
+  vartti_client_url: 'https://{{ vartti_host }}:{{ vartti_port }}'
   # DO NOT USE VALUE "0" FOR crl_updatetime_validation IN PRODUCTION 
   crl_updatetime_validation: "0"
   hst_prompt_url: "https://{{ hst_router_host }}/hstidp/hst-prompt"

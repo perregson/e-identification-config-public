@@ -28,6 +28,10 @@
   vtj_username: 'changeit20'
   vtj_sosonimi: 'changeit21'
   xroad_truststore_password: 'tunnistaminen'
+  vartti_keystore_password: 'foobar0'
+  vartti_keystore_keypassword: 'foobar0'
+  vartti_truststore_password: 'foobar0'
+  vartti_proxy_uri: ''
 #Tupas adapter bank configs
   url_nordea: 'https://tupas.nordea.fi/cgi-bin/SOLO3011'
   url_tfi_nordea: 'https://www.tunnistus.fi/ubitp/saml2/names/ac/tupas.nordea.3'
