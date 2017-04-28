@@ -50,9 +50,10 @@
   ca_dir_path: '/opt/crt/certs/ca'
   crl_dir_path: '/opt/crt/crls'
   oc_ca_cn_name_list: "VRK TEST CA for Healthcare Professionals"
-  vartti_client_url: 'https://{{ vartti_host }}:{{ vartti_port }}'
+  vartti_client_url: 'https://{{ int_router_host }}:{{ int_router_port }}'
   # DO NOT USE VALUE "0" FOR crl_updatetime_validation IN PRODUCTION 
   crl_updatetime_validation: "0"
+  crl_cache_timeout: "600000"
   hst_prompt_url: "https://{{ hst_router_host }}/hstidp/hst-prompt"
 #Common certs, keys
 #Shibboleth cert and metadata generation

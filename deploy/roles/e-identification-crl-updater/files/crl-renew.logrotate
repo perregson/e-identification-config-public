@@ -1,0 +1,13 @@
+/data/logs/crl-updater/crl-updater.log {
+        daily
+        dateext
+        dateformat .%Y-%m-%d
+        extension .log
+        compressext .gz
+        missingok
+        rotate 65
+        compress
+        delaycompress
+        notifempty
+        create 620 root crl
+}

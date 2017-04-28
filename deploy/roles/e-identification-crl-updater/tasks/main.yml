@@ -1,0 +1,57 @@
+- name: Add crl group
+  group: name=crl state=present system=yes
+
+- name: Add crl user
+  user: name=crl group=crl comment="VRK CRL Updater" shell=/usr/bin/bash createhome=no home=/data/crls
+
+- name: Add /data/crls directory
+  file: path=/data/crls owner=root group=crl mode=775 state=directory
+
+- name: Add /data/crls-backup directory
+  file: path=/data/crls-backup owner=root group=crl mode=775 state=directory
+
+- name: Add /data/crl-updater directory
+  file: path=/data/crl-updater owner=root group=root mode=755 state=directory
+
+- name: Add /data/crl-updater/tmp directory
+  file: path=/data/crl-updater/tmp owner=root group=crl mode=775 state=directory
+
+- name: Add /data/logs/crl-updater directory
+  file: path=/data/logs/crl-updater owner=root group=root mode=755 state=directory
+
+- name: touch /data/logs/crl-updater/crl-updater.log file
+  file: path=/data/logs/crl-updater/crl-updater.log owner=root group=crl mode=620 state=touch
+
+- name: Copy renew.sh file
+  template: src=renew.sh.template mode=755 dest=/data/crl-updater/renew.sh
+
+- name: Copy renew.conf file (production environment)
+  copy: src=renew.prod.conf mode=755 dest=/data/crl-updater/renew.conf
+  when: env == "prod"
+
+- name: Copy renew.conf file (all test environments)
+  copy: src=renew.test.conf mode=755 dest=/data/crl-updater/renew.conf
+  when: env == "local" or env == "dev" or env == "test" or env == "kete"
+
+- name: Copy renew.conf file (override prod)
+  copy: src=renew.prod.conf mode=755 dest=/data/crl-updater/renew.conf
+  when: crl_mode is defined and crl_mode == "prod"
+
+- name: Copy renew.conf file (override test)
+  copy: src=renew.test.conf mode=755 dest=/data/crl-updater/renew.conf
+  when: crl_mode is defined and crl_mode == "test"
+
+- name: Remove old cronjob file from previous version (if exists)
+  cron: cron_file="VRK-CRL-Updater"
+        name="VRK CRL Updater (15 minutes schedule)"
+        state="absent"
+
+- name: Creates/updates cronjob for renew.sh
+  cron: minute="*/10"
+        name="VRK CRL Updater (10 minutes schedule)"
+        cron_file="VRK-CRL-Updater"
+        user="crl"
+        job="bash /data/crl-updater/renew.sh"
+
+- name: Add logrotate script for log file
+  copy: src=crl-renew.logrotate mode=644 owner=root group=root dest=/etc/logrotate.d/crl-renew

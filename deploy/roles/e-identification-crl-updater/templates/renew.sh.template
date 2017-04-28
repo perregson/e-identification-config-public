@@ -1,0 +1,195 @@
+#!/bin/bash
+#
+# VRK CRL updater script for Suomi.fi-tunnistaminen
+# Copyright 2017 Population Register Centre
+# License: MIT
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+#
+# Run this from cron every 10 minutes
+#
+# This script updates all configured CRLs as a one-time operation and exits:
+#
+# 1) Reads CRL_LIST file (format: CRL_URL;local_filename;description). For every entry:
+# 2) Checks existing CRL and decides whether it needs updating (see checkCRL)
+# 3) If update needed, tries to download CRL from CRL_URL. Otherwise process next.
+# 4) If download fails, warning/error log entry (next update < INTERVAL). Process next.
+# 5) If download succeeds, script checks whether it is valid (OpenSSL check) and either:
+#    - OK: Takes new CRL into use, backs up old to BACKUP_DIR
+#    - NOK: Keeps existing CRL in place
+
+export http_proxy="{{ crl_http_proxy | default('') }}"
+set -f # disable globbing
+
+ME="VRK CRL Update"
+REQ="openssl wget cp mv date cut mktemp stat expr chmod"
+
+CRL_DIR="/data/crls"
+BACKUP_DIR="/data/crls-backup"
+TEMP_DIR="/data/crl-updater/tmp"
+
+ENV="{{ env }}"
+LOGFILE="/data/logs/crl-updater/crl-updater.log"
+CRL_LIST="/data/crl-updater/renew.conf"
+VALIDITY="{{ crl_validity | default('3600') }}"  # Trigger CRL update 3600 seconds before nextUpdate timestamp
+INTERVAL="{{ crl_interval | default('600') }}"   # How often this script is run (in seconds). Needed for error logging.
+MAX_AGE="{{ crl_max_age | default('86400') }}"   # Maximum age of CRL in seconds (force download if file timestamp is older)
+WGET_TIMEOUT="{{ crl_wget_timeout | default('120') }}"
+
+
+# Outputs formatted log line. Log level as first parameter
+function log
+{
+  echo $(date +"%Y-%m-%d %H:%M:%S") [$1] ${ME}/${ENV}: "${@:2}" >> ${LOGFILE};
+}
+
+# Check if CRL needs to be updater. Returns >0 (update needed) if:
+#  1) CRL syntax is invalid (OpenSSL cannot read it) or file does not exist
+#  2) CRL file creation timestamp is older than MAX_AGE
+#  3) CRL nextUpdate time is sooner than configured INTERVAL (default: 3600 seconds)
+function checkCRL
+{
+  NEXT_UPDATE=$(openssl crl -inform der -noout -nextupdate -in "$1" 2>/dev/null) || return 1;
+
+  # stat -c %Y returns file modified timestamp (epoch)
+  S_NOW=$(date +%s)
+  S_CRL_MODIFIED=$(stat -c %Y "$1")
+  S_DIFF_MODIFIED=$(expr "${S_NOW}" - "${S_CRL_MODIFIED}")
+  [ "${S_DIFF_MODIFIED}" -gt "${MAX_AGE}" ] && return 2;
+
+  # nextUpdate=Feb  2 16:27:42 2017 GMT
+  T_UPDATE=$(echo $NEXT_UPDATE|cut -d'=' -f2)
+  S_UPDATE=$(date +%s --date="${T_UPDATE}")
+  S_DIFF=$(expr "${S_UPDATE}" - "${S_NOW}")
+  [ "${S_DIFF}" -lt "${VALIDITY}" ] && return 3;
+
+  # All checks passed, no need to update CRL
+  return 0;
+}
+
+# Only checks CRL syntax validity (OpenSSL can read it)
+function checkCRLSyntax
+{
+  NEXT_UPDATE=$(openssl crl -inform der -noout -nextupdate -in "$1" 2>/dev/null) || return 1;
+  return 0;
+}
+
+# Checks that inputted variables are defined (not empty)
+function checkVariable
+{
+  for _arg in $@
+  do
+    if [ "${!_arg}" = "" ]
+    then
+      echo "WARNING: Required variable ${_arg} not defined";
+      return 1;
+    fi
+  done
+  return 0;
+}
+
+# Check that required parameters are defined (and not empty)
+checkVariable CRL_LIST CRL_DIR TEMP_DIR BACKUP_DIR LOGFILE || {
+  log ERROR "Required configuration items are missing, exiting."
+  exit 1
+}
+mkdir -p ${CRL_DIR} ${TEMP_DIR} ${BACKUP_DIR}
+
+# Check availability of required binaries
+which ${REQ} >/dev/null || {
+  log ERROR "One or more required binaries not found in path: ${REQ}, exiting."
+  exit 1
+}
+
+# Check that configuration file exists
+test -f ${CRL_LIST} || {
+  log ERROR "Configuration file ${CRL_LIST} does not exist, exiting."
+  exit 1
+}
+
+# Main loop which updates configured CRLs
+while read CRL; do
+  if [ "${CRL}" == "" ] || [[ ${CRL} == \#* ]] || [[ ${CRL} == \;* ]]; then continue; fi
+  log INFO " -- Processing entry: ${CRL}"
+  IFS=';'; parts=($CRL); unset IFS;
+  CRL_URL="${parts[0]}"
+  CRL_FILENAME="${parts[1]//[^a-zA-Z0-9_-.]/}"
+  CRL_DESCRIPTION="${parts[2]}"
+
+  if [[ ! ${CRL_URL} == \http* ]]; then
+    log ERROR "CRL URL does not start with http(s): ${CRL_URL}, skipping.."
+    continue;
+  fi
+  if [ -z "${CRL_FILENAME}" ]; then
+    # If target filename not specified, generate it from url (sha1sum)
+    CRL_FILENAME=$(echo ${CRL_URL}|sha1sum|awk '{ print $1 }').crl
+  fi
+
+  log INFO "CRL URL: ${CRL_URL}"
+  log INFO "Target filename: ${CRL_FILENAME}"
+  log INFO "Description: ${CRL_DESCRIPTION}"
+
+  CRL_TEMP_FILE="${TEMP_DIR}/${CRL_FILENAME}"
+  CRL_BACKUP_FILE="${BACKUP_DIR}/${CRL_FILENAME}"
+  CRL_FINAL_FILE="${CRL_DIR}/${CRL_FILENAME}"
+
+  # Check if existing CRL is good enough
+  S_DIFF=0 # reset value
+  S_DIFF_MODIFIED=0 # reset value
+  checkCRL "${CRL_FINAL_FILE}" && {
+    log INFO "CRL already up-to-date, S_DIFF=${S_DIFF} S_DIFF_MODIFIED=${S_DIFF_MODIFIED}"
+    continue; # If CRL is already ok, process next..
+  }
+
+  log INFO "CRL update needed, S_DIFF=${S_DIFF} S_DIFF_MODIFIED=${S_DIFF_MODIFIED}"
+  # Download new CRL
+  wget --timeout=${WGET_TIMEOUT} --quiet "${CRL_URL}" -O "${CRL_TEMP_FILE}" || {
+    # By default, CRL download failure causes WARNING level logging (not necessarily fatal)
+    LEVEL="WARNING"
+    # If, however, CRL next update time is within VALIDITY time (one hour), use ERROR
+    [ "${S_DIFF}" -lt "${VALIDITY}" ] && LEVEL="ERROR";
+    log ${LEVEL} "Unable to download CRL from URL: ${CRL_URL}, skipping.."
+    continue;
+  }
+
+  # Check downloaded file content (OpenSSL check)
+  checkCRLSyntax "${CRL_TEMP_FILE}" || {
+    log ERROR "Downloaded CRL file is corrupt: ${CRL_TEMP_FILE}, skipping.."
+    rm -f "${CRL_TEMP_FILE}"
+    continue;
+  }
+
+  # Backup old file
+  rm -f "${CRL_BACKUP_FILE}"
+  cp -fp "${CRL_FINAL_FILE}" "${CRL_BACKUP_FILE}" 2>/dev/null
+
+  # Replace crl file with downloaded one
+  mv -f "${CRL_TEMP_FILE}" "${CRL_FINAL_FILE}" 2>/dev/null || {
+    log ERROR "Unable to apply new CRL, move operation failed: ${CRL_FINAL_FILE}"
+    rm -f "${CRL_TEMP_FILE}"
+    continue;
+  }
+
+  # Finally, one more check to verify that CRL exists at final location
+  checkCRLSyntax "${CRL_FINAL_FILE}" || {
+    log ERROR "Internal error, updating CRL failed: ${CRL_FILENAME}"
+  }
+  log INFO "Successfully updated CRL file: ${CRL_FINAL_FILE} (${CRL_DESCRIPTION})"
+
+done < ${CRL_LIST}

@@ -15,9 +15,7 @@ sudo apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58
 echo "deb https://apt.dockerproject.org/repo ubuntu-xenial main" | sudo tee /etc/apt/sources.list.d/docker.list # docker
 sudo apt-get update
  
-sudo apt-get install linux-image-extra-$(uname -r) apt-transport-https ca-certificates # docker
 sudo apt-get install docker-engine # docker
-sudo groupadd docker # docker
 sudo usermod -aG docker $USER # docker
  
 sudo apt-get install oracle-java8-installer # oracle jdk
@@ -62,6 +60,7 @@ git clone https://github.com/vrk-kpa/e-identification-shared-api-public.git e-id
 git clone https://github.com/vrk-kpa/e-identification-sp-service-public.git e-identification-sp-service
 git clone https://github.com/vrk-kpa/e-identification-test-service-public.git e-identification-test-service
 git clone https://github.com/vrk-kpa/e-identification-vtj-client-public.git e-identification-vtj-client
+git clone https://github.com/vrk-kpa/e-identification-vartti-client-public.git e-identification-vartti-client
 git clone https://github.com/vrk-kpa/sevi-identification-ui-public.git sevi-identification-ui
 ```
 
@@ -77,7 +76,8 @@ sed --in-place "s/docker pull dev-docker/#docker pull dev-docker/g" \
  e-identification-feedback-service/script/build.sh \
  e-identification-mobile-idp/script/build.sh \
  e-identification-proxy-service/script/build.sh \
- e-identification-integration-idp/script/build.sh
+ e-identification-integration-idp/script/build.sh \
+ e-identification-vartti-client/script/build.sh
 
 sed --in-place "s/docker push dev-docker/#docker push dev-docker/g" \
  e-identification-config-public/build/docker/tomcat/build_images.sh \
@@ -157,6 +157,9 @@ cd ~/build/src/e-identification-test-service
 script/build.sh -d local
 
 cd ~/build/src/e-identification-vtj-client
+script/build.sh -d local
+
+cd ~/build/src/e-identification-vartti-client
 script/build.sh -d local
 
 cd ~/build/src/sevi-identification-ui

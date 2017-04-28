@@ -1,4 +1,27 @@
 ---
+# VRK CRL Updater
+
+- hosts: integration-identity-providers
+  sudo: yes
+  roles:
+    - e-identification-crl-updater
+  vars:
+    local_variables: "{{ conf_root }}/local_configs/local_variables.yml"
+    infrafile: "{{ conf_root }}/configs/infra.yml"
+
+  vars_files:
+
+    - "{{ local_variables }}"
+    - "{{ infrafile }}"
+  tags:
+    - crl-updater
+    - all
+    - all-local
+    - all-dev
+    - all-kete
+    - all-test
+    - all-prod
+
 # Static content Nginx playbook
 
 - hosts: static-nginx-server
@@ -18,12 +41,14 @@
     mounts: "{{ static_mounts }}"
     local_variables: "{{ conf_root }}/local_configs/local_variables.yml"
   tags:
+    - e-identification-static-container
     - static
     - all
     - all-local
     - all-dev
     - all-kete
     - all-test
+    - all-prod
 
   vars_files:
     - "{{ local_variables }}"
@@ -49,17 +74,19 @@
     mounts: "{{ int_router_mounts }}"
     local_variables: "{{ conf_root }}/local_configs/local_variables.yml"
   tags:
+    - e-identification-internal-router-container
     - internal-router
     - all-local
     - all-dev
     - all-kete
     - all-test
+    - all-prod
     - all
 
   vars_files:
     - "{{ local_variables }}"
-    - "{{ aprovarsfile }}"
     - "{{ infrafile }}"
+    - [ "{{ aprovarsfile }}", "{{ infrafile }}" ]
 
 # e-identification-external-router playbook
 
@@ -80,11 +107,13 @@
     mounts: "{{ ext_router_mounts }}"
     local_variables: "{{ conf_root }}/local_configs/local_variables.yml"
   tags:
+    - e-identification-external-router-container
     - external-router
     - all-local
     - all-dev
     - all-kete
     - all-test
+    - all-prod
     - all
 
   vars_files:
@@ -111,11 +140,13 @@
     mounts: "{{ hst_router_mounts }}"
     local_variables: "{{ conf_root }}/local_configs/local_variables.yml"
   tags:
+    - e-identification-hst-router-container
     - hst-router
     - all-local
     - all-dev
     - all-kete
     - all-test
+    - all-prod
     - all
 
   vars_files:
@@ -136,7 +167,7 @@
     postgres_port: "{{ metadata_postgres_port }}"
     container_name:  "{{ metadata_container_name }}"
     deploydir: "{{ deploy_root }}/{{ metadata_directory }}/"
-    confdir: "{{ conf_root }}/configs/{{ metadata_directory }}/"
+    confdir: "{{ conf_root }}/configs/{{ metadata_conf_directory }}/"
     logdir: "{{ deploy_root }}/logs/metadata-server/"
     imagename: "{{ metadata_imagename }}"
     aprovarsfile: "{{ conf_root }}/configs/metadata.yml"
@@ -144,11 +175,13 @@
     mounts: "{{ metadata_mounts }}"
     local_variables: "{{ conf_root }}/local_configs/local_variables.yml"
   tags:
+    - metadata-server-container
     - metadata
     - all-local
     - all-dev
     - all-kete
     - all-test
+    - all-prod
     - all
   vars_files:
     - "{{ local_variables }}"
@@ -177,11 +210,13 @@
     mounts: "{{ proxy_mounts }}"
     local_variables: "{{ conf_root }}/local_configs/local_variables.yml"
   tags:
+    - proxy-server-container
     - proxy
     - all-local
     - all-dev
     - all-kete
     - all-test
+    - all-prod
     - all
   vars_files:
     - "{{ local_variables }}"
@@ -211,11 +246,13 @@
     mounts: "{{ sp_mounts }}"
     local_variables: "{{ conf_root }}/local_configs/local_variables.yml"
   tags:
+    - service-provider-container
     - sp
     - all-local
     - all-dev
     - all-kete
     - all-test
+    - all-prod
     - all
   vars_files:
     - "{{ local_variables }}"
@@ -244,11 +281,13 @@
     mounts: "{{ idp_mounts }}"
     local_variables: "{{ conf_root }}/local_configs/local_variables.yml"
   tags:
+    - identity-provider-container
     - idp
     - all-local
     - all-dev
     - all-kete
     - all-test
+    - all-prod
     - all
   vars_files:
     - "{{ local_variables }}"
@@ -277,11 +316,13 @@
     mounts: "{{ integration_idp_mounts }}"
     local_variables: "{{ conf_root }}/local_configs/local_variables.yml"
   tags:
+    - integration-identity-provider-container
     - tupasidp
     - all-local
     - all-dev
     - all-kete
     - all-test
+    - all-prod
     - all
   vars_files:
     - "{{ local_variables }}"
@@ -307,11 +348,13 @@
     mounts: "{{ vtj_mounts }}"
     local_variables: "{{ conf_root }}/local_configs/local_variables.yml"
   tags:
+    - vtj-client-container
     - vtj
     - all-local
     - all-dev
     - all-kete
     - all-test
+    - all-prod
     - all
   vars_files:
     - "{{ local_variables }}"
@@ -337,11 +380,13 @@
     mounts: "{{ vtj_mounts }}"
     local_variables: "{{ conf_root }}/local_configs/local_variables.yml"
   tags:
+    - vtj-client-container2
     - vtj2
     - all-local
     - all-dev
     - all-kete
     - all-test
+    - all-prod
     - all
   vars_files:
     - "{{ local_variables }}"
@@ -370,13 +415,11 @@
     - fake-vtj
     - all-local
     - all-dev
-    - all-kete
-    - all-test
     - all
   vars_files:
-    - "{{ local_variables }}"
-    - "{{ aprovarsfile }}"
     - "{{ infrafile }}"
+    - "{{ local_variables }}"
+    - [ "{{ aprovarsfile }}", "{{ local_variables }}" ]
 
 
 # HST IdP playbook
@@ -401,11 +444,13 @@
     mounts: "{{ hst_idp_mounts }}"
     local_variables: "{{ conf_root }}/local_configs/local_variables.yml"
   tags:
+    - hst-identity-provider-container
     - hst-idp
     - all-local
     - all-dev
     - all-kete
     - all-test
+    - all-prod
     - all
 
   vars_files:
@@ -433,11 +478,13 @@
     mounts: "{{ feedback_mounts }}"
     local_variables: "{{ conf_root }}/local_configs/local_variables.yml"
   tags:
+    - e-identification-feedback-container
     - feedback
     - all-local
     - all-dev
     - all-kete
     - all-test
+    - all-prod
     - all
 
   vars_files:
@@ -469,6 +516,7 @@
     - all-dev
     - all-kete
     - all-test
+    - all-prod
     - all
   vars_files:
     - "{{ local_variables }}"
@@ -502,6 +550,7 @@
     - all-dev
     - all-kete
     - all-test
+    - all-prod
     - all
   vars_files:
     - "{{ local_variables }}"
@@ -534,9 +583,9 @@
 #    - all-test
     - all
   vars_files:
-    - "{{ local_variables }}"
-    - "{{ aprovarsfile }}"
     - "{{ infrafile }}"
+    - "{{ local_variables }}"
+    - [ "{{ aprovarsfile }}", "{{ infrafile }}" ]
 
 
 # Test service
@@ -571,7 +620,39 @@
 #    - all-test
 #   - all
   vars_files:
+    - "{{ infrafile }}"
+    - "{{ local_variables }}"
+    - [ "{{ aprovarsfile }}", "{{ infrafile }}" ]
+
+# vartti-client
+- hosts: vartti
+  sudo: yes
+  roles:
+    - e-identification-apro-certs
+    - e-identification-deploy
+
+  vars:
+    host: "{{ vartti_host }}"
+    ports: "{{ vartti_ports }}"
+    container_name:  "{{ vartti_container_name }}"
+    deploydir: "{{ deploy_root }}/{{ vartti_directory }}/"
+    confdir: "{{ conf_root }}/configs/{{ vartti_directory }}/"
+    logdir: "{{ deploy_root }}/logs/vartti-client/"
+    imagename: "{{ vartti_imagename }}"
+    aprovarsfile: "{{ conf_root }}/configs/vartti.yml"
+    infrafile: "{{ conf_root }}/configs/infra.yml"
+    mounts: "{{ vartti_mounts }}"
+    local_variables: "{{ conf_root }}/local_configs/local_variables.yml"
+  tags:
+    - vartti-client-container
+    - vartti
+    - all-local
+    - all-dev
+    - all-kete
+    - all-test
+    - all-prod
+    - all
+  vars_files:
     - "{{ local_variables }}"
     - "{{ aprovarsfile }}"
     - "{{ infrafile }}"
-
