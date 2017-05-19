@@ -10,6 +10,7 @@ Asennusohjeet on tehty juuri asennetun Ubuntu 16.04 LTS -käyttöjärjestelmän 
 ```
 sudo apt-get update # pakettilistausten päivitys
 sudo apt-get dist-upgrade # pakettien päivitys
+
 sudo add-apt-repository ppa:webupd8team/java # Oracle JDK
 sudo apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D # docker
 echo "deb https://apt.dockerproject.org/repo ubuntu-xenial main" | sudo tee /etc/apt/sources.list.d/docker.list # docker
@@ -32,7 +33,7 @@ Lisää /etc/hosts -tiedostoon seuraavat rivit:
 192.168.0.2     kortti.tunnistaminen.test
 192.168.0.3     testipalvelu.test
 ```
-Luo tiedosto ~/kapa/deploy-local.properties ja lisää sinne seuraavat rivit:
+Luo hakemisto (mkdir ~/kapa) ja lisää uuteen tiedostoon ~/kapa/deploy-local.properties seuraavat rivit:
 ```
 deploy_dir=~/build/deploy
 log_dir=~/build/deploy/logs
@@ -173,3 +174,5 @@ NET_IF=enp0s3 ./deploy.sh all
 ```
 
 Deployn jälkeen paketin mukana tuleva testiasiointipalvelu löytyy osoitteesta https://testipalvelu.test/
+
+Huom! Selain varoittaa palvelinvarmenteista. Tämä on normaalia sillä julkaisussa on käytössä ns. self-signed varmenteet. Jotkin selaimet voivat vaatia yksityisen tilan käyttöä varoituksen ohittamiseksi.

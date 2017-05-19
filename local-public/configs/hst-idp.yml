@@ -50,6 +50,7 @@
   ca_dir_path: '/opt/crt/certs/ca'
   crl_dir_path: '/opt/crt/crls'
   oc_ca_cn_name_list: "VRK TEST CA for Healthcare Professionals"
+  hst_ca_cn_name_list: "VRK CA for Test Purposes;VRK CA for Test Purposes - G2;VRK CA for Test Purposes - G3"
   vartti_client_url: 'https://{{ int_router_host }}:{{ int_router_port }}'
   # DO NOT USE VALUE "0" FOR crl_updatetime_validation IN PRODUCTION 
   crl_updatetime_validation: "0"
