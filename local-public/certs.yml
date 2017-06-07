@@ -38,3 +38,6 @@
   vartti_key_file: 'vartti-client-pub.key'
   vartti_keystore_keylen: '2048'
   vartti_keystore_subject: '/C=FI/ST=Finland/L=Helsinki/CN=tunnistaminen.test'
+  token_keystore_keylen: '2048'
+  token_keystore_subject: 'C=FI, ST=Finland, L=Helsinki, O=public, CN=public-token-signing'
+  token_keystore_validity_days: '730'

@@ -45,3 +45,4 @@
   idpconf_idp_shibboleth_error_tag: 'coreidpshib'
   idpconf_idp_tomcat_error_tag: 'coreidptc'
   idpconf_binding_path: 'idp'
+  katso_global_logout_url: 'https://htesti.katso.tunnistus.fi/uas/logout'

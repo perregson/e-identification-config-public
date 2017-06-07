@@ -44,13 +44,11 @@ mkdir -p ~/build/src
 mkdir -p ~/build/deploy
 cd ~/build/src
 git clone https://github.com/vrk-kpa/e-identification-config-public.git
-git clone https://github.com/vrk-kpa/e-identification-adapter-service-public.git e-identification-adapter-service
 git clone https://github.com/vrk-kpa/e-identification-docker-images-public.git e-identification-docker-images
 git clone https://github.com/vrk-kpa/e-identification-fake-vtj-public.git e-identification-fake-vtj
 git clone https://github.com/vrk-kpa/e-identification-feedback-service-public.git e-identification-feedback-service
 git clone https://github.com/vrk-kpa/e-identification-hst-idp-public.git e-identification-hst-idp
 git clone https://github.com/vrk-kpa/e-identification-idp-service-public.git e-identification-idp-service
-git clone https://github.com/vrk-kpa/e-identification-integration-idp-public.git e-identification-integration-idp
 git clone https://github.com/vrk-kpa/e-identification-localisation-service-public.git e-identification-localisation-service
 git clone https://github.com/vrk-kpa/e-identification-metadata-service-public.git e-identification-metadata-service
 git clone https://github.com/vrk-kpa/e-identification-mobile-idp-public.git e-identification-mobile-idp
@@ -60,6 +58,7 @@ git clone https://github.com/vrk-kpa/e-identification-proxy-service-public.git e
 git clone https://github.com/vrk-kpa/e-identification-shared-api-public.git e-identification-shared-api
 git clone https://github.com/vrk-kpa/e-identification-sp-service-public.git e-identification-sp-service
 git clone https://github.com/vrk-kpa/e-identification-test-service-public.git e-identification-test-service
+git clone https://github.com/vrk-kpa/e-identification-tupas-idp-public.git e-identification-tupas-idp
 git clone https://github.com/vrk-kpa/e-identification-vtj-client-public.git e-identification-vtj-client
 git clone https://github.com/vrk-kpa/e-identification-vartti-client-public.git e-identification-vartti-client
 git clone https://github.com/vrk-kpa/sevi-identification-ui-public.git sevi-identification-ui
@@ -77,7 +76,7 @@ sed --in-place "s/docker pull dev-docker/#docker pull dev-docker/g" \
  e-identification-feedback-service/script/build.sh \
  e-identification-mobile-idp/script/build.sh \
  e-identification-proxy-service/script/build.sh \
- e-identification-integration-idp/script/build.sh \
+ e-identification-tupas-idp/script/build.sh \
  e-identification-vartti-client/script/build.sh
 
 sed --in-place "s/docker push dev-docker/#docker push dev-docker/g" \
@@ -115,9 +114,6 @@ e-identification-hst-router/script/build.sh local
 e-identification-internal-router/script/build.sh local
 
 # Loput imaget:
-cd ~/build/src/e-identification-adapter-service
-script/build.sh -d local
-
 cd ~/build/src/e-identification-fake-vtj
 script/build.sh -d local
 
@@ -128,9 +124,6 @@ cd ~/build/src/e-identification-hst-idp
 script/build.sh -d local
 
 cd ~/build/src/e-identification-idp-service
-script/build.sh -d local
-
-cd ~/build/src/e-identification-integration-idp
 script/build.sh -d local
 
 cd ~/build/src/e-identification-localisation-service
@@ -157,6 +150,9 @@ script/build.sh -d local
 cd ~/build/src/e-identification-test-service
 script/build.sh -d local
 
+cd ~/build/src/e-identification-tupas-idp
+script/build.sh -d local
+
 cd ~/build/src/e-identification-vtj-client
 script/build.sh -d local
 
@@ -170,7 +166,7 @@ script/build.sh -d local
 Aja deploy-prosessi lokaalille ympäristölle:
 ```
 cd ~/build/src/e-identification-config-public/local-public
-NET_IF=enp0s3 ./deploy.sh all
+./deploy.sh all
 ```
 
 Deployn jälkeen paketin mukana tuleva testiasiointipalvelu löytyy osoitteesta https://testipalvelu.test/

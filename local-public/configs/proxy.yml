@@ -13,3 +13,5 @@
   xroad_producer_id: 'TBD'
   vtj_client_url: 'https://{{ int_router_host }}:{{ int_router_port }}'
   vtj_client_dummydata: 'true'
+  token_keystore: 'token-keystore.jks'
+  token_keystore_alias: 'token-keystore'

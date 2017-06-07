@@ -5,9 +5,16 @@ SCRIPTFILE="undefined"
 # docker machine name in non-linux dev environments
 DOCKER_MACHINE="default"
 
-# Use NET_IF to override network interface, example: NET_IF=enp0s3 ./deploy.sh all
-if [ "$NET_IF" = "" ]; then
-  NET_IF="eth0"
+# Use NET_IF to override local network interface, example: NET_IF=enp0s3 ./deploy.sh all
+# If NET_IF not defined, find available network interface
+if [ -z "$NET_IF" ]; then
+  ifconfig enp0s3 >/dev/null 2>&1 && NET_IF="enp0s3"
+  ifconfig eth0   >/dev/null 2>&1 && NET_IF="eth0"
+fi
+
+# If NET_IF still not detected, try to auto-detect active network interface
+if [ -z "$NET_IF" ]; then
+  NET_IF=$(ip -o link show|awk '{print $2,$9}'|grep -v "^lo"|grep -v docker|cut -d':' -f1)
 fi
 
 # check os, os x users install coreutils: brew install coreutils
