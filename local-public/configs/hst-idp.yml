@@ -66,3 +66,4 @@
   vrk_ca_cert: "test-bundle.crt"
   hst_router_apache_loglevel: "debug"
   hst_router_host_cert_path: '{{ deploydir }}/ssl'
+  scs_enabled: "false"

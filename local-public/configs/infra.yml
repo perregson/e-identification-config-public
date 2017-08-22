@@ -48,7 +48,7 @@
   integration_idp_target_port: '8443'
   integration_idp_ports: '-p {{ integration_idp_port }}:{{ integration_idp_target_port }}'
   integration_idp_container_name: 'integration-identity-provider-container'
-  integration_idp_imagename: "integration-identity-provider:local"
+  integration_idp_imagename: "e-identification-tupas-idp:local"
   integration_idp_directory: "tupasidp"
   integration_idp_mounts: "-v {{ deploydir }}:/data00/deploy:z -v {{ logdir }}:/data00/logs:z"
   hst_idp_host: 'tun-pub-adap1'
