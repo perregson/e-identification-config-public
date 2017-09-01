@@ -2,8 +2,8 @@
 #Common
 #Tupas IdP
   idp_authn_public_url: 'https://{{ ext_router_host }}/tupasidp/authn/External'
-  tupas_properties_file: '/opt/adapter-service-properties/tupas-bank-properties.csv'
-  tupas_template_file: '/opt/adapter-service-properties/tupas-html-form-template.html'
+  tupas_properties_file: '/opt/tupas-identity-provider/tupas-bank-properties.csv'
+  tupas_template_file: '/opt/tupas-identity-provider/tupas-html-form-template.html'
   service_provider_url: 'https://{{ ext_router_host }}'
   idpconf_access_allowed_ip_range: "\"#{ {'192.168.0.1/32', '::1/128'} }\""
   idpconf_keystore_pass: '{{ tupas_idpconf_idp_keystore_pass_value }}'
