@@ -1,11 +1,7 @@
 ---
 #Common
 #Tupas IdP
-  adapter_public_url: 'https://{{ ext_router_host }}/adapter'
   idp_authn_public_url: 'https://{{ ext_router_host }}/tupasidp/authn/External'
-  adapter_idp_url: 'https://{{ ext_router_host }}/tupasidp'
-  adapter_rest_url: 'https://{{ int_router_host }}:{{ int_router_port }}/adapter'
-  adapter_session_map_file: '/opt/adapter-service-properties/adapter-attribute-map.csv'
   tupas_properties_file: '/opt/adapter-service-properties/tupas-bank-properties.csv'
   tupas_template_file: '/opt/adapter-service-properties/tupas-html-form-template.html'
   service_provider_url: 'https://{{ ext_router_host }}'

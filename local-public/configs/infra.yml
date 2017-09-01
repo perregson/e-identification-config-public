@@ -43,14 +43,14 @@
   metadata_mounts: "-v {{ deploydir }}:/data00/deploy:z -v {{ logdir }}:/data00/logs:z"
   metadata_db_container_name: 'metadata-postgres'
   metadata_db_directory: "metadata"
-  integration_idp_host: 'tun-pub-adap1'
-  integration_idp_port: '8034'
-  integration_idp_target_port: '8443'
-  integration_idp_ports: '-p {{ integration_idp_port }}:{{ integration_idp_target_port }}'
-  integration_idp_container_name: 'integration-identity-provider-container'
-  integration_idp_imagename: "e-identification-tupas-idp:local"
-  integration_idp_directory: "tupasidp"
-  integration_idp_mounts: "-v {{ deploydir }}:/data00/deploy:z -v {{ logdir }}:/data00/logs:z"
+  tupas_idp_host: 'tun-pub-adap1'
+  tupas_idp_port: '8034'
+  tupas_idp_target_port: '8443'
+  tupas_idp_ports: '-p {{ tupas_idp_port }}:{{ tupas_idp_target_port }}'
+  tupas_idp_container_name: 'integration-identity-provider-container'
+  tupas_idp_imagename: "e-identification-tupas-idp:local"
+  tupas_idp_directory: "tupasidp"
+  tupas_idp_mounts: "-v {{ deploydir }}:/data00/deploy:z -v {{ logdir }}:/data00/logs:z"
   hst_idp_host: 'tun-pub-adap1'
   hst_idp_port: '8038'
   hst_idp_target_port: '8443'
@@ -75,7 +75,7 @@
   static_host: 'tun-pub-cache1'
   static_port: '8036'
   static_ports: '-p {{ static_port }}:443'
-  static_mounts: "-v {{ deploydir }}/nginx:/etc/nginx/conf.d:z -v {{ deploydir }}/ssl:/etc/nginx/ssl:z -v {{ deploydir }}/resources/js/config.js:/usr/share/nginx/html/resources/js/config.js:z -v {{ deploydir }}/metadata:/usr/share/nginx/html/metadata:z -v {{ logdir }}:/var/log/nginx:z -v {{ deploy_root }}/{{ localisation_directory }}/localisation_files:/usr/share/nginx/html/localisation:z -v {{ deploydir }}/git-info:/usr/share/nginx/html/version.txt:z -v {{ deploydir }}/disruption_message.json:/usr/share/nginx/html/resources/js/disruption_data/disruption_message.json:z"
+  static_mounts: "-v {{ deploydir }}/nginx:/etc/nginx/conf.d:z -v {{ deploydir }}/ssl:/etc/nginx/ssl:z -v {{ deploydir }}/resources/js/config.js:/usr/share/nginx/html/resources/js/config.js:z -v {{ deploydir }}/metadata:/usr/share/nginx/html/metadata:z -v {{ logdir }}:/var/log/nginx:z -v {{ deploydir }}/git-info:/usr/share/nginx/html/version.txt:z -v {{ deploydir }}/disruption_message.json:/usr/share/nginx/html/resources/js/disruption_data/disruption_message.json:z"
   static_directory: "static"
   static_imagename: "e-identification-static:local"
   static_container_name: 'e-identification-static-container'
@@ -127,7 +127,7 @@
   fake_vtj_directory: "fake-vtj"
   fake_vtj_mounts: "-v {{ deploydir }}:/data00/deploy:z -v {{ logdir }}:/data00/logs:z -v /var/run/docker.sock:/var/run/docker.sock:z -v {{ deploy_root }}/logs:/tmp/logs:z"
   sema_host: 'tun-pub-beprx1'
-  sema_port: '8042'
+  sema_port: '8048'
   sema_target_port: '8080'
   sema_ports: '-p {{ sema_port }}:{{ sema_target_port }}'
   sema_container_name: 'e-identification-sema-container'
@@ -154,7 +154,7 @@
   env: "local"
   log_level: "DEBUG"
   docker_registry: "dev-docker-registry.kapa.ware.fi"
-  additional_docker_configs: " --add-host tunnistaminen.test:192.168.0.1 --add-host kortti.tunnistaminen.test:192.168.0.2 --add-host {{ sp_host }}:192.168.0.1 --add-host {{ idp_host }}:192.168.0.1 --add-host {{ proxy_host }}:192.168.0.1 --add-host {{ metadata_host }}:192.168.0.1 --add-host {{ integration_idp_host }}:192.168.0.1 --add-host {{ proxy_host }}:192.168.0.1 --add-host {{ int_router_host }}:192.168.0.1 --add-host {{ int_router_host }}:192.168.0.1 {{ '--add-host ' ~ mobile_backend_mssap_host ~ ':192.168.0.10' if mobile_backend_mssap_host is defined else ''}} {{ '--add-host ' ~ vartti_api_host ~ ':192.168.0.4' if vartti_api_host is defined else ''}}"
+  additional_docker_configs: " --add-host tunnistaminen.test:192.168.0.1 --add-host kortti.tunnistaminen.test:192.168.0.2 --add-host {{ sp_host }}:192.168.0.1 --add-host {{ idp_host }}:192.168.0.1 --add-host {{ proxy_host }}:192.168.0.1 --add-host {{ metadata_host }}:192.168.0.1 --add-host {{ tupas_idp_host }}:192.168.0.1 --add-host {{ proxy_host }}:192.168.0.1 --add-host {{ int_router_host }}:192.168.0.1 --add-host {{ int_router_host }}:192.168.0.1 {{ '--add-host ' ~ mobile_backend_mssap_host ~ ':192.168.0.10' if mobile_backend_mssap_host is defined else ''}} {{ '--add-host ' ~ vartti_api_host ~ ':192.168.0.4' if vartti_api_host is defined else ''}}"
   default_error_url: "https://{{ ext_router_host }}/500/"
   discovery_page_path: "https://{{ ext_router_host }}/sivut/discovery-page/"
   java_xmx_megabytes: "1024"

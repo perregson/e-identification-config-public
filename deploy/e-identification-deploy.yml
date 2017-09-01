@@ -300,17 +300,17 @@
     - e-identification-deploy
 
   vars:
-    host: "{{ integration_idp_host }}"
-    ports: "{{ integration_idp_ports }}"
-    target_port: "{{ integration_idp_target_port }}"
-    container_name:  "{{ integration_idp_container_name }}"
-    deploydir: "{{ deploy_root }}/{{ integration_idp_directory }}/"
-    confdir: "{{ conf_root }}/configs/{{ integration_idp_directory }}/"
+    host: "{{ tupas_idp_host }}"
+    ports: "{{ tupas_idp_ports }}"
+    target_port: "{{ tupas_idp_target_port }}"
+    container_name:  "{{ tupas_idp_container_name }}"
+    deploydir: "{{ deploy_root }}/{{ tupas_idp_directory }}/"
+    confdir: "{{ conf_root }}/configs/{{ tupas_idp_directory }}/"
     logdir: "{{ deploy_root }}/logs/identity-provider-tupasidp/"
-    imagename: "{{ integration_idp_imagename }}"
+    imagename: "{{ tupas_idp_imagename }}"
     aprovarsfile: "{{ conf_root }}/configs/tupasidp.yml"
     infrafile: "{{ conf_root }}/configs/infra.yml"
-    mounts: "{{ integration_idp_mounts }}"
+    mounts: "{{ tupas_idp_mounts }}"
     local_variables: "{{ conf_root }}/local_configs/local_variables.yml"
   tags:
     - integration-identity-provider-container
@@ -640,6 +640,38 @@
   tags:
     - vartti-client-container
     - vartti
+    - all-local
+    - all-dev
+    - all-kete
+    - all-test
+    - all-prod
+    - all
+  vars_files:
+    - "{{ local_variables }}"
+    - "{{ aprovarsfile }}"
+    - "{{ infrafile }}"
+
+# eidas
+- hosts: eidas
+  sudo: yes
+  roles:
+    - e-identification-deploy
+
+  vars:
+    host: "{{ eidas_host }}"
+    ports: "{{ eidas_ports }}"
+    container_name:  "{{ eidas_container_name }}"
+    deploydir: "{{ deploy_root }}/{{ eidas_directory }}/"
+    confdir: "{{ conf_root }}/configs/{{ eidas_directory }}/"
+    logdir: "{{ deploy_root }}/logs/eidas/"
+    imagename: "{{ eidas_imagename }}"
+    aprovarsfile: "{{ conf_root }}/configs/eidas.yml"
+    infrafile: "{{ conf_root }}/configs/infra.yml"
+    mounts: "{{ eidas_mounts }}"
+    local_variables: "{{ conf_root }}/local_configs/local_variables.yml"
+  tags:
+    - eidas-client-container
+    - eidas
     - all-local
     - all-dev
     - all-kete

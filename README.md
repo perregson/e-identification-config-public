@@ -49,11 +49,8 @@ git clone https://github.com/vrk-kpa/e-identification-fake-vtj-public.git e-iden
 git clone https://github.com/vrk-kpa/e-identification-feedback-service-public.git e-identification-feedback-service
 git clone https://github.com/vrk-kpa/e-identification-hst-idp-public.git e-identification-hst-idp
 git clone https://github.com/vrk-kpa/e-identification-idp-service-public.git e-identification-idp-service
-git clone https://github.com/vrk-kpa/e-identification-localisation-service-public.git e-identification-localisation-service
 git clone https://github.com/vrk-kpa/e-identification-metadata-service-public.git e-identification-metadata-service
 git clone https://github.com/vrk-kpa/e-identification-mobile-idp-public.git e-identification-mobile-idp
-git clone https://github.com/vrk-kpa/e-identification-mobile-idp-backend-public.git e-identification-mobile-idp-backend
-git clone https://github.com/vrk-kpa/e-identification-mobile-idp-plugin-public.git e-identification-mobile-idp-plugin
 git clone https://github.com/vrk-kpa/e-identification-proxy-service-public.git e-identification-proxy-service
 git clone https://github.com/vrk-kpa/e-identification-shared-api-public.git e-identification-shared-api
 git clone https://github.com/vrk-kpa/e-identification-sp-service-public.git e-identification-sp-service
@@ -126,19 +123,10 @@ script/build.sh -d local
 cd ~/build/src/e-identification-idp-service
 script/build.sh -d local
 
-cd ~/build/src/e-identification-localisation-service
-script/build.sh -d local
-
 cd ~/build/src/e-identification-metadata-service
 script/build.sh -d local
 
 cd ~/build/src/e-identification-mobile-idp
-script/build.sh -d local
-
-cd ~/build/src/e-identification-mobile-idp-backend
-script/build.sh -d local
-
-cd ~/build/src/e-identification-mobile-idp-plugin
 script/build.sh -d local
 
 cd ~/build/src/e-identification-proxy-service

@@ -9,7 +9,6 @@
   idpconf_sealer_keypass: '{{ mobile_idp_sealer_keystore_pass_value }}'
   idpconf_shibboleth_version: 'shibboleth-identity-provider-3.2.1'
   idpconf_core_sp_metadata_url: 'https://{{ int_router_host }}:{{ int_router_port }}/static/metadata/sp-metadata.xml'
-  idpconf_host: '{{ ext_router_host }}'
   idpconf_scope: '{{ ext_router_host }}'
   idpconf_entityid: 'https://{{ ext_router_host }}/mobileidp/idp1'
   idpconf_displayname: "Kapa dev Mobile IdP"
