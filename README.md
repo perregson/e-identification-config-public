@@ -9,20 +9,20 @@ Asennusohjeet on tehty juuri asennetun Ubuntu 16.04 LTS -käyttöjärjestelmän 
 
 ```
 sudo apt-get update # pakettilistausten päivitys
-sudo apt-get dist-upgrade # pakettien päivitys
+sudo apt-get -y dist-upgrade # pakettien päivitys
 
 sudo add-apt-repository ppa:webupd8team/java # Oracle JDK
 sudo apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D # docker
 echo "deb https://apt.dockerproject.org/repo ubuntu-xenial main" | sudo tee /etc/apt/sources.list.d/docker.list # docker
 sudo apt-get update
  
-sudo apt-get install docker-engine # docker
+sudo apt-get -y install docker-engine # docker
 sudo usermod -aG docker $USER # docker
  
-sudo apt-get install oracle-java8-installer # oracle jdk
-sudo apt-get install maven git ansible
+sudo apt-get -y install oracle-java8-installer oracle-java8-unlimited-jce-policy # oracle jdk
+sudo apt-get -y install maven git ansible
  
-sudo apt-get install nodejs npm gem ruby-sass ruby-compass # sevi-identification-ui
+sudo apt-get -y install nodejs npm gem ruby-sass ruby-compass # sevi-identification-ui
 sudo ln -s /usr/bin/nodejs /usr/bin/node # sevi-identification-ui 
 ```
 Suositeltavaa on tehdä uudelleenkäynnistys (sudo reboot) tässä välissä, jotta päivitetyt paketit ja käyttöoikeudet tulevat varmasti voimaan.

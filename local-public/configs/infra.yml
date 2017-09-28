@@ -126,14 +126,6 @@
   fake_vtj_imagename: "e-identification-fake-vtj:local"
   fake_vtj_directory: "fake-vtj"
   fake_vtj_mounts: "-v {{ deploydir }}:/data00/deploy:z -v {{ logdir }}:/data00/logs:z -v /var/run/docker.sock:/var/run/docker.sock:z -v {{ deploy_root }}/logs:/tmp/logs:z"
-  sema_host: 'tun-pub-beprx1'
-  sema_port: '8048'
-  sema_target_port: '8080'
-  sema_ports: '-p {{ sema_port }}:{{ sema_target_port }}'
-  sema_container_name: 'e-identification-sema-container'
-  sema_directory: "sema"
-  sema_mounts: "-v {{ deploydir }}:/data00/deploy:z -v {{ logdir }}:/data00/logs:z"
-  sema_imagename: "e-identification-sema:local"
   mobile_idp_host: 'tun-pub-adap1'
   mobile_idp_port: '8045'
   mobile_idp_target_port: '8443'

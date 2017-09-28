@@ -2,15 +2,10 @@
 CREATE USER vagrant WITH PASSWORD 'vagrant';
 DROP DATABASE  IF EXISTS metadata;
 CREATE DATABASE metadata;
-CREATE DATABASE sema;
 
 --
 GRANT ALL ON DATABASE metadata TO vagrant;
 ALTER DATABASE metadata OWNER TO vagrant;
-
---
-GRANT ALL ON DATABASE sema TO vagrant;
-ALTER DATABASE sema OWNER TO vagrant;
 
 \c metadata
 

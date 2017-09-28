@@ -55,9 +55,6 @@ localhost ansible_connection=local
 [localisations]
 #localhost ansible_connection=local
 
-#[sema]
-#localhost ansible_connection=local
-
 [local]
 localhost ansible_connection=local
 

@@ -552,36 +552,6 @@
     - "{{ aprovarsfile }}"
     - "{{ infrafile }}"
 
-# Sema api
-
-- hosts: sema
-  sudo: yes
-  roles:
-    - e-identification-deploy
-  vars:
-    host: "{{ sema_host }}"
-    ports: "{{ sema_ports }}"
-    container_name:  "{{ sema_container_name }}"
-    deploydir: "{{ deploy_root }}/{{ sema_directory }}/"
-    logdir: "{{ deploy_root }}/logs/{{ sema_directory }}/"
-    confdir: "{{ conf_root }}/configs/{{ sema_directory }}/"
-    imagename: "{{ sema_imagename }}"
-    aprovarsfile: "{{ conf_root }}/configs/sema.yml"
-    infrafile: "{{ conf_root }}/configs/infra.yml"
-    mounts: "{{ sema_mounts }}"
-    local_variables: "{{ conf_root }}/local_configs/local_variables.yml"
-  tags:
-    - sema
-    - all-local
-    - all-dev
-#    - all-kete
-#    - all-test
-    - all
-  vars_files:
-    - "{{ infrafile }}"
-    - "{{ local_variables }}"
-    - [ "{{ aprovarsfile }}", "{{ infrafile }}" ]
-
 
 # Test service
 
