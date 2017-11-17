@@ -1,30 +1,8 @@
   apro_ca_key: 'kapa-ca-pub-key.pem'
   apro_ca_subj: "/C=FI/ST=Uusimaa/L=Helsinki/O=Kapapub/OU=Kapapub/CN=KapapubCA"
-  apro_ca_keylen: "4096"
   apro_ca_serial: "kapa-ca-pub-cert.srl"
   apro_ssl_subj: '/C=FI/ST=Uusimaa/L=Helsinki/O=Kapapub/OU=Kapapub/CN='
-  apro_ssl_keylen: "2048"
   apro_ssl_csr: 'ssl.csr'
-  certgen_outputpath: "certs"
-  certgen_hostnamelist: "hostnames"
-  certgen_idplist: "idpnames"
-  certgen_splist: "spnames"
-  tomcat_keystore: 'tomcat_keystore'
-  java_truststore: "kapa-ca"
-  idp_keylen: "2048"
-  idp_encryption_cert: "idp-encryption.crt"
-  idp_encryption_key: "idp-encryption.key"
-  idp_signing_cert: "idp-signing.crt"
-  idp_signing_key: "idp-signing.key"
-  idp_entities_name: "valtionhallinnontunnistuksenohjauspalvelunidpt"
-  sp_keylen: "2048"
-  sp_encryption_cert: "sp-encryption.crt"
-  sp_encryption_key: "sp-encryption.key"
-  sp_signing_cert: "sp-signing.crt"
-  sp_signing_key: "sp-signing.key"
-  mobile_keylen: "2048"
-  mobile_plugin_cert_file: "mobile-plugin.crt"
-  mobile_backend_csr_file: "mobile-backend.csr"
   vartti_keystore_root_ca_file: 'VRK_TEST_Root_CA.pem'
   vartti_keystore_ica_file: 'VRK_CA_for_Test_Purposes_-_G3.pem'
   vartti_keystore_root_ca_alias: 'vrktestroot'
@@ -36,8 +14,5 @@
   vartti_csr_file: 'vartti-client-pub.csr'
   vartti_cert_file: 'vartti-client-pub.crt'
   vartti_key_file: 'vartti-client-pub.key'
-  vartti_keystore_keylen: '2048'
   vartti_keystore_subject: '/C=FI/ST=Finland/L=Helsinki/CN=tunnistaminen.test'
-  token_keystore_keylen: '2048'
   token_keystore_subject: 'C=FI, ST=Finland, L=Helsinki, O=public, CN=public-token-signing'
-  token_keystore_validity_days: '730'

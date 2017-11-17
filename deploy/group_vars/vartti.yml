@@ -1,0 +1,4 @@
+  vartti_signature_validity_mins: '30'
+  vartti_keystore_alias: 'vartticlient'
+  vartti_connection_timeout: '10000'
+  vartti_read_timeout: '10000'

@@ -1,15 +1,10 @@
 ---
 #Common
-  apache_ciphers: "-ALL:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-SHA384:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-SHA256:ECDHE-RSA-AES256-SHA:ECDHE-RSA-AES128-SHA:DHE-RSA-AES256-SHA256:DHE-RSA-AES128-GCM-SHA256:DHE-RSA-AES128-SHA256:DHE-RSA-AES256-SHA:DHE-RSA-AES128-SHA:AES256-GCM-SHA384:AES128-GCM-SHA256:AES256-SHA256:AES128-SHA256:AES256-SHA:AES128-SHA"
 #Identity Provider
   idpconf_access_allowed_ip_range: "\"#{ {'192.168.0.1/32', '::1/128'} }\""
   idpconf_keystore_pass: '{{ hst_idpconf_idp_keystore_pass_value }}'
   idpconf_sealer_storepass: '{{ hst_idpconf_sealer_keystore_pass_value }}'
   idpconf_sealer_keypass: '{{ hst_idpconf_sealer_keystore_pass_value }}'
-  idpconf_shibboleth_version: 'shibboleth-identity-provider-3.2.1'
-  idpconf_core_sp_metadata_url: 'https://{{ int_router_host }}:{{ int_router_port }}/static/metadata/sp-metadata.xml'
-  idpconf_host: '{{ hst_router_host }}'
-  idpconf_scope: '{{ hst_router_host }}'
   idpconf_entityid: 'https://{{ hst_router_host }}/hstidp/idp1'
   idpconf_displayname: "Kapa dev HST IdP"
   idpconf_displayname_fi: "Kapa dev HST IdP fi"
@@ -20,8 +15,6 @@
   idpconf_description_en: "Kapa dev HST IdP desc en"
   idpconf_description_sv: "Kapa dev HST IdP desc sv"
   idpconf_kapa_image_url: "https://{{ ext_router_host }}/img/kapa.png"
-  idpconf_logo_height: "70"
-  idpconf_logo_width: "229"
   idpconf_organisation_name: "Kapa development"
   idpconf_organisation_name_fi: "Kapa development fi"
   idpconf_organisation_name_en: "Kapa development en"
@@ -29,33 +22,20 @@
   idpconf_organisation_displayname_fi: "Kapa development displ fi"
   idpconf_organisation_displayname_en: "Kapa development displ en"
   idpconf_organisation_displayname_sv: "Kapa development displ sv"
-  idpconf_organisation_url: "http://vm.fi/palveluarkkitehtuuri"
-  idpconf_organisation_url_fi: "http://vm.fi/palveluarkkitehtuuri"
-  idpconf_organisation_url_en: "http://vm.fi/palveluarkkitehtuuri"
-  idpconf_organisation_url_sv: "http://vm.fi/palveluarkkitehtuuri"
   idpconf_contact_given_name: "Kapa development"
   idpconf_contact_surname: "Kapa development"
   idpconf_contact_email: "admin@vagrant.dev"
   idpconf_subj: "/C=FI/ST=Uusimaa/L=Helsinki/O=Kapapub/OU=Kapapub/CN={{ ext_router_host }}"
   idpconf_error_url: "https://{{ ext_router_host }}/virhe/"
-  idpconf_idp_shibboleth_error_tag: 'hstidpshib'
-  idpconf_idp_tomcat_error_tag: 'hstidptc'
-  idpconf_binding_path: 'hstidp'
 #HST IdP
   host_crl_root: '{{ deploydir }}/crt'
   host_ica_dir_path: '{{ deploydir }}/crt/icas'
   host_ca_dir_path: '{{ deploydir }}/crt/ca'
   host_crl_dir_path: '{{ deploydir }}/crt/crls'
-  ica_dir_path: '/opt/crt/certs/icas'
-  ca_dir_path: '/opt/crt/certs/ca'
-  crl_dir_path: '/opt/crt/crls'
   oc_ca_cn_name_list: "VRK TEST CA for Healthcare Professionals"
   hst_ca_cn_name_list: "VRK CA for Test Purposes;VRK CA for Test Purposes - G2;VRK CA for Test Purposes - G3"
-  vartti_client_url: 'https://{{ int_router_host }}:{{ int_router_port }}'
   # DO NOT USE VALUE "0" FOR crl_updatetime_validation IN PRODUCTION 
   crl_updatetime_validation: "0"
-  crl_cache_timeout: "600000"
-  hst_prompt_url: "https://{{ hst_router_host }}/hstidp/hst-prompt"
 #Common certs, keys
 #Shibboleth cert and metadata generation
   shibgen_idp_id: "pub_hstidp"
@@ -66,4 +46,3 @@
   vrk_ca_cert: "test-bundle.crt"
   hst_router_apache_loglevel: "debug"
   hst_router_host_cert_path: '{{ deploydir }}/ssl'
-  scs_enabled: "false"

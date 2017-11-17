@@ -1,7 +1,7 @@
 ---
 # Static content Nginx playbook
 
-- hosts: static-nginx-server
+- hosts: static
   sudo: yes
   vars:
     container_name:  "{{ static_container_name }}"
@@ -60,7 +60,7 @@
 
  # IdentityProvider Playbook
 
-- hosts: identity-providers
+- hosts: idp
   sudo: yes
   vars:
     container_name:  "{{ idp_container_name }}"
@@ -85,7 +85,7 @@
         docker stop {{ container_name }} | cat # pipecat igrores errors
         docker start {{ container_name }}
 
-- hosts: proxy-servers
+- hosts: proxy
   sudo: yes
   vars:
     container_name:  "{{ proxy_container_name }}"

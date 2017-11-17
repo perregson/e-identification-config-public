@@ -1,0 +1,5 @@
+---
+  eidas_node_host: 'eidas-router'
+  eidas_router_host_cert_path: '{{ deploydir }}/ssl'
+  eidas_router_pub_ssl_cert: "dev-ssl.crt"
+  eidas_router_pub_ssl_key: "dev-ssl.key"

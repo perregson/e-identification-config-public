@@ -1,7 +1,7 @@
 ---
 # VRK CRL Updater
 
-- hosts: integration-identity-providers
+- hosts: tupasidp
   sudo: yes
   roles:
     - e-identification-crl-updater
@@ -24,7 +24,7 @@
 
 # Static content Nginx playbook
 
-- hosts: static-nginx-server
+- hosts: static
   sudo: yes
   roles:
     - e-identification-deploy
@@ -36,7 +36,8 @@
     confdir: "{{ conf_root }}/configs/{{ static_directory }}/"
     logdir: "{{ deploy_root }}/logs/static/"
     imagename: "{{ static_imagename }}"
-    aprovarsfile: "{{ conf_root }}/configs/static.yml"
+    varsfilename: "static.yml"
+    aprovarsfile: "{{ conf_root }}/configs/{{ varsfilename }}"
     infrafile: "{{ conf_root }}/configs/infra.yml"
     mounts: "{{ static_mounts }}"
     local_variables: "{{ conf_root }}/local_configs/local_variables.yml"
@@ -57,7 +58,7 @@
 
 # e-identification-internal-router playbook
 
-- hosts: e-identification-internal-router
+- hosts: internal-router
   sudo: yes
   roles:
     - e-identification-deploy
@@ -69,7 +70,8 @@
     confdir: "{{ conf_root }}/configs/{{ int_router_directory }}/"
     logdir: "{{ deploy_root }}/logs/e-identification-internal-router/"
     imagename: "{{ int_router_imagename }}"
-    aprovarsfile: "{{ conf_root }}/configs/internal-router.yml"
+    varsfilename: "internal-router.yml"
+    aprovarsfile: "{{ conf_root }}/configs/{{ varsfilename }}"
     infrafile: "{{ conf_root }}/configs/infra.yml"
     mounts: "{{ int_router_mounts }}"
     local_variables: "{{ conf_root }}/local_configs/local_variables.yml"
@@ -90,7 +92,7 @@
 
 # e-identification-external-router playbook
 
-- hosts: e-identification-external-router
+- hosts: external-router
   sudo: yes
   roles:
     - e-identification-deploy
@@ -102,7 +104,8 @@
     confdir: "{{ conf_root }}/configs/{{ ext_router_directory }}/"
     logdir: "{{ deploy_root }}/logs/e-identification-external-router/"
     imagename: "{{ ext_router_imagename }}"
-    aprovarsfile: "{{ conf_root }}/configs/external-router.yml"
+    varsfilename: "external-router.yml"
+    aprovarsfile: "{{ conf_root }}/configs/{{ varsfilename }}"
     infrafile: "{{ conf_root }}/configs/infra.yml"
     mounts: "{{ ext_router_mounts }}"
     local_variables: "{{ conf_root }}/local_configs/local_variables.yml"
@@ -123,7 +126,7 @@
 
 # e-identification-hst-router playbook
 
-- hosts: e-identification-hst-router
+- hosts: hst-router
   sudo: yes
   roles:
     - e-identification-deploy
@@ -135,7 +138,8 @@
     confdir: "{{ conf_root }}/configs/{{ hst_router_directory }}/"
     logdir: "{{ deploy_root }}/logs/e-identification-hst-router/"
     imagename: "{{ hst_router_imagename }}"
-    aprovarsfile: "{{ conf_root }}/configs/hst-idp.yml"
+    varsfilename: "hst-idp.yml"
+    aprovarsfile: "{{ conf_root }}/configs/{{ varsfilename }}"
     infrafile: "{{ conf_root }}/configs/infra.yml"
     mounts: "{{ hst_router_mounts }}"
     local_variables: "{{ conf_root }}/local_configs/local_variables.yml"
@@ -155,7 +159,7 @@
     - "{{ infrafile }}"
 
 
-- hosts: metadata-servers
+- hosts: metadata
   sudo: yes
   roles:
     - e-identification-apro-certs
@@ -170,7 +174,8 @@
     confdir: "{{ conf_root }}/configs/{{ metadata_conf_directory }}/"
     logdir: "{{ deploy_root }}/logs/metadata-server/"
     imagename: "{{ metadata_imagename }}"
-    aprovarsfile: "{{ conf_root }}/configs/metadata.yml"
+    varsfilename: "metadata.yml"
+    aprovarsfile: "{{ conf_root }}/configs/{{ varsfilename }}"
     infrafile: "{{ conf_root }}/configs/infra.yml"
     mounts: "{{ metadata_mounts }}"
     local_variables: "{{ conf_root }}/local_configs/local_variables.yml"
@@ -190,7 +195,7 @@
 
 
 #- hosts: local
-- hosts: proxy-servers
+- hosts: proxy
   sudo: yes
   roles:
     - e-identification-apro-certs
@@ -204,7 +209,8 @@
     confdir: "{{ conf_root }}/configs/{{ proxy_directory }}/"
     logdir: "{{ deploy_root }}/logs/proxy-server/"
     imagename: "{{ proxy_imagename }}"
-    aprovarsfile: "{{ conf_root }}/configs/proxy.yml"
+    varsfilename: "proxy.yml"
+    aprovarsfile: "{{ conf_root }}/configs/{{ varsfilename }}"
     infrafile: "{{ conf_root }}/configs/infra.yml"
     mounts: "{{ proxy_mounts }}"
     local_variables: "{{ conf_root }}/local_configs/local_variables.yml"
@@ -224,7 +230,7 @@
 
 # Service Provider Playbook
 
-- hosts: service-providers
+- hosts: sp
   sudo: yes
   roles:
     - e-identification-apro-certs
@@ -239,7 +245,8 @@
     confdir: "{{ conf_root }}/configs/{{ sp_directory }}/"
     logdir: "{{ deploy_root }}/logs/service-provider/"
     imagename: "{{ sp_imagename }}"
-    aprovarsfile: "{{ conf_root }}/configs/sp.yml"
+    varsfilename: "sp.yml"
+    aprovarsfile: "{{ conf_root }}/configs/{{ varsfilename }}"
     infrafile: "{{ conf_root }}/configs/infra.yml"
     mounts: "{{ sp_mounts }}"
     local_variables: "{{ conf_root }}/local_configs/local_variables.yml"
@@ -259,7 +266,7 @@
 
 # Identity Provider Playbook
 
-- hosts: identity-providers
+- hosts: idp
   sudo: yes
   roles:
     - e-identification-apro-certs
@@ -273,7 +280,8 @@
     confdir: "{{ conf_root }}/configs/{{ idp_directory }}/"
     logdir: "{{ deploy_root }}/logs/identity-provider/"
     imagename: "{{ idp_imagename }}"
-    aprovarsfile: "{{ conf_root }}/configs/idp.yml"
+    varsfilename: "idp.yml"
+    aprovarsfile: "{{ conf_root }}/configs/{{ varsfilename }}"
     infrafile: "{{ conf_root }}/configs/infra.yml"
     mounts: "{{ idp_mounts }}"
     local_variables: "{{ conf_root }}/local_configs/local_variables.yml"
@@ -293,7 +301,7 @@
 
 # Integration Identity Provider Playbook
 
-- hosts: integration-identity-providers
+- hosts: tupasidp
   sudo: yes
   roles:
     - e-identification-apro-certs
@@ -308,7 +316,8 @@
     confdir: "{{ conf_root }}/configs/{{ tupas_idp_directory }}/"
     logdir: "{{ deploy_root }}/logs/identity-provider-tupasidp/"
     imagename: "{{ tupas_idp_imagename }}"
-    aprovarsfile: "{{ conf_root }}/configs/tupasidp.yml"
+    varsfilename: "tupasidp.yml"
+    aprovarsfile: "{{ conf_root }}/configs/{{ varsfilename }}"
     infrafile: "{{ conf_root }}/configs/infra.yml"
     mounts: "{{ tupas_idp_mounts }}"
     local_variables: "{{ conf_root }}/local_configs/local_variables.yml"
@@ -327,7 +336,7 @@
     - "{{ infrafile }}"
 
 # Vtj-client playbook
-- hosts: vtj-client
+- hosts: vtj
   sudo: yes
   roles:
     - e-identification-deploy
@@ -340,7 +349,8 @@
     confdir: "{{ conf_root }}/configs/{{ vtj_directory }}/"
     logdir: "{{ deploy_root }}/logs/vtj-client/"
     imagename: "{{ vtj_imagename }}"
-    aprovarsfile: "{{ conf_root }}/configs/vtj.yml"
+    varsfilename: "vtj.yml"
+    aprovarsfile: "{{ conf_root }}/configs/{{ varsfilename }}"
     infrafile: "{{ conf_root }}/configs/infra.yml"
     mounts: "{{ vtj_mounts }}"
     local_variables: "{{ conf_root }}/local_configs/local_variables.yml"
@@ -359,7 +369,7 @@
     - "{{ infrafile }}"
 
 # Vtj-client2 playbook
-- hosts: vtj-client2
+- hosts: vtj2
   sudo: yes
   roles:
     - e-identification-deploy
@@ -372,7 +382,8 @@
     confdir: "{{ conf_root }}/configs/{{ vtj_directory2 }}/"
     logdir: "{{ deploy_root }}/logs/vtj-client2/"
     imagename: "{{ vtj_imagename }}"
-    aprovarsfile: "{{ conf_root }}/configs/vtj2.yml"
+    varsfilename: "vtj2.yml"
+    aprovarsfile: "{{ conf_root }}/configs/{{ varsfilename }}"
     infrafile: "{{ conf_root }}/configs/infra.yml"
     mounts: "{{ vtj_mounts }}"
     local_variables: "{{ conf_root }}/local_configs/local_variables.yml"
@@ -404,7 +415,8 @@
     confdir: "{{ conf_root }}/configs/{{ fake_vtj_directory }}/"
     logdir: "{{ deploy_root }}/logs/fake-vtj/"
     imagename: "{{ fake_vtj_imagename }}"
-    aprovarsfile: "{{ conf_root }}/configs/fake-vtj.yml"
+    varsfilename: "fake-vtj.yml"
+    aprovarsfile: "{{ conf_root }}/configs/{{ varsfilename }}"
     infrafile: "{{ conf_root }}/configs/infra.yml"
     mounts: "{{ fake_vtj_mounts }}"
     local_variables: "{{ conf_root }}/local_configs/local_variables.yml"
@@ -421,7 +433,7 @@
 
 # HST IdP playbook
 
-- hosts: e-identification-hst-idps
+- hosts: hst-idp
   sudo: yes
   roles:
     - e-identification-apro-certs
@@ -435,7 +447,8 @@
     confdir: "{{ conf_root }}/configs/{{ hst_directory }}/"
     logdir: "{{ deploy_root }}/logs/e-identification-hst-idp/"
     imagename: "{{ hst_imagename }}"
-    aprovarsfile: "{{ conf_root }}/configs/hst-idp.yml"
+    varsfilename: "hst-idp.yml"
+    aprovarsfile: "{{ conf_root }}/configs/{{ varsfilename }}"
     infrafile: "{{ conf_root }}/configs/infra.yml"
     mounts: "{{ hst_idp_mounts }}"
     local_variables: "{{ conf_root }}/local_configs/local_variables.yml"
@@ -456,7 +469,7 @@
 
 # Feedback playbook
 
-- hosts: feedback-servers
+- hosts: feedback
   sudo: yes
   roles:
     - e-identification-deploy
@@ -469,7 +482,8 @@
     confdir: "{{ conf_root }}/configs/{{ feedback_directory }}/"
     logdir: "{{ deploy_root }}/logs/e-identification-feedback/"
     imagename: "{{ feedback_imagename }}"
-    aprovarsfile: "{{ conf_root }}/configs/feedback.yml"
+    varsfilename: "feedback.yml"
+    aprovarsfile: "{{ conf_root }}/configs/{{ varsfilename }}"
     infrafile: "{{ conf_root }}/configs/infra.yml"
     mounts: "{{ feedback_mounts }}"
     local_variables: "{{ conf_root }}/local_configs/local_variables.yml"
@@ -490,7 +504,7 @@
 
 # Localisation Playbook
 
-- hosts: localisations
+- hosts: localisation
   sudo: yes
   roles:
     - e-identification-deploy
@@ -502,7 +516,8 @@
     confdir: "{{ conf_root }}/configs/{{ localisation_directory }}/"
     logdir: "{{ deploy_root }}/logs/localisation/"
     imagename: "{{ localisation_imagename }}"
-    aprovarsfile: "{{ conf_root }}/configs/localisation.yml"
+    varsfilename: "localisation.yml"
+    aprovarsfile: "{{ conf_root }}/configs/{{ varsfilename }}"
     infrafile: "{{ conf_root }}/configs/infra.yml"
     mounts: "{{ localisation_mounts }}"
     local_variables: "{{ conf_root }}/local_configs/local_variables.yml"
@@ -521,7 +536,7 @@
 
 # Mobile IdP playbook
 
-- hosts: e-identification-mobile-idps
+- hosts: mobile-idp
   sudo: yes
   roles:
     - e-identification-apro-certs
@@ -535,7 +550,8 @@
     confdir: "{{ conf_root }}/configs/{{ mobile_idp_directory }}/"
     logdir: "{{ deploy_root }}/logs/e-identification-mobile-idp/"
     imagename: "{{ mobile_idp_imagename }}"
-    aprovarsfile: "{{ conf_root }}/configs/mobile-idp.yml"
+    varsfilename: "mobile-idp.yml"
+    aprovarsfile: "{{ conf_root }}/configs/{{ varsfilename }}"
     infrafile: "{{ conf_root }}/configs/infra.yml"
     mounts: "{{ mobile_idp_mounts }}"
     local_variables: "{{ conf_root }}/local_configs/local_variables.yml"
@@ -572,7 +588,8 @@
     logdir: "{{ deploy_root }}/logs/{{ testsp_directory }}/"
     confdir: "{{ conf_root }}/configs/{{ testsp_directory }}/"
     imagename: "{{ testsp_imagename }}"
-    aprovarsfile: "{{ conf_root }}/configs/test-service.yml"
+    varsfilename: "test-service.yml"
+    aprovarsfile: "{{ conf_root }}/configs/{{ varsfilename }}"
     infrafile: "{{ conf_root }}/configs/infra.yml"
     mounts: "{{ testsp_mounts }}"
     local_variables: "{{ conf_root }}/local_configs/local_variables.yml"
@@ -603,7 +620,8 @@
     confdir: "{{ conf_root }}/configs/{{ vartti_directory }}/"
     logdir: "{{ deploy_root }}/logs/vartti-client/"
     imagename: "{{ vartti_imagename }}"
-    aprovarsfile: "{{ conf_root }}/configs/vartti.yml"
+    varsfilename: "vartti.yml"
+    aprovarsfile: "{{ conf_root }}/configs/{{ varsfilename }}"
     infrafile: "{{ conf_root }}/configs/infra.yml"
     mounts: "{{ vartti_mounts }}"
     local_variables: "{{ conf_root }}/local_configs/local_variables.yml"
@@ -635,12 +653,14 @@
     confdir: "{{ conf_root }}/configs/{{ eidas_directory }}/"
     logdir: "{{ deploy_root }}/logs/eidas/"
     imagename: "{{ eidas_imagename }}"
-    aprovarsfile: "{{ conf_root }}/configs/eidas.yml"
+    varsfilename: "eidas.yml"
+    aprovarsfile: "{{ conf_root }}/configs/{{ varsfilename }}"
     infrafile: "{{ conf_root }}/configs/infra.yml"
     mounts: "{{ eidas_mounts }}"
     local_variables: "{{ conf_root }}/local_configs/local_variables.yml"
   tags:
-    - eidas-client-container
+    - eidas-container
+    - eidas-node
     - eidas
     - all-local
     - all-dev
@@ -648,6 +668,42 @@
     - all-test
     - all-prod
     - all
+  vars_files:
+    - "{{ local_variables }}"
+    - "{{ aprovarsfile }}"
+    - "{{ infrafile }}"
+
+
+# e-identification-eidas-router playbook
+
+- hosts: eidas-router
+  sudo: yes
+  roles:
+    - e-identification-deploy
+  vars:
+    host: "{{ eidas_router_host }}"
+    ports: "{{ eidas_router_ports }}"
+    container_name:  "{{ eidas_router_container_name }}"
+    deploydir: "{{ deploy_root }}/{{ eidas_router_directory }}/"
+    confdir: "{{ conf_root }}/configs/{{ eidas_router_directory }}/"
+    logdir: "{{ deploy_root }}/logs/e-identification-eidas-router/"
+    imagename: "{{ eidas_router_imagename }}"
+    varsfilename: "eidas.yml"
+    aprovarsfile: "{{ conf_root }}/configs/{{ varsfilename }}"
+    infrafile: "{{ conf_root }}/configs/infra.yml"
+    mounts: "{{ eidas_router_mounts }}"
+    local_variables: "{{ conf_root }}/local_configs/local_variables.yml"
+  tags:
+    - e-identification-eidas-router-container
+    - eidas
+    - eidas-router
+    - all-local
+    - all-dev
+    - all-kete
+    - all-test
+    - all-prod
+    - all
+
   vars_files:
     - "{{ local_variables }}"
     - "{{ aprovarsfile }}"

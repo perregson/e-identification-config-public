@@ -1,31 +1,15 @@
 ---
 #Common
-  tomcat_keystore: "tomcat_keystore"
-  tomcat_alias: "tomcat_ssl"
+  tomcat_alias: "tun-pub-beprx1"
 
 #Vtjclient
   vtj_ca: 'VRK CA for Test Purposes'
-  vtj_ca_validity: '1'
-  vtj_ca_blacklisted: '1'
-  xroad_protocol_version: '4.0'
   xroad_endpoint: 'http://{{ fake_vtj_host }}:{{ fake_vtj_port }}/'
   xroad_connectivity_keystore_path: '/data00/deploy/vtjcertstore.jks'
-  xroad_truststore_path: '/data00/deploy/xroadTrustStore'
-  vtj_connection_timeout: '10000'
-  vtj_receive_timeout: '10000'
-  service_object_type: 'SERVICE'
-  client_object_type: 'SUBSYSTEM'
   service_sdsb_instance: 'FI-DEV'
-  service_member_class: 'GOV'
-  service_member_code: '0245437-2'
   service_subsystem_code: 'VTJService'
-  service_service_code: 'HenkilonTunnusKysely'
-  service_service_version: 'v1'
   client_sdsb_instance: 'FI-DEV'
-  client_member_class: 'GOV'
-  client_member_code: '0245437-2'
   client_subsystem_code: 'APROClient'
-  vtj_server_port: '{{ vtj_target_port }}'
 
 # Testing
   vtj_dummydata: 'false'

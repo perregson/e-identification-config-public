@@ -1,34 +1,34 @@
-[integration-identity-providers]
+[tupasidp]
 localhost ansible_connection=local
 
-[proxy-servers]
+[proxy]
 localhost ansible_connection=local
 
-[service-providers]
+[sp]
 localhost ansible_connection=local
 
-[identity-providers]
+[idp]
 localhost ansible_connection=local
 
-[metadata-servers]
+[metadata]
 localhost ansible_connection=local
 
-[external-routers]
+[external-router]
 localhost ansible_connection=local
 
-[internal-routers]
+[internal-router]
 localhost ansible_connection=local
 
-[static-nginx-server]
+[static]
 localhost ansible_connection=local
 
 [router-servers]
 localhost ansible_connection=local
 
-[vtj-client]
+[vtj]
 localhost ansible_connection=local
 
-[vtj-client2]
+[vtj2]
 localhost ansible_connection=local
 
 [fake-vtj]
@@ -37,19 +37,13 @@ localhost ansible_connection=local
 [e-identification-metadata-db-servers]
 localhost ansible_connection=local
 
-[e-identification-internal-router]
-localhost ansible_connection=local
-
-[e-identification-external-router]
-localhost ansible_connection=local
-
-#[e-identification-hst-idps]
+#[hst-idp]
 #localhost ansible_connection=local
 
-#[e-identification-hst-router]
+#[hst-router]
 #localhost ansible_connection=local
 
-[feedback-servers]
+[feedback]
 localhost ansible_connection=local
 
 [localisations]
@@ -58,7 +52,7 @@ localhost ansible_connection=local
 [local]
 localhost ansible_connection=local
 
-[e-identification-mobile-idps]
+[mobile-idp]
 localhost ansible_connection=local
 
 [test-service]
@@ -66,3 +60,9 @@ localhost ansible_connection=local
 
 [vartti]
 localhost ansible_connection=local
+
+[eidas]
+#localhost ansible_connection=local
+
+[eidas-router]
+#localhost ansible_connection=local

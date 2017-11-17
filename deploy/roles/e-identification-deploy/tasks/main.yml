@@ -1,5 +1,6 @@
 ---
 # Deploy container
+
 - name: Pull {{ docker_registry }}/{{ imagename }}
   shell: docker pull {{ docker_registry }}/{{ imagename }}
   when: do_not_pull_image is not defined
@@ -10,14 +11,14 @@
   local_action: shell mktemp -d --tmpdir=/tmp deployXXXXXX
   register: tempdir
 
-- name: Prepare filled directory in tempdir 
+- name: Prepare filled directory in tempdir
   local_action: |
     shell chmod 777 {{ tempdir.stdout }}
     mkdir {{ tempdir.stdout }}/filled
     echo {{ansible_date_time.iso8601}}| tee {{ tempdir.stdout }}/filled/git-info
     echo Config: | tee -a {{ tempdir.stdout }}/filled/git-info
-    git -C {{ confdir }} rev-parse --abbrev-ref HEAD | tee -a {{ tempdir.stdout }}/filled/git-info
-    git -C {{ confdir }} rev-parse HEAD | tee -a {{ tempdir.stdout }}/filled/git-info
+    git -C {{ conf_root }} rev-parse --abbrev-ref HEAD | tee -a {{ tempdir.stdout }}/filled/git-info
+    git -C {{ conf_root }} rev-parse HEAD | tee -a {{ tempdir.stdout }}/filled/git-info
     basename {{ conf_root }} | tee -a {{ tempdir.stdout }}/filled/git-info
 
 - name: Get templates from container to host
@@ -34,6 +35,9 @@
 - name: Fill templates
   local_action: |
     shell tar -C {{ tempdir.stdout }}/ -zxf {{ tempdir.stdout }}/templates.tgz
+    mkdir -p {{ tempdir.stdout }}/ansible/group_vars/
+    cp -r {{ playbook_dir }}/group_vars/all {{ tempdir.stdout }}/ansible/group_vars/
+    cp {{ playbook_dir }}/group_vars/{{ varsfilename }} {{ tempdir.stdout }}/ansible/group_vars/all
     ansible-playbook {{ tempdir.stdout }}/ansible/create_tar.yml -e conf_root={{ conf_root }} -e tempdir={{ tempdir.stdout }} -e local_variables={{ local_variables }} -e aprovarsfile={{ aprovarsfile }} -e infrafile={{ infrafile }} -e confdir={{ confdir }} -e host={{ host }} {{ ' -e version=' ~ version if version is defined else '' }} {{ ' -e internal_ip=' ~ internal_ip if internal_ip is defined else '' }}
 
 - name: Copy filled templates
