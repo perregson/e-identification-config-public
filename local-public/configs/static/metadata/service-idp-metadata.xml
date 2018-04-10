@@ -1,156 +1,150 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<EntitiesDescriptor Name="valtionhallinnontunnistuksenohjauspalvelunidpt" xmlns="urn:oasis:names:tc:SAML:2.0:metadata" xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    <EntityDescriptor  xmlns="urn:oasis:names:tc:SAML:2.0:metadata"
-                       xmlns:ds="http://www.w3.org/2000/09/xmldsig#"
-                       xmlns:shibmd="urn:mace:shibboleth:metadata:1.0"
-                       xmlns:xml="http://www.w3.org/XML/1998/namespace"
-                       xmlns:mdui="urn:oasis:names:tc:SAML:metadata:ui"
-                       entityID="https://tunnistaminen.test/tupasidp2">
-        <IDPSSODescriptor WantAuthnRequestsSigned="true" protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol">
-            <Extensions>
-                <shibmd:Scope regexp="false">tunnistaminen.test</shibmd:Scope>
-                <mdui:UIInfo>
-                    <mdui:DisplayName xml:lang="fi">KaPA DEV integration IdP fi</mdui:DisplayName>
-                    <mdui:DisplayName xml:lang="en">KaPA DEV integration IdP en</mdui:DisplayName>
-                    <mdui:DisplayName xml:lang="sv">KaPA DEV integration IdP sv</mdui:DisplayName>
-                    <mdui:Description xml:lang="fi">KaPA DEV integration IdP desc fi</mdui:Description>
-                    <mdui:Description xml:lang="en">KaPA DEV integration IdP desc en</mdui:Description>
-                    <mdui:Description xml:lang="sv">KaPA DEV integration IdP desc sv</mdui:Description>
-                    <mdui:Logo height="70" width="229">https://tunnistaminen.test/img/kapa.png</mdui:Logo>
-                </mdui:UIInfo>
-            </Extensions>
-            <KeyDescriptor use="signing">
-                <ds:KeyInfo>
-                    <ds:X509Data>
-                        <ds:X509Certificate>
-MIIDuTCCAqGgAwIBAgIJAI3Utkcst179MA0GCSqGSIb3DQEBCwUAMHMxCzAJBgNVBAYTAkZJMRAwDgYDVQQIDAdVdXNpbWFhMREwDwYDVQQHDAhIZWxzaW5raTEQMA4GA1UECgwHS2FwYXB1YjEQMA4GA1UECwwHS2FwYXB1YjEbMBkGA1UEAwwSdHVubmlzdGFtaW5lbi50ZXN0MB4XDTE3MDExMTExMjkyNloXDTE4MDExMTExMjkyNlowczELMAkGA1UEBhMCRkkxEDAOBgNVBAgMB1V1c2ltYWExETAPBgNVBAcMCEhlbHNpbmtpMRAwDgYDVQQKDAdLYXBhcHViMRAwDgYDVQQLDAdLYXBhcHViMRswGQYDVQQDDBJ0dW5uaXN0YW1pbmVuLnRlc3QwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQCqIQvqluViAub+uSP+wwjsVYWvByQ4ulHsgIt3Qtekc+Li6UTmJYIpYW1mzUAiy5ne+EdCLIkuRYDxR07EpwAQCrJsL6GcHWp0O8pMaybLug4TXIWQp55Nuqz4iyxoI3qqrToGAcDhzdTkY0S3+qaLBg67pvo7j3Y4v+wbiflh9abNzO26rNr57CQ43R9ZEu4cHkRoR\/R8gXN6NGQ699sKmIRaDCyySkHWHPLPJN7CYeuPHqllf+U51z7QgVT3Km6P05TXqy0\/Z3crikeqM2LxpdQK0CRklwaCflW+VGtLS5BSc5z1yn2D6dGxUF+\/3Jd34rDEZ5lkaNOcYcpZimFlAgMBAAGjUDBOMB0GA1UdDgQWBBQvJqioti5mcp+wbhgu75fbhHlmjDAfBgNVHSMEGDAWgBQvJqioti5mcp+wbhgu75fbhHlmjDAMBgNVHRMEBTADAQH\/MA0GCSqGSIb3DQEBCwUAA4IBAQAu+H1yx3cN4zMo9GfEmSU3M\/u3Y6OmKC4\/x2T8\/nNhlR1cAFYmgNizlZalaWsjK3Of4uWQnyyYd5rkN5GfjfGtiISXCc7U0xuk3notQIoEM83auwsg0yQnHa1PNuLWg5TTfORJu4HDIzlMiQENNpfEb4vuWXSUhabkX0f1oa7YK0pDIWYUUDK7zixZ5hd\/x5PaDlC6yGABRXbYQlnZ52xwJyZKP3n9LGFJL+i7D2HUt1CZ\/welZc4jQL\/4clx2c2XuCo0ajy2+g8r7RD6iLU\/B6yD+JY49wnHg2Q5ZbXX7XHYS+M89ibkmzRDWoxDgX8Lj4Umo2wcBxSXulTkB8raf
-                        </ds:X509Certificate>
-                    </ds:X509Data>
-                </ds:KeyInfo>
-            </KeyDescriptor>
-            <SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://tunnistaminen.test/tupasidp/profile/SAML2/POST/SLO"/>
-            <SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect" Location="https://tunnistaminen.test/tupasidp/profile/SAML2/Redirect/SLO"/>
-            <NameIDFormat>urn:oasis:names:tc:SAML:2.0:nameid-format:transient</NameIDFormat>
-            <SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://tunnistaminen.test/tupasidp/profile/SAML2/POST/SSO"/>
-            <SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect" Location="https://tunnistaminen.test/tupasidp/profile/SAML2/Redirect/SSO"/>
-        </IDPSSODescriptor>
-        <Organization>
-            <OrganizationName xml:lang="fi">KaPA development fi</OrganizationName>
-            <OrganizationName xml:lang="en">KaPA development en</OrganizationName>
-            <OrganizationName xml:lang="sv">KaPA development sv</OrganizationName>
-            <OrganizationDisplayName xml:lang="fi">KaPA development displ fi</OrganizationDisplayName>
-            <OrganizationDisplayName xml:lang="en">KaPA development displ en</OrganizationDisplayName>
-            <OrganizationDisplayName xml:lang="sv">KaPA development displ sv</OrganizationDisplayName>
-            <OrganizationURL xml:lang="fi">http://vm.fi/palveluarkkitehtuuri</OrganizationURL>
-            <OrganizationURL xml:lang="en">http://vm.fi/palveluarkkitehtuuri</OrganizationURL>
-            <OrganizationURL xml:lang="sv">http://vm.fi/palveluarkkitehtuuri</OrganizationURL>
-        </Organization>
-        <ContactPerson contactType="technical">
-            <GivenName>KaPA development</GivenName>
-            <SurName>KaPA development</SurName>
-            <EmailAddress>mailto:admin@tunnistaminen.test</EmailAddress>
-        </ContactPerson>
-    </EntityDescriptor>
-    <EntityDescriptor  xmlns="urn:oasis:names:tc:SAML:2.0:metadata"
-                       xmlns:ds="http://www.w3.org/2000/09/xmldsig#"
-                       xmlns:shibmd="urn:mace:shibboleth:metadata:1.0"
-                       xmlns:xml="http://www.w3.org/XML/1998/namespace"
-                       xmlns:mdui="urn:oasis:names:tc:SAML:metadata:ui"
-                       entityID="https://kortti.tunnistaminen.test/hstidp/idp1">
-        <IDPSSODescriptor WantAuthnRequestsSigned="true" protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol">
-            <Extensions>
-                <shibmd:Scope regexp="false">kortti.tunnistaminen.test</shibmd:Scope>
-                <mdui:UIInfo>
-                    <mdui:DisplayName xml:lang="fi">Kapa dev HST IdP fi</mdui:DisplayName>
-                    <mdui:DisplayName xml:lang="en">Kapa dev HST IdP en</mdui:DisplayName>
-                    <mdui:DisplayName xml:lang="sv">Kapa dev HST IdP sv</mdui:DisplayName>
-                    <mdui:Description xml:lang="fi">Kapa dev HST IdP desc fi</mdui:Description>
-                    <mdui:Description xml:lang="en">Kapa dev HST IdP desc en</mdui:Description>
-                    <mdui:Description xml:lang="sv">Kapa dev HST IdP desc sv</mdui:Description>
-                    <mdui:Logo height="70" width="229">https://tunnistaminen.test/img/kapa.png</mdui:Logo>
-                </mdui:UIInfo>
-            </Extensions>
-            <KeyDescriptor use="signing">
-                <ds:KeyInfo>
-                    <ds:X509Data>
-                        <ds:X509Certificate>
-MIIDuTCCAqGgAwIBAgIJAN5CK1ui2B7UMA0GCSqGSIb3DQEBCwUAMHMxCzAJBgNVBAYTAkZJMRAwDgYDVQQIDAdVdXNpbWFhMREwDwYDVQQHDAhIZWxzaW5raTEQMA4GA1UECgwHS2FwYXB1YjEQMA4GA1UECwwHS2FwYXB1YjEbMBkGA1UEAwwSdHVubmlzdGFtaW5lbi50ZXN0MB4XDTE3MDExMTExMjkyNloXDTE4MDExMTExMjkyNlowczELMAkGA1UEBhMCRkkxEDAOBgNVBAgMB1V1c2ltYWExETAPBgNVBAcMCEhlbHNpbmtpMRAwDgYDVQQKDAdLYXBhcHViMRAwDgYDVQQLDAdLYXBhcHViMRswGQYDVQQDDBJ0dW5uaXN0YW1pbmVuLnRlc3QwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQCbX0tJNbFDCzYuzSqqQRqH4XfwHBAriI9cqf9oNFyGXsw71wdghZ5oqG0PzaaQGhPuOPvUejihCEh+wBHoevnKkajlG6yqBhyvHIZrgNd60n+ADDJ+vMkJJlDu\/BqtMXFFUUejme55z6sZcaaRXMBb4EqEWCUmCl9f1RV\/avmEzhp\/NPoqTfccuR8B64XK3QwHaxT3CCTIiD+Z2RXhoIZTbA3Bt2Q1a2NzK+E7bfAY\/wCJ+Movl7g5MQ69d1fZlLMFDKGwJUrl6tCF2VjMdnbV85aid60mYixIJ8E8ozrvJJMakVQmo10RD5jNt17QER4MVtL+j4OMUAgH\/V4KWYE1AgMBAAGjUDBOMB0GA1UdDgQWBBTNgqjJUoO6uXwsfpdc\/sCURE021jAfBgNVHSMEGDAWgBTNgqjJUoO6uXwsfpdc\/sCURE021jAMBgNVHRMEBTADAQH\/MA0GCSqGSIb3DQEBCwUAA4IBAQBNdzhbMfloF9yy16pym4h9IFy\/inNkdf+nFsHUVgvCpHiKyDugkJ6rMK9VRv6Jk9\/v6+ByhoYCoT+et2cquD3XfPdQ+zP1LpLAE\/q4xNNlFGoYhskekHXMP9lK9uQ5\/PZSvqMq1YIkMFi1oacUARnPPjXHqeSwFFtZeqJ2Bz3jqk8jhKEJXCsIonBSWjD\/Idy52dOr2+AfH4np1p94zWRz6xc99pCP1hoEqbWqLuZkYruAHTVQgOpShkHvU1iTTLmxjzkR+vImvSyYRiqztiy2+4F9Rz9e9u0RcdwYVAqfFUgGcVcPTKZIqJFELWszCuk4O2K5cYDi8hRFDUtxqnhJ
-                        </ds:X509Certificate>
-                    </ds:X509Data>
-                </ds:KeyInfo>
-            </KeyDescriptor>
-            <SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://kortti.tunnistaminen.test/hstidp/profile/SAML2/POST/SLO"/>
-            <SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect" Location="https://kortti.tunnistaminen.test/hstidp/profile/SAML2/Redirect/SLO"/>
-            <NameIDFormat>urn:oasis:names:tc:SAML:2.0:nameid-format:transient</NameIDFormat>
-            <SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://kortti.tunnistaminen.test/hstidp/profile/SAML2/POST/SSO"/>
-            <SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect" Location="https://kortti.tunnistaminen.test/hstidp/profile/SAML2/Redirect/SSO"/>
-        </IDPSSODescriptor>
-        <Organization>
-            <OrganizationName xml:lang="fi">Kapa development fi</OrganizationName>
-            <OrganizationName xml:lang="en">Kapa development en</OrganizationName>
-            <OrganizationName xml:lang="sv">Kapa development sv</OrganizationName>
-            <OrganizationDisplayName xml:lang="fi">Kapa development displ fi</OrganizationDisplayName>
-            <OrganizationDisplayName xml:lang="en">Kapa development displ en</OrganizationDisplayName>
-            <OrganizationDisplayName xml:lang="sv">Kapa development displ sv</OrganizationDisplayName>
-            <OrganizationURL xml:lang="fi">http://vm.fi/palveluarkkitehtuuri</OrganizationURL>
-            <OrganizationURL xml:lang="en">http://vm.fi/palveluarkkitehtuuri</OrganizationURL>
-            <OrganizationURL xml:lang="sv">http://vm.fi/palveluarkkitehtuuri</OrganizationURL>
-        </Organization>
-        <ContactPerson contactType="technical">
-            <GivenName>Kapa development</GivenName>
-            <SurName>Kapa development</SurName>
-            <EmailAddress>mailto:admin@vagrant.dev</EmailAddress>
-        </ContactPerson>
-    </EntityDescriptor>
-    <EntityDescriptor  xmlns="urn:oasis:names:tc:SAML:2.0:metadata"
-                       xmlns:ds="http://www.w3.org/2000/09/xmldsig#"
-                       xmlns:shibmd="urn:mace:shibboleth:metadata:1.0"
-                       xmlns:xml="http://www.w3.org/XML/1998/namespace"
-                       xmlns:mdui="urn:oasis:names:tc:SAML:metadata:ui"
-                       entityID="https://tunnistaminen.test/mobileidp/idp1">
-        <IDPSSODescriptor WantAuthnRequestsSigned="true" protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol">
-            <Extensions>
-                <shibmd:Scope regexp="false">tunnistaminen.test</shibmd:Scope>
-                <mdui:UIInfo>
-                    <mdui:DisplayName xml:lang="fi">Kapa dev Mobile IdP fi</mdui:DisplayName>
-                    <mdui:DisplayName xml:lang="en">Kapa dev Mobile IdP en</mdui:DisplayName>
-                    <mdui:DisplayName xml:lang="sv">Kapa dev Mobile IdP sv</mdui:DisplayName>
-                    <mdui:Description xml:lang="fi">Kapa dev Mobile IdP desc fi</mdui:Description>
-                    <mdui:Description xml:lang="en">Kapa dev Mobile IdP desc en</mdui:Description>
-                    <mdui:Description xml:lang="sv">Kapa dev Mobile IdP desc sv</mdui:Description>
-                    <mdui:Logo height="70" width="229">https://tunnistaminen.test/img/kapa.png</mdui:Logo>
-                </mdui:UIInfo>
-            </Extensions>
-            <KeyDescriptor use="signing">
-                <ds:KeyInfo>
-                    <ds:X509Data>
-                        <ds:X509Certificate>
-MIIDuTCCAqGgAwIBAgIJAKsoXkn+72YnMA0GCSqGSIb3DQEBCwUAMHMxCzAJBgNVBAYTAkZJMRAwDgYDVQQIDAdVdXNpbWFhMREwDwYDVQQHDAhIZWxzaW5raTEQMA4GA1UECgwHS2FwYXB1YjEQMA4GA1UECwwHS2FwYXB1YjEbMBkGA1UEAwwSdHVubmlzdGFtaW5lbi50ZXN0MB4XDTE3MDExMTExMjkyN1oXDTE4MDExMTExMjkyN1owczELMAkGA1UEBhMCRkkxEDAOBgNVBAgMB1V1c2ltYWExETAPBgNVBAcMCEhlbHNpbmtpMRAwDgYDVQQKDAdLYXBhcHViMRAwDgYDVQQLDAdLYXBhcHViMRswGQYDVQQDDBJ0dW5uaXN0YW1pbmVuLnRlc3QwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQDSuxbisn3l4WEFxWU8ZVopEG3zGpX50TB1BcxMONH+\/cgZaHrqVQ\/a0w+UXVCfgcf6Cl1oJBdKi14mA4j3Gj\/uJOqN3JhrqJGGgSvr2LmTHt9OVt287ThbYqmrCWtELGJn\/zERn4bDiZsMajGbsunusE+BboQRt0UcCxzHq4GlmqeDk7IHWukFbayNAU8nSzQGIc+22FlRkdMbAMxXFMpD+3N4wdHQI0WOvryoZp9ELLz7NYfkOUWt+2BoveEENaWj1i5l0v92i+TlztVhn6sZDT4HtNuv3lG+ajK2J+2wpFpgmoVxIqJzPwHhtYwJi5yp3yyJFEc9fO8vbD0iW6KRAgMBAAGjUDBOMB0GA1UdDgQWBBQgYIcz\/CdNCxBuvARlYDxjznaTNDAfBgNVHSMEGDAWgBQgYIcz\/CdNCxBuvARlYDxjznaTNDAMBgNVHRMEBTADAQH\/MA0GCSqGSIb3DQEBCwUAA4IBAQBoY2rHhstXIFyaR5Tcx9bazexZIdOntPPQ6mXwckNLGEORj49i89RK9rOTvKxjJaL0UnvmIxDpS0aHBGVRQzECqkd5VexmDOxtUV8sa1comr6IApEGdR03fIkN8fYhR0z3sNudcBJNGi8HHE8TIoaLz5DxbVFVHwqSzKVSMNdsOhi4y0dXwdXKHx99Ryr5g3IP54AdaOKJoCWyC7ZPqMHmeAbe26NfMjUlDCZ9HHT4d5bK7mXgbErF6w6GsPGZjtY2ymnB8g8OtVLsIjRDImzd5TSmUFM8HNjT1yKudhavtECYUnh7Ghtomt6VQZ80mD+P+39WxjD2DAIYQJVtX\/U3
-                        </ds:X509Certificate>
-                    </ds:X509Data>
-                </ds:KeyInfo>
-            </KeyDescriptor>
-            <SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://tunnistaminen.test/mobileidp/profile/SAML2/POST/SLO"/>
-            <SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect" Location="https://tunnistaminen.test/mobileidp/profile/SAML2/Redirect/SLO"/>
-            <NameIDFormat>urn:oasis:names:tc:SAML:2.0:nameid-format:transient</NameIDFormat>
-            <SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://tunnistaminen.test/mobileidp/profile/SAML2/POST/SSO"/>
-            <SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect" Location="https://tunnistaminen.test/mobileidp/profile/SAML2/Redirect/SSO"/>
-        </IDPSSODescriptor>
-        <Organization>
-            <OrganizationName xml:lang="fi">Kapa development fi</OrganizationName>
-            <OrganizationName xml:lang="en">Kapa development en</OrganizationName>
-            <OrganizationName xml:lang="sv">Kapa development sv</OrganizationName>
-            <OrganizationDisplayName xml:lang="fi">Kapa development displ fi</OrganizationDisplayName>
-            <OrganizationDisplayName xml:lang="en">Kapa development displ en</OrganizationDisplayName>
-            <OrganizationDisplayName xml:lang="sv">Kapa development displ sv</OrganizationDisplayName>
-            <OrganizationURL xml:lang="fi">http://vm.fi/palveluarkkitehtuuri</OrganizationURL>
-            <OrganizationURL xml:lang="en">http://vm.fi/palveluarkkitehtuuri</OrganizationURL>
-            <OrganizationURL xml:lang="sv">http://vm.fi/palveluarkkitehtuuri</OrganizationURL>
-        </Organization>
-        <ContactPerson contactType="technical">
-            <GivenName>Kapa development</GivenName>
-            <SurName>Kapa development</SurName>
-            <EmailAddress>mailto:admin@docker.dev</EmailAddress>
-        </ContactPerson>
-    </EntityDescriptor>
+<EntitiesDescriptor Name="valtionhallinnontunnistuksenohjauspalvelunidpt" validUntil="2018-10-30T13:26:31Z" xmlns="urn:oasis:names:tc:SAML:2.0:metadata" xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<EntityDescriptor  xmlns="urn:oasis:names:tc:SAML:2.0:metadata"
+                   xmlns:ds="http://www.w3.org/2000/09/xmldsig#"
+                   xmlns:shibmd="urn:mace:shibboleth:metadata:1.0"
+                   xmlns:xml="http://www.w3.org/XML/1998/namespace"
+                   xmlns:mdui="urn:oasis:names:tc:SAML:metadata:ui"
+                   entityID="https://tunnistaminen.test/tupasidp2">
+    <IDPSSODescriptor WantAuthnRequestsSigned="true" protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol">
+        <Extensions>
+            <shibmd:Scope regexp="false">tunnistaminen.test</shibmd:Scope>
+            <mdui:UIInfo>
+                <mdui:DisplayName xml:lang="fi">KaPA DEV integration IdP fi</mdui:DisplayName>
+                <mdui:DisplayName xml:lang="en">KaPA DEV integration IdP en</mdui:DisplayName>
+                <mdui:DisplayName xml:lang="sv">KaPA DEV integration IdP sv</mdui:DisplayName>
+                <mdui:Description xml:lang="fi">KaPA DEV integration IdP desc fi</mdui:Description>
+                <mdui:Description xml:lang="en">KaPA DEV integration IdP desc en</mdui:Description>
+                <mdui:Description xml:lang="sv">KaPA DEV integration IdP desc sv</mdui:Description>
+                <mdui:Logo height="70" width="229">https://tunnistaminen.test/img/kapa.png</mdui:Logo>
+            </mdui:UIInfo>
+        </Extensions>
+        <KeyDescriptor use="signing">
+            <ds:KeyInfo>
+                <ds:X509Data>
+                    <ds:X509Certificate>
+MIIDuTCCAqGgAwIBAgIJAKnQPWRoiBZvMA0GCSqGSIb3DQEBCwUAMHMxCzAJBgNVBAYTAkZJMRAwDgYDVQQIDAdVdXNpbWFhMREwDwYDVQQHDAhIZWxzaW5raTEQMA4GA1UECgwHS2FwYXB1YjEQMA4GA1UECwwHS2FwYXB1YjEbMBkGA1UEAwwSdHVubmlzdGFtaW5lbi50ZXN0MB4XDTE3MTAzMDEzMjYzN1oXDTE5MTAzMDEzMjYzN1owczELMAkGA1UEBhMCRkkxEDAOBgNVBAgMB1V1c2ltYWExETAPBgNVBAcMCEhlbHNpbmtpMRAwDgYDVQQKDAdLYXBhcHViMRAwDgYDVQQLDAdLYXBhcHViMRswGQYDVQQDDBJ0dW5uaXN0YW1pbmVuLnRlc3QwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQC7SqZvH0pd9hs1HJavCwwBf7MVhZvY8woQhf8cqLJJGgcCOW2x5Mn16I0N1/zm15zMqXRZH8u88ACKTjsC0cPy/OuXJrROCrC5f1I4UuLPQC9s78gnQmdEpwC81UyhMe8JTBxwQSUJwk+Ku1fHxYxZXTBsHrQwtX34AkYgZpw1gEQXpFOs5eeAw4xIT+s3528q8YDWHAu0FPT0H+H7I97XpV/qVanNpmUjr7Vga2PkBLdEKqlr+ZCWaQL7gXiRo/63rv/HJSatjf47KMFl4Xrqzwef2Yt7UTx51bWXUtNc1OT4OCuMVTFxB/OQ/ZgyVHQkGPP9wxIl0RePQwuqNabTAgMBAAGjUDBOMB0GA1UdDgQWBBRM/j4Y2ea0jxa0GEgh91C2UCA7DjAfBgNVHSMEGDAWgBRM/j4Y2ea0jxa0GEgh91C2UCA7DjAMBgNVHRMEBTADAQH/MA0GCSqGSIb3DQEBCwUAA4IBAQCOJTgBonHDG8vC7EBR/VgOFMFqb6enxZksQaM5KdNjp5b9P9F6dOcKB8/pM9ytb6f7wQ549xWn+X7fhAkwH/UL6SVxEQnwIU+4HIWynBztZ3DVQ5sZhVgC1IKBjK4iTs2gsopbS891ODhDJtt+0Ezy54UuZ8Z9iq6h9ANePUViedXBdFwYJ5zeED9stVrPFhITWJLoOt4OjyF/JLM0gZYkezcUQihHUDxwSbsCWITi6cIOL8wAMkRoeHLikd7KneK0Til3tN1v/RVEE0senYSxCfFAOa6msZdnYgVbUnBZv5TQ8a+x8pmgQrP18Vb6FAW6rxI0Y00pJTuIRdW8Ftes
+                    </ds:X509Certificate>
+                </ds:X509Data>
+            </ds:KeyInfo>
+        </KeyDescriptor>
+	<NameIDFormat>urn:oasis:names:tc:SAML:2.0:nameid-format:transient</NameIDFormat>
+        <SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://tunnistaminen.test/tupasidp/profile/SAML2/POST/SSO"/>
+        <SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect" Location="https://tunnistaminen.test/tupasidp/profile/SAML2/Redirect/SSO"/>
+    </IDPSSODescriptor>
+    <Organization>
+        <OrganizationName xml:lang="fi">KaPA development fi</OrganizationName>
+        <OrganizationName xml:lang="en">KaPA development en</OrganizationName>
+        <OrganizationName xml:lang="sv">KaPA development sv</OrganizationName>
+        <OrganizationDisplayName xml:lang="fi">KaPA development displ fi</OrganizationDisplayName>
+        <OrganizationDisplayName xml:lang="en">KaPA development displ en</OrganizationDisplayName>
+        <OrganizationDisplayName xml:lang="sv">KaPA development displ sv</OrganizationDisplayName>
+        <OrganizationURL xml:lang="fi">http://vm.fi/palveluarkkitehtuuri</OrganizationURL>
+        <OrganizationURL xml:lang="en">http://vm.fi/palveluarkkitehtuuri</OrganizationURL>
+        <OrganizationURL xml:lang="sv">http://vm.fi/palveluarkkitehtuuri</OrganizationURL>
+    </Organization>
+    <ContactPerson contactType="technical">
+        <GivenName>KaPA development</GivenName>
+        <SurName>KaPA development</SurName>
+        <EmailAddress>mailto:admin@tunnistaminen.test</EmailAddress>
+    </ContactPerson>
+</EntityDescriptor>
+<EntityDescriptor  xmlns="urn:oasis:names:tc:SAML:2.0:metadata"
+                   xmlns:ds="http://www.w3.org/2000/09/xmldsig#"
+                   xmlns:shibmd="urn:mace:shibboleth:metadata:1.0"
+                   xmlns:xml="http://www.w3.org/XML/1998/namespace"
+                   xmlns:mdui="urn:oasis:names:tc:SAML:metadata:ui"
+                   entityID="https://kortti.tunnistaminen.test/hstidp/idp1">
+    <IDPSSODescriptor WantAuthnRequestsSigned="true" protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol">
+        <Extensions>
+            <shibmd:Scope regexp="false">kortti.tunnistaminen.test</shibmd:Scope>
+            <mdui:UIInfo>
+                <mdui:DisplayName xml:lang="fi">Kapa dev HST IdP fi</mdui:DisplayName>
+                <mdui:DisplayName xml:lang="en">Kapa dev HST IdP en</mdui:DisplayName>
+                <mdui:DisplayName xml:lang="sv">Kapa dev HST IdP sv</mdui:DisplayName>
+                <mdui:Description xml:lang="fi">Kapa dev HST IdP desc fi</mdui:Description>
+                <mdui:Description xml:lang="en">Kapa dev HST IdP desc en</mdui:Description>
+                <mdui:Description xml:lang="sv">Kapa dev HST IdP desc sv</mdui:Description>
+                <mdui:Logo height="70" width="229">https://tunnistaminen.test/img/kapa.png</mdui:Logo>
+            </mdui:UIInfo>
+        </Extensions>
+        <KeyDescriptor use="signing">
+            <ds:KeyInfo>
+                <ds:X509Data>
+                    <ds:X509Certificate>
+MIIDuTCCAqGgAwIBAgIJAPEVOPi/X2GqMA0GCSqGSIb3DQEBCwUAMHMxCzAJBgNVBAYTAkZJMRAwDgYDVQQIDAdVdXNpbWFhMREwDwYDVQQHDAhIZWxzaW5raTEQMA4GA1UECgwHS2FwYXB1YjEQMA4GA1UECwwHS2FwYXB1YjEbMBkGA1UEAwwSdHVubmlzdGFtaW5lbi50ZXN0MB4XDTE3MTAzMDEzMjYzOFoXDTE5MTAzMDEzMjYzOFowczELMAkGA1UEBhMCRkkxEDAOBgNVBAgMB1V1c2ltYWExETAPBgNVBAcMCEhlbHNpbmtpMRAwDgYDVQQKDAdLYXBhcHViMRAwDgYDVQQLDAdLYXBhcHViMRswGQYDVQQDDBJ0dW5uaXN0YW1pbmVuLnRlc3QwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQCoF1kOXMRzXFsN5yZAessWeKQKvhUmNPx3rVjXzdGa87Swo23IMhAmuPonhxESpLXQl6LAxo7mOCeK0L50zDy9HiKDBtqXZjPGWXJa6LjbsebOPLgD3+jqW4XRkk/R1S6PkUVZOA7faaq03FqX53aHCsl6YRLlW/YnNbBIDq1dXsG3i8uhOxW3CWYlyrkHUcR4kMJ/tok3HkLiRML+2lnTIxLZxVNycCTTp3xPa+3Z2xa4UOXyxz2GWI6UajlMLpyXjvpGrMFIMrp8b8iKMB2r+3hCDuR3pmQBkTuTXUr130r5NwsewNITwl1kUP8af857pI0J1BiKPaj68v33SnnZAgMBAAGjUDBOMB0GA1UdDgQWBBQ89y1pr96zHfYPZtMGQ1YQKVwAxzAfBgNVHSMEGDAWgBQ89y1pr96zHfYPZtMGQ1YQKVwAxzAMBgNVHRMEBTADAQH/MA0GCSqGSIb3DQEBCwUAA4IBAQAam+EF6vKw8mGz/jN0ZY2db8I2lwBES39b0jau8aHFEp2x1Idd90aJAOmrnLovV/H47hBqfRfzrndaWHLitMP0YqgxP8EjaN3bGy1mOC5HPno1sC8JOdFvAAa4S6u3kX9c6bI/TXlJq7XA/2M3vyknWX3g284Dic8VjUgCrhUdZTF0UH5sVNfpSN/t2QaPKuYkGSoJuuixUHwkL1kaVfdMYgVsspQo9hFWUHsdqrETWeuvHxWgrZK0WI7w5iWoEgJY/4owgnwMgpMFo/bWFR6PJ0mQjJG6/UsMg34Baq/8spLutDONrbEwZl5ClwjgbJVjLLAsJSyNAhnY49sQByIy
+                    </ds:X509Certificate>
+                </ds:X509Data>
+            </ds:KeyInfo>
+        </KeyDescriptor>
+	<NameIDFormat>urn:oasis:names:tc:SAML:2.0:nameid-format:transient</NameIDFormat>
+        <SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://kortti.tunnistaminen.test/hstidp/profile/SAML2/POST/SSO"/>
+        <SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect" Location="https://kortti.tunnistaminen.test/hstidp/profile/SAML2/Redirect/SSO"/>
+    </IDPSSODescriptor>
+    <Organization>
+        <OrganizationName xml:lang="fi">Kapa development fi</OrganizationName>
+        <OrganizationName xml:lang="en">Kapa development en</OrganizationName>
+        <OrganizationName xml:lang="sv">Kapa development sv</OrganizationName>
+        <OrganizationDisplayName xml:lang="fi">Kapa development displ fi</OrganizationDisplayName>
+        <OrganizationDisplayName xml:lang="en">Kapa development displ en</OrganizationDisplayName>
+        <OrganizationDisplayName xml:lang="sv">Kapa development displ sv</OrganizationDisplayName>
+        <OrganizationURL xml:lang="fi">http://vm.fi/palveluarkkitehtuuri</OrganizationURL>
+        <OrganizationURL xml:lang="en">http://vm.fi/palveluarkkitehtuuri</OrganizationURL>
+        <OrganizationURL xml:lang="sv">http://vm.fi/palveluarkkitehtuuri</OrganizationURL>
+    </Organization>
+    <ContactPerson contactType="technical">
+        <GivenName>Kapa development</GivenName>
+        <SurName>Kapa development</SurName>
+        <EmailAddress>mailto:admin@vagrant.dev</EmailAddress>
+    </ContactPerson>
+</EntityDescriptor>
+<EntityDescriptor  xmlns="urn:oasis:names:tc:SAML:2.0:metadata"
+                   xmlns:ds="http://www.w3.org/2000/09/xmldsig#"
+                   xmlns:shibmd="urn:mace:shibboleth:metadata:1.0"
+                   xmlns:xml="http://www.w3.org/XML/1998/namespace"
+                   xmlns:mdui="urn:oasis:names:tc:SAML:metadata:ui"
+                   entityID="https://tunnistaminen.test/mobileidp/idp1">
+    <IDPSSODescriptor WantAuthnRequestsSigned="true" protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol">
+        <Extensions>
+            <shibmd:Scope regexp="false">tunnistaminen.test</shibmd:Scope>
+            <mdui:UIInfo>
+                <mdui:DisplayName xml:lang="fi">Kapa dev Mobile IdP fi</mdui:DisplayName>
+                <mdui:DisplayName xml:lang="en">Kapa dev Mobile IdP en</mdui:DisplayName>
+                <mdui:DisplayName xml:lang="sv">Kapa dev Mobile IdP sv</mdui:DisplayName>
+                <mdui:Description xml:lang="fi">Kapa dev Mobile IdP desc fi</mdui:Description>
+                <mdui:Description xml:lang="en">Kapa dev Mobile IdP desc en</mdui:Description>
+                <mdui:Description xml:lang="sv">Kapa dev Mobile IdP desc sv</mdui:Description>
+                <mdui:Logo height="70" width="229">https://tunnistaminen.test/img/kapa.png</mdui:Logo>
+            </mdui:UIInfo>
+        </Extensions>
+        <KeyDescriptor use="signing">
+            <ds:KeyInfo>
+                <ds:X509Data>
+                    <ds:X509Certificate>
+MIIDuTCCAqGgAwIBAgIJAPpB3tUk/WLNMA0GCSqGSIb3DQEBCwUAMHMxCzAJBgNVBAYTAkZJMRAwDgYDVQQIDAdVdXNpbWFhMREwDwYDVQQHDAhIZWxzaW5raTEQMA4GA1UECgwHS2FwYXB1YjEQMA4GA1UECwwHS2FwYXB1YjEbMBkGA1UEAwwSdHVubmlzdGFtaW5lbi50ZXN0MB4XDTE3MTAzMDEzMjYzOFoXDTE5MTAzMDEzMjYzOFowczELMAkGA1UEBhMCRkkxEDAOBgNVBAgMB1V1c2ltYWExETAPBgNVBAcMCEhlbHNpbmtpMRAwDgYDVQQKDAdLYXBhcHViMRAwDgYDVQQLDAdLYXBhcHViMRswGQYDVQQDDBJ0dW5uaXN0YW1pbmVuLnRlc3QwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQDLClCXlH5tX1ET6mponwE52jAorUjpArwLpNr9fs79wZHY3DKCISi/n2Z/+gvrNYmjMwgKIyxebY+mhCy96BQ/Czl1dirSaR9QarMfxP271X3D2DOKO5QW89UCUwKE2+E/R/E8qY3gKZPrN1jRaOfe9bU50kICb7AqEuJS+UtAMQ0j0SClF8iowsuAHB6TZfbfQiWrT0z/ONd95O4wicAGOkUAcC1tRmqLptCfnB1ljTfRzxMOUf++/9CH65Birp5ovnUM+/dDRf0zn7UwfI268Mbl/B1pIcM+c0C3FS4o77f7raQ20Aj8jON0NOxJo4+V2qjpj7dgwCW6NDuGAebzAgMBAAGjUDBOMB0GA1UdDgQWBBRiQa2I1k8zm51vMFgGVKCRPKOZ/zAfBgNVHSMEGDAWgBRiQa2I1k8zm51vMFgGVKCRPKOZ/zAMBgNVHRMEBTADAQH/MA0GCSqGSIb3DQEBCwUAA4IBAQATk42TkQ9Ie7KeCNSyHvjNhadl336k2i/Hl5CynOV8fh/mxe5FL9VCinlDWCC4S1ntviJiX+KsXJrVlCXC8IEhGqwUyimY248mJQTAGcQE9+K6W2lVRVPuVIrkk9hXV8fezLOp9PuUAvlLcUkj1kmGASXDRm8G1AGqjB3ZWn4zi5YlG9YJJiz9qRhJezzz1GB5mlQRxytImyxyKorp4d3F4KPdAl/OxwEtya/EgLXHLko84iW3hn1cM3rJXMyJFvGZ8/TVsr+xkz5AM8U0GzhSoDKiIho7gqa0Nr+SgXfLf19EqVrQg6VEX1VYtfTRfoBxspPSefUmRYNUn0lt/trY
+                    </ds:X509Certificate>
+                </ds:X509Data>
+            </ds:KeyInfo>
+        </KeyDescriptor>
+	<NameIDFormat>urn:oasis:names:tc:SAML:2.0:nameid-format:transient</NameIDFormat>
+        <SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://tunnistaminen.test/mobileidp/profile/SAML2/POST/SSO"/>
+        <SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect" Location="https://tunnistaminen.test/mobileidp/profile/SAML2/Redirect/SSO"/>
+    </IDPSSODescriptor>
+    <Organization>
+        <OrganizationName xml:lang="fi">Kapa development fi</OrganizationName>
+        <OrganizationName xml:lang="en">Kapa development en</OrganizationName>
+        <OrganizationName xml:lang="sv">Kapa development sv</OrganizationName>
+        <OrganizationDisplayName xml:lang="fi">Kapa development displ fi</OrganizationDisplayName>
+        <OrganizationDisplayName xml:lang="en">Kapa development displ en</OrganizationDisplayName>
+        <OrganizationDisplayName xml:lang="sv">Kapa development displ sv</OrganizationDisplayName>
+        <OrganizationURL xml:lang="fi">http://vm.fi/palveluarkkitehtuuri</OrganizationURL>
+        <OrganizationURL xml:lang="en">http://vm.fi/palveluarkkitehtuuri</OrganizationURL>
+        <OrganizationURL xml:lang="sv">http://vm.fi/palveluarkkitehtuuri</OrganizationURL>
+    </Organization>
+    <ContactPerson contactType="technical">
+        <GivenName>Kapa development</GivenName>
+        <SurName>Kapa development</SurName>
+        <EmailAddress>mailto:admin@docker.dev</EmailAddress>
+    </ContactPerson>
+</EntityDescriptor>
 </EntitiesDescriptor>

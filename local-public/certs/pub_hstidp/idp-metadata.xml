@@ -15,21 +15,19 @@
                 <mdui:Description xml:lang="fi">Kapa dev HST IdP desc fi</mdui:Description>
                 <mdui:Description xml:lang="en">Kapa dev HST IdP desc en</mdui:Description>
                 <mdui:Description xml:lang="sv">Kapa dev HST IdP desc sv</mdui:Description>
-                <mdui:Logo height="70" width="229">https://www.tunnistus-dev.xyz/img/kapa.png</mdui:Logo>
+                <mdui:Logo height="70" width="229">https://tunnistaminen.test/img/kapa.png</mdui:Logo>
             </mdui:UIInfo>
         </Extensions>
         <KeyDescriptor use="signing">
             <ds:KeyInfo>
                 <ds:X509Data>
                     <ds:X509Certificate>
-MIIDuTCCAqGgAwIBAgIJAN5CK1ui2B7UMA0GCSqGSIb3DQEBCwUAMHMxCzAJBgNVBAYTAkZJMRAwDgYDVQQIDAdVdXNpbWFhMREwDwYDVQQHDAhIZWxzaW5raTEQMA4GA1UECgwHS2FwYXB1YjEQMA4GA1UECwwHS2FwYXB1YjEbMBkGA1UEAwwSdHVubmlzdGFtaW5lbi50ZXN0MB4XDTE3MDExMTExMjkyNloXDTE4MDExMTExMjkyNlowczELMAkGA1UEBhMCRkkxEDAOBgNVBAgMB1V1c2ltYWExETAPBgNVBAcMCEhlbHNpbmtpMRAwDgYDVQQKDAdLYXBhcHViMRAwDgYDVQQLDAdLYXBhcHViMRswGQYDVQQDDBJ0dW5uaXN0YW1pbmVuLnRlc3QwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQCbX0tJNbFDCzYuzSqqQRqH4XfwHBAriI9cqf9oNFyGXsw71wdghZ5oqG0PzaaQGhPuOPvUejihCEh+wBHoevnKkajlG6yqBhyvHIZrgNd60n+ADDJ+vMkJJlDu\/BqtMXFFUUejme55z6sZcaaRXMBb4EqEWCUmCl9f1RV\/avmEzhp\/NPoqTfccuR8B64XK3QwHaxT3CCTIiD+Z2RXhoIZTbA3Bt2Q1a2NzK+E7bfAY\/wCJ+Movl7g5MQ69d1fZlLMFDKGwJUrl6tCF2VjMdnbV85aid60mYixIJ8E8ozrvJJMakVQmo10RD5jNt17QER4MVtL+j4OMUAgH\/V4KWYE1AgMBAAGjUDBOMB0GA1UdDgQWBBTNgqjJUoO6uXwsfpdc\/sCURE021jAfBgNVHSMEGDAWgBTNgqjJUoO6uXwsfpdc\/sCURE021jAMBgNVHRMEBTADAQH\/MA0GCSqGSIb3DQEBCwUAA4IBAQBNdzhbMfloF9yy16pym4h9IFy\/inNkdf+nFsHUVgvCpHiKyDugkJ6rMK9VRv6Jk9\/v6+ByhoYCoT+et2cquD3XfPdQ+zP1LpLAE\/q4xNNlFGoYhskekHXMP9lK9uQ5\/PZSvqMq1YIkMFi1oacUARnPPjXHqeSwFFtZeqJ2Bz3jqk8jhKEJXCsIonBSWjD\/Idy52dOr2+AfH4np1p94zWRz6xc99pCP1hoEqbWqLuZkYruAHTVQgOpShkHvU1iTTLmxjzkR+vImvSyYRiqztiy2+4F9Rz9e9u0RcdwYVAqfFUgGcVcPTKZIqJFELWszCuk4O2K5cYDi8hRFDUtxqnhJ
+MIIDuTCCAqGgAwIBAgIJAPEVOPi/X2GqMA0GCSqGSIb3DQEBCwUAMHMxCzAJBgNVBAYTAkZJMRAwDgYDVQQIDAdVdXNpbWFhMREwDwYDVQQHDAhIZWxzaW5raTEQMA4GA1UECgwHS2FwYXB1YjEQMA4GA1UECwwHS2FwYXB1YjEbMBkGA1UEAwwSdHVubmlzdGFtaW5lbi50ZXN0MB4XDTE3MTAzMDEzMjYzOFoXDTE5MTAzMDEzMjYzOFowczELMAkGA1UEBhMCRkkxEDAOBgNVBAgMB1V1c2ltYWExETAPBgNVBAcMCEhlbHNpbmtpMRAwDgYDVQQKDAdLYXBhcHViMRAwDgYDVQQLDAdLYXBhcHViMRswGQYDVQQDDBJ0dW5uaXN0YW1pbmVuLnRlc3QwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQCoF1kOXMRzXFsN5yZAessWeKQKvhUmNPx3rVjXzdGa87Swo23IMhAmuPonhxESpLXQl6LAxo7mOCeK0L50zDy9HiKDBtqXZjPGWXJa6LjbsebOPLgD3+jqW4XRkk/R1S6PkUVZOA7faaq03FqX53aHCsl6YRLlW/YnNbBIDq1dXsG3i8uhOxW3CWYlyrkHUcR4kMJ/tok3HkLiRML+2lnTIxLZxVNycCTTp3xPa+3Z2xa4UOXyxz2GWI6UajlMLpyXjvpGrMFIMrp8b8iKMB2r+3hCDuR3pmQBkTuTXUr130r5NwsewNITwl1kUP8af857pI0J1BiKPaj68v33SnnZAgMBAAGjUDBOMB0GA1UdDgQWBBQ89y1pr96zHfYPZtMGQ1YQKVwAxzAfBgNVHSMEGDAWgBQ89y1pr96zHfYPZtMGQ1YQKVwAxzAMBgNVHRMEBTADAQH/MA0GCSqGSIb3DQEBCwUAA4IBAQAam+EF6vKw8mGz/jN0ZY2db8I2lwBES39b0jau8aHFEp2x1Idd90aJAOmrnLovV/H47hBqfRfzrndaWHLitMP0YqgxP8EjaN3bGy1mOC5HPno1sC8JOdFvAAa4S6u3kX9c6bI/TXlJq7XA/2M3vyknWX3g284Dic8VjUgCrhUdZTF0UH5sVNfpSN/t2QaPKuYkGSoJuuixUHwkL1kaVfdMYgVsspQo9hFWUHsdqrETWeuvHxWgrZK0WI7w5iWoEgJY/4owgnwMgpMFo/bWFR6PJ0mQjJG6/UsMg34Baq/8spLutDONrbEwZl5ClwjgbJVjLLAsJSyNAhnY49sQByIy
                     </ds:X509Certificate>
                 </ds:X509Data>
             </ds:KeyInfo>
         </KeyDescriptor>
-        <SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://kortti.tunnistaminen.test/hstidp/profile/SAML2/POST/SLO"/>
-        <SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect" Location="https://kortti.tunnistaminen.test/hstidp/profile/SAML2/Redirect/SLO"/>
-		<NameIDFormat>urn:oasis:names:tc:SAML:2.0:nameid-format:transient</NameIDFormat>
+	<NameIDFormat>urn:oasis:names:tc:SAML:2.0:nameid-format:transient</NameIDFormat>
         <SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://kortti.tunnistaminen.test/hstidp/profile/SAML2/POST/SSO"/>
         <SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect" Location="https://kortti.tunnistaminen.test/hstidp/profile/SAML2/Redirect/SSO"/>
     </IDPSSODescriptor>

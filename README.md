@@ -58,7 +58,7 @@ git clone https://github.com/vrk-kpa/e-identification-test-service-public.git e-
 git clone https://github.com/vrk-kpa/e-identification-tupas-idp-public.git e-identification-tupas-idp
 git clone https://github.com/vrk-kpa/e-identification-vtj-client-public.git e-identification-vtj-client
 git clone https://github.com/vrk-kpa/e-identification-vartti-client-public.git e-identification-vartti-client
-git clone https://github.com/vrk-kpa/sevi-identification-ui-public.git sevi-identification-ui
+git clone https://github.com/vrk-kpa/e-identification-static-ui-public.git e-identification-static-ui
 ```
 
 Osassa komponenteista build-skripteistä on poistettava käytöstä viittaukset sisäiseen docker-repoon:
@@ -82,9 +82,22 @@ sed --in-place "s/docker push dev-docker/#docker push dev-docker/g" \
  e-identification-config-public/build/docker/tomcat-apache2-shibd-sp/build_images.sh
 ```
 
+Lataa centos7-java8 base imagea varten tarvittava jdk-8u151-linux-x64.rpm:
+Sen saa Esimerkiksi täältä http://www.oracle.com/technetwork/java/javase/downloads/java-archive-javase8-2177648.html
+
+Siirrä ladattu jdk-8u151-linux-x64.rpm tiedosto kansioon oikeean paikkaan: 
+mv jdk-8u151-linux-x64.rpm ~/build/src/e-identification-config-public/build/docker/centos7-java8
+
+
 Käännä kaikki komponentit:
 ```
 # Docker base imaget:
+cd ~/build/src/e-identification-config-public/build/docker/centos7-java8
+./build.sh
+
+cd ~/build/src/e-identification-config-public/build/docker/centos7-shibd
+./build.sh
+
 cd ~/build/src/e-identification-config-public/build/docker/java8
 ./build.sh
 

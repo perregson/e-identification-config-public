@@ -42,3 +42,4 @@
   spconf_kapa_image_url: "https://{{ ext_router_host }}/static/img/kapa.png"
   spconf_contact_email: 'admin@tunnistaminen.test'
   shibgen_sp_id: "pub_core_sp"
+  sp_apache_loglevel: "debug"

@@ -47,6 +47,7 @@
   ext_router_ports: '-p 192.168.0.1:{{ ext_router_port }}:443 -p 192.168.0.1:80:80'
   ext_router_mounts: "-v {{ deploydir }}/nginx:/etc/nginx/conf.d:z -v {{ external_router_host_cert_path }}:/etc/nginx/ssl:z -v {{ deploydir }}/html:/etc/nginx/html:z -v {{ logdir }}:/var/log/nginx:z -v {{ deploydir }}/nginx_cache:/nginx_cache:Z"
   ext_router_imagename: "e-identification-external-router:local"
+  ext_router_sp_metadata_config: 'allow 0.0.0.0/0;'
   hst_router_host: 'kortti.tunnistaminen.test'
   hst_router_port: '443'
   hst_router_ports: '-p 192.168.0.2:{{ hst_router_port }}:{{ hst_router_target_port }}'
