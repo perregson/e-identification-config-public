@@ -1,0 +1,6 @@
+# test-idp
+    location /testidp {
+        add_header Cache-Control "no-store";
+        proxy_pass https://{{ test_idp_host }}:{{ test_idp_port }}/testidp;
+        proxy_set_header Host $host;
+    }

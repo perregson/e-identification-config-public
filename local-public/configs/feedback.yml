@@ -1,15 +1,4 @@
----
-  log:
-    file: '/data00/logs/feedback.log'
-    level: info
-  smtp:
-    port: 25
-    host: smtp.host
-  mail:
-    to: to.address@mail.com
-    from: noreply@suomi.fi
-    subject: "Suomi.fi-tunnistaminen, palaute"
-  ssl:
-    feedback_host_cert_path: '/data00/deploy/ssl/'
-    key_file: "{{ apro_ssl_key }}"
-    cert_file: "{{ apro_ssl_cert }}"
+feedbackconf_log_level: "info"
+feedbackconf_smtp_port: "25"
+feedbackconf_smtp_host: "smtp.host"
+feedbackconf_mail_to: "to.address@mail.com"

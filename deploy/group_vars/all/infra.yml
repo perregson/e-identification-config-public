@@ -1,4 +1,4 @@
-  release_version: 'v2.3.6'
+  release_version: 'v4.0.0'
   sp_port: '8030'
   sp_target_port: '443'
   sp_ports: '-p {{ sp_port }}:{{ sp_target_port }}'
@@ -71,6 +71,11 @@
   mobile_idp_ports: '-p {{ mobile_idp_port }}:{{ mobile_idp_target_port }}'
   mobile_idp_container_name: 'mobile-identity-provider-container'
   mobile_idp_directory: 'mobile-idp'
+  test_idp_port: '8099'
+  test_idp_target_port: '8443'
+  test_idp_ports: '-p {{ test_idp_port }}:{{ test_idp_target_port }}'
+  test_idp_container_name: 'test-idp-container'
+  test_idp_directory: 'test-idp'
   vartti_port: '8047'
   vartti_target_port: '8443'
   vartti_ports: ' -p {{ vartti_port }}:{{ vartti_target_port }}'
@@ -90,3 +95,4 @@
   proxy_rest_url: 'https://{{ int_router_host }}:{{ int_router_port }}/proxy'
   jdbc_db_url: 'jdbc:postgresql://{{ metadata_postgres_host }}:{{ metadata_postgres_port }}/metadata'
   shibgen_outputpath: 'certs'
+  spconf_location_eidas_base: "/LoginEIDAS1"

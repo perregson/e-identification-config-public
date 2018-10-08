@@ -1,2 +1,3 @@
 #!/bin/bash
-docker build -t dev-docker-registry.kapa.ware.fi/e-identification-base-java-service .
+docker pull ubuntu:16.04
+docker build -t e-identification-docker-virtual.vrk-artifactory-01.eden.csc.fi/e-identification-base-java-service .

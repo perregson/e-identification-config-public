@@ -1,19 +1,5 @@
 # Pull base image
-FROM ubuntu:14.04
-
-######
-# Install node and tools
-######
-
-# Update packages
-# Install some packages we need
-# Install Node.JS
-RUN apt-get -y update && apt-get -y upgrade && \
-    apt-get install -y curl && \
-    apt-get install -y git && \
-    cd /usr/local && \
-    curl https://nodejs.org/dist/v6.3.0/node-v6.3.0-linux-x64.tar.gz | tar --strip-components=1 -zxf- && cd && \
-    npm -g update npm
+FROM node:10-stretch
 
 ######
 # Create directories

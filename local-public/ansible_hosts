@@ -66,3 +66,6 @@ localhost ansible_connection=local
 
 [eidas-router]
 #localhost ansible_connection=local
+
+[test-idp]
+localhost ansible_connection=local

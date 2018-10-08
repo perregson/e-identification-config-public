@@ -9,5 +9,5 @@
         compress
         delaycompress
         notifempty
-        create 620 root crl
+        create 624 root crl
 }

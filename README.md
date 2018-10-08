@@ -22,8 +22,8 @@ sudo usermod -aG docker $USER # docker
 sudo apt-get -y install oracle-java8-installer oracle-java8-unlimited-jce-policy # oracle jdk
 sudo apt-get -y install maven git ansible
  
-sudo apt-get -y install nodejs npm gem ruby-sass ruby-compass # sevi-identification-ui
-sudo ln -s /usr/bin/nodejs /usr/bin/node # sevi-identification-ui 
+sudo apt-get -y install nodejs npm gem ruby-sass ruby-compass # e-identification-static-ui 
+sudo ln -s /usr/bin/nodejs /usr/bin/node # e-identification-static-ui
 ```
 Suositeltavaa on tehdä uudelleenkäynnistys (sudo reboot) tässä välissä, jotta päivitetyt paketit ja käyttöoikeudet tulevat varmasti voimaan.
 
@@ -59,11 +59,12 @@ git clone https://github.com/vrk-kpa/e-identification-tupas-idp-public.git e-ide
 git clone https://github.com/vrk-kpa/e-identification-vtj-client-public.git e-identification-vtj-client
 git clone https://github.com/vrk-kpa/e-identification-vartti-client-public.git e-identification-vartti-client
 git clone https://github.com/vrk-kpa/e-identification-static-ui-public.git e-identification-static-ui
+git clone https://github.com/vrk-kpa/e-identification-test-idp-public.git e-identification-test-idp-public
 ```
 
 Osassa komponenteista build-skripteistä on poistettava käytöstä viittaukset sisäiseen docker-repoon:
 ```
-sed --in-place "s/docker pull dev-docker/#docker pull dev-docker/g" \
+sed --in-place "s/docker pull e-identification-docker-virtual/#docker pull e-identification-docker-virtual/g" \
  e-identification-idp-service/script/build.sh \
  e-identification-metadata-service/script/build.sh \
  e-identification-hst-idp/script/build.sh \
@@ -74,19 +75,21 @@ sed --in-place "s/docker pull dev-docker/#docker pull dev-docker/g" \
  e-identification-mobile-idp/script/build.sh \
  e-identification-proxy-service/script/build.sh \
  e-identification-tupas-idp/script/build.sh \
- e-identification-vartti-client/script/build.sh
-
-sed --in-place "s/docker push dev-docker/#docker push dev-docker/g" \
+ e-identification-vartti-client/script/build.sh \
+ e-identification-test-idp/script/build.sh \
+ e-identification-vtj-client/script/build.sh \
  e-identification-config-public/build/docker/tomcat/build_images.sh \
  e-identification-config-public/build/docker/tomcat-idp-3.2.1/build_images.sh \
- e-identification-config-public/build/docker/tomcat-apache2-shibd-sp/build_images.sh
+ e-identification-config-public/build/docker/tomcat-apache2-shibd-sp/build_images.sh \
+ e-identification-config-public/build/docker/centos7-shibd/build.sh
 ```
 
 Lataa centos7-java8 base imagea varten tarvittava jdk-8u151-linux-x64.rpm:
 Sen saa Esimerkiksi täältä http://www.oracle.com/technetwork/java/javase/downloads/java-archive-javase8-2177648.html
 
-Siirrä ladattu jdk-8u151-linux-x64.rpm tiedosto kansioon oikeean paikkaan: 
-mv jdk-8u151-linux-x64.rpm ~/build/src/e-identification-config-public/build/docker/centos7-java8
+Siirrä ladattu jdk-8u151-linux-x64.rpm tiedosto oikeisiin paikkoihin: 
+cp jdk-8u151-linux-x64.rpm ~/build/src/e-identification-config-public/build/docker/centos7-java8
+cp jdk-8u151-linux-x64.rpm ~/build/src/e-identification-config-public/build/docker/java8
 
 
 Käännä kaikki komponentit:
@@ -160,7 +163,10 @@ script/build.sh -d local
 cd ~/build/src/e-identification-vartti-client
 script/build.sh -d local
 
-cd ~/build/src/sevi-identification-ui
+cd ~/build/src/e-identification-static-ui
+script/build.sh -d local
+
+cd ~/build/src/e-identification-test-idp
 script/build.sh -d local
 ```
 

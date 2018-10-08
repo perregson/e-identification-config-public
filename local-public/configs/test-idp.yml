@@ -1,0 +1,31 @@
+---
+#Common
+#Identity Provider
+  idpconf_access_allowed_ip_range: "\"#{ {'192.168.0.1/32', '::1/128'} }\""
+  idpconf_keystore_pass: '{{ test_idpconf_idp_keystore_pass_value }}'
+  idpconf_sealer_storepass: '{{ test_idpconf_sealer_keystore_pass_value }}'
+  idpconf_sealer_keypass: '{{ test_idpconf_sealer_keystore_pass_value }}'
+  idpconf_entityid: 'https://{{ ext_router_host }}/testidp/idp1'
+  idpconf_displayname: "Kapa dev TEST IdP"
+  idpconf_displayname_fi: "Kapa dev TEST IdP fi"
+  idpconf_displayname_en: "Kapa dev TEST IdP en"
+  idpconf_displayname_sv: "Kapa dev TEST IdP sv"
+  idpconf_description: "Kapa dev TEST IdP"
+  idpconf_description_fi: "Kapa dev TEST IdP desc fi"
+  idpconf_description_en: "Kapa dev TEST IdP desc en"
+  idpconf_description_sv: "Kapa dev TEST IdP desc sv"
+  idpconf_kapa_image_url: "https://{{ ext_router_host }}/img/kapa.png"
+  idpconf_organisation_name: "Kapa development"
+  idpconf_organisation_name_fi: "Kapa development fi"
+  idpconf_organisation_name_en: "Kapa development en"
+  idpconf_organisation_name_sv: "Kapa development sv"
+  idpconf_organisation_displayname_fi: "Kapa development displ fi"
+  idpconf_organisation_displayname_en: "Kapa development displ en"
+  idpconf_organisation_displayname_sv: "Kapa development displ sv"
+  idpconf_contact_given_name: "Kapa development"
+  idpconf_contact_surname: "Kapa development"
+  idpconf_contact_email: "admin@vagrant.dev"
+  idpconf_subj: "/C=FI/ST=Uusimaa/L=Helsinki/O=Kapadev/OU=Kapadev/CN=idp.test"
+  idpconf_error_url: "https://{{ ext_router_host }}/virhe/"
+#Shibboleth cert and metadata generation
+  shibgen_idp_id: "pub_testidp"

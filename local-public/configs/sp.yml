@@ -4,12 +4,19 @@
   sp_cert: 'sp-cert.pem'
   eidas_cert: 'eidas-cert.pem'
   eidas_key: 'eidas-key.pem'
+  sp_eidas_signing_cert: 'sp-eidas-signing-cert.pem'
+  sp_eidas_signing_key: 'sp-eidas-signing-key.pem'
+  sp_eidas_encryption_cert: 'sp-eidas-encryption-cert.pem'
+  sp_eidas_encryption_key: 'sp-eidas-encryption-key.pem'
   spconf_entityid_katso_pwd: "https://htesti.katso.tunnistus.fi/uas"
   spconf_AuthnContextDeclRef_katso_pwd: "https://htesti.katso.tunnistus.fi/uas/saml2/names/ac/password.katso.1"
   spconf_AuthnContextDeclRef_katso_otp: "https://htesti.katso.tunnistus.fi/uas/saml2/names/ac/otp.katso.1"
   spconf_entityid_fakevetuma: "https://shib-idp.kapa.ware.fi/idp/shibboleth"
   spconf_entityid_vrk: "https://kortti.tunnistaminen.test/hstidp/idp1"
+  spconf_entityid_testidp: "https://tunnistaminen.test/testidp/idp1"
   spconf_entityid_mobiili: "https://tunnistaminen.test/mobileidp/idp1"
+  spconf_entityid_mobiili2: "https://tunnistus-pp.telia.fi/uas"
+  spconf_AuthnContextDeclRef_mobiili2: "https://tunnistus-pp.telia.fi/uas/saml2/names/ac/mpki.telia.test.1"
   spconf_entityid_vetuma: "https://testitunnistus.suomi.fi/VETUMASSO/app"
   spconf_integrationidp_entityid: "https://tunnistaminen.test/tupasidp2"
   spconf_entityid_mpass: "https://mpass.apro.tunnistus.fi/idp/shibboleth"
@@ -17,7 +24,13 @@
   spconf_entityid_eidas1: "https://eidas-idp.test/idp/shibboleth"
   spconf_location_eidas2: "/LoginEIDAS2"
   spconf_entityid_eidas2: "http://eidas-router:8052/EidasNode/ConnectorResponderMetadata"
+  spconf_location_eidas_de: "/LoginEIDASDEeLoA3"
+  spconf_location_eidas_low: "{{ spconf_location_eidas_base }}eLoA1"
+  spconf_location_eidas_substantial: "{{ spconf_location_eidas_base }}eLoA2"
+  spconf_location_eidas_high: "{{ spconf_location_eidas_base }}eLoA3"
+  spconf_entityid_mw_de: "empty"
   spconf_status_acl: "127.0.0.1"
+  spconf_provider_name: "DEMO-SP"
   spconf_entityid: "https://tunnistaminen.test/sp2"
   spconf_displayname: "KaPA DEV SP"
   spconf_displayname_fi: "KaPA DEV SP fi"

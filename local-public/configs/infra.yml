@@ -35,7 +35,7 @@
   vtj_ports: '  -p {{ vtj_port }}:{{ vtj_target_port }}'
   vtj_imagename: "e-identification-vtj-client:local"
   static_host: 'tun-pub-cache1'
-  static_mounts: "-v {{ deploydir }}/nginx:/etc/nginx/conf.d:z -v {{ deploydir }}/ssl:/etc/nginx/ssl:z -v {{ deploydir }}/resources/js/config.js:/usr/share/nginx/html/resources/js/config.js:z -v {{ deploydir }}/metadata:/usr/share/nginx/html/metadata:z -v {{ logdir }}:/var/log/nginx:z -v {{ deploydir }}/git-info:/usr/share/nginx/html/version.txt:z -v {{ deploydir }}/disruption_message.json:/usr/share/nginx/html/resources/js/disruption_data/disruption_message.json:z"
+  static_mounts: "-v {{ deploydir }}:/data00/deploy:z -v {{ deploydir }}/nginx:/etc/nginx/conf.d:z -v {{ deploydir }}/ssl:/etc/nginx/ssl:z -v {{ deploydir }}/metadata:/usr/share/nginx/html/metadata:z -v {{ logdir }}:/var/log/nginx:z -v {{ deploydir }}/git-info:/usr/share/nginx/html/version.txt:z -v {{ deploydir }}/disruption_message.json:/usr/share/nginx/html/resources/js/disruption_data/disruption_message.json:z"
   static_imagename: "e-identification-static:local"
   localisation_host: 'tun-pub-cache1'
   localisation_imagename: "e-identification-localisation-service:local"
@@ -71,6 +71,9 @@
   mobile_idp_host: 'tun-pub-adap1'
   mobile_idp_imagename: "e-identification-mobile-idp:local"
   mobile_idp_mounts: "-v {{ deploydir }}:/data00/deploy:z -v {{ logdir }}:/data00/logs:z"
+  test_idp_host: 'tun-pub-adap1'
+  test_idp_imagename: "e-identification-test-idp:local"
+  test_idp_mounts: "-v {{ deploydir }}:/data00/deploy:z -v {{ logdir }}:/data00/logs:z"
   vartti_host: 'tun-pub-beprx1'
   vartti_imagename: "e-identification-vartti-client:local"
   eidas_host: 'tun-pub-beprx1'
@@ -78,7 +81,7 @@
 #
   env: "local"
   log_level: "DEBUG"
-  docker_registry: "dev-docker-registry.kapa.ware.fi"
+  docker_registry: "e-identification-docker-virtual.vrk-artifactory-01.eden.csc.fi"
   additional_docker_configs: " --add-host tunnistaminen.test:192.168.0.1 --add-host kortti.tunnistaminen.test:192.168.0.2 --add-host {{ sp_host }}:192.168.0.1 --add-host {{ idp_host }}:192.168.0.1 --add-host {{ proxy_host }}:192.168.0.1 --add-host {{ metadata_host }}:192.168.0.1 --add-host {{ tupas_idp_host }}:192.168.0.1 --add-host {{ proxy_host }}:192.168.0.1 --add-host {{ int_router_host }}:192.168.0.1 --add-host {{ int_router_host }}:192.168.0.1 {{ '--add-host ' ~ mobile_backend_mssap_host ~ ':192.168.0.10' if mobile_backend_mssap_host is defined else ''}} {{ '--add-host ' ~ vartti_api_host ~ ':192.168.0.4' if vartti_api_host is defined else ''}}"
   java_xmx_megabytes: "1024"
   tomcat_ciphers: "TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384,TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256,TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA,TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA,TLS_DHE_RSA_WITH_AES_256_CBC_SHA256,TLS_DHE_RSA_WITH_AES_128_GCM_SHA256,TLS_DHE_RSA_WITH_AES_128_CBC_SHA256,TLS_DHE_RSA_WITH_AES_256_CBC_SHA,TLS_DHE_RSA_WITH_AES_128_CBC_SHA,TLS_RSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_128_GCM_SHA256,TLS_RSA_WITH_AES_256_CBC_SHA256,TLS_RSA_WITH_AES_128_CBC_SHA256,TLS_RSA_WITH_AES_256_CBC_SHA,TLS_RSA_WITH_AES_128_CBC_SHA"

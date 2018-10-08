@@ -1,2 +1,3 @@
   idpconf_host: '{{ ext_router_host }}'
   discovery_page_timeout: '295000'
+  mobile_identification_operator: 'elisa'

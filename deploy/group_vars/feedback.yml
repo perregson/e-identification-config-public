@@ -1,0 +1,15 @@
+
+feedbackconf_log_file: "/data00/logs/feedback.log"
+
+feedbackconf_smtp_secure: false
+feedbackconf_smtp_ignoreTLS: false
+feedbackconf_smtp_requireTLS: true
+
+feedbackconf_mail_from: "noreply@suomi.fi"
+feedbackconf_mail_subject: "Suomi.fi-tunnistaminen, palaute"
+feedbackconf_mail_eidas_pretext: "Suomi.fi-tunnistuksen kautta on lähetetty asiointipalvelulle seuraava palvelupyyntö:"
+feedbackconf_mail_eidas_posttext: "Tämä viesti on lähetetty Suomi.fi-tunnistuksen palvelupyyntölomakkeelta, joka näytetään eIDAS-tunnistautuneille käyttäjille tunnistautumisen jälkeen silloin kun asiointipalvelu on rekisteröinyt perustiedoissaan lomakkeen käyttöön. EIDAS-tunnistautumisen valinneita käyttäjiä ei siten ohjata asiointipalveluun. Lomakkeen poistaminen käytöstä tai palvelupyyntöjen toimitusosoitteen muuttaminen on mahdollista päivittämällä asiointipalvelun metadata Palveluhallinnan kautta (https://palveluhallinta.suomi.fi)."
+
+feedbackconf_ssl_feedback_host_cert_path: "/data00/deploy/ssl/"
+feedbackconf_ssl_key_file: "{{ apro_ssl_key }}"
+feedbackconf_ssl_cert_file: "{{ apro_ssl_cert }}"

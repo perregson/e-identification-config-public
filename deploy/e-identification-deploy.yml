@@ -27,6 +27,7 @@
 - hosts: static
   sudo: yes
   roles:
+    - e-identification-clear-cache
     - e-identification-deploy
   vars:
     host: "{{ static_host }}"
@@ -95,6 +96,7 @@
 - hosts: external-router
   sudo: yes
   roles:
+    - e-identification-clear-cache
     - e-identification-deploy
   vars:
     host: "{{ ext_router_host }}"
@@ -162,6 +164,7 @@
 - hosts: metadata
   sudo: yes
   roles:
+    - e-identification-clear-cache
     - e-identification-apro-certs
     - e-identification-deploy
   vars:
@@ -209,6 +212,7 @@
     confdir: "{{ conf_root }}/configs/{{ proxy_directory }}/"
     logdir: "{{ deploy_root }}/logs/proxy-server/"
     imagename: "{{ proxy_imagename }}"
+    additional_service_docker_configs: "{{ proxy_additional_docker_configs | default('') }}"
     varsfilename: "proxy.yml"
     aprovarsfile: "{{ conf_root }}/configs/{{ varsfilename }}"
     infrafile: "{{ conf_root }}/configs/infra.yml"
@@ -269,6 +273,7 @@
 - hosts: idp
   sudo: yes
   roles:
+    - e-identification-clear-cache
     - e-identification-apro-certs
     - e-identification-deploy
   vars:
@@ -538,7 +543,8 @@
 
 - hosts: mobile-idp
   sudo: yes
-  roles:
+  roles: 
+    - e-identification-clear-cache
     - e-identification-apro-certs
     - e-identification-deploy
   vars:
@@ -604,6 +610,43 @@
     - "{{ infrafile }}"
     - "{{ local_variables }}"
     - [ "{{ aprovarsfile }}", "{{ infrafile }}" ]
+
+# Test service 2
+
+- hosts: test-service2
+  sudo: yes
+  roles:
+    - e-identification-apro-certs
+    - e-identification-deploy
+
+  vars:
+    host: "{{ testsp2_host }}"
+    ports: "{{ testsp2_ports }}"
+    target_port: "{{ testsp2_target_port }}"
+    jmx_port: "{{ testsp2_jmx_port }}"
+    jmx_rmi_port: "{{ testsp2_jmx_rmi_port }}"
+    container_name:  "{{ testsp2_container_name }}"
+    deploydir: "{{ deploy_root }}/{{ testsp2_directory }}/"
+    logdir: "{{ deploy_root }}/logs/{{ testsp2_directory }}/"
+    confdir: "{{ conf_root }}/configs/{{ testsp2_directory }}/"
+    imagename: "{{ testsp2_imagename }}"
+    varsfilename: "test-service2.yml"
+    aprovarsfile: "{{ conf_root }}/configs/{{ varsfilename }}"
+    infrafile: "{{ conf_root }}/configs/infra.yml"
+    mounts: "{{ testsp2_mounts }}"
+    local_variables: "{{ conf_root }}/local_configs/local_variables.yml"
+  tags:
+    - test-service
+#    - all-local
+#    - all-dev
+#    - all-kete
+#    - all-test
+#   - all
+  vars_files:
+    - "{{ infrafile }}"
+    - "{{ local_variables }}"
+    - [ "{{ aprovarsfile }}", "{{ infrafile }}" ]
+
 
 # vartti-client
 - hosts: vartti
@@ -680,6 +723,7 @@
   sudo: yes
   roles:
     - e-identification-deploy
+    - e-identification-check-dhparams
   vars:
     host: "{{ eidas_router_host }}"
     ports: "{{ eidas_router_ports }}"
@@ -697,6 +741,42 @@
     - e-identification-eidas-router-container
     - eidas
     - eidas-router
+    - all-local
+    - all-dev
+    - all-kete
+    - all-test
+    - all-prod
+    - all
+
+  vars_files:
+    - "{{ local_variables }}"
+    - "{{ aprovarsfile }}"
+    - "{{ infrafile }}"
+
+
+# Test IdP playbook
+
+- hosts: test-idp
+  sudo: yes
+  roles:
+    - e-identification-apro-certs
+    - e-identification-deploy
+  vars:
+    host: "{{ test_idp_host }}"
+    ports: "{{ test_idp_ports }}"
+    target_port: "{{ test_idp_target_port }}"
+    container_name:  "{{ test_idp_container_name }}"
+    deploydir: "{{ deploy_root }}/{{ test_idp_directory }}/"
+    confdir: "{{ conf_root }}/configs/{{ test_idp_directory }}/"
+    logdir: "{{ deploy_root }}/logs/e-identification-test-idp/"
+    imagename: "{{ test_idp_imagename }}"
+    varsfilename: "test-idp.yml"
+    aprovarsfile: "{{ conf_root }}/configs/{{ varsfilename }}"
+    infrafile: "{{ conf_root }}/configs/infra.yml"
+    mounts: "{{ test_idp_mounts }}"
+    local_variables: "{{ conf_root }}/local_configs/local_variables.yml"
+  tags:
+    - test-idp
     - all-local
     - all-dev
     - all-kete

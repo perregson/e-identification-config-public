@@ -20,7 +20,7 @@
   file: path=/data/logs/crl-updater owner=root group=root mode=755 state=directory
 
 - name: touch /data/logs/crl-updater/crl-updater.log file
-  file: path=/data/logs/crl-updater/crl-updater.log owner=root group=crl mode=620 state=touch
+  file: path=/data/logs/crl-updater/crl-updater.log owner=root group=crl mode=664 state=touch
 
 - name: Copy renew.sh file
   template: src=renew.sh.template mode=755 dest=/data/crl-updater/renew.sh
