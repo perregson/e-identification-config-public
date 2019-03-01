@@ -1,4 +1,5 @@
   deploy_root: "/tmp/auth-deploy"
+  phase_id_step_zero: 'XXXXX-phase-id-step-zero-XXXXX'
   phase_id_step_five: 'changeit0'
   phase_id_step_four: 'changeit1'
   phase_id_step_one: 'changeit2'

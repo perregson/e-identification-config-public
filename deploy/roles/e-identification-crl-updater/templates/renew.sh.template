@@ -42,14 +42,15 @@ REQ="openssl wget cp mv date cut mktemp stat expr chmod"
 
 CRL_DIR="/data/crls"
 BACKUP_DIR="/data/crls-backup"
-TEMP_DIR="/data/crl-updater/tmp"
+TEMP_DIR=`mktemp -d`
+trap "rm -rf $TEMP_DIR" EXIT
 
 ENV="{{ env }}"
 LOGFILE="/data/logs/crl-updater/crl-updater.log"
 CRL_LIST="/data/crl-updater/renew.conf"
-VALIDITY="{{ crl_validity | default('3600') }}"  # Trigger CRL update 3600 seconds before nextUpdate timestamp
+VALIDITY="{{ crl_validity | default('11400') }}"  # Trigger CRL update 11400 seconds before nextUpdate timestamp. This also changes log message for download failures from WARNING to ERROR.
 INTERVAL="{{ crl_interval | default('600') }}"   # How often this script is run (in seconds). Needed for error logging.
-MAX_AGE="{{ crl_max_age | default('86400') }}"   # Maximum age of CRL in seconds (force download if file timestamp is older)
+MAX_AGE="{{ crl_max_age | default('3600') }}"   # Maximum age of CRL in seconds (force download if file timestamp is older)
 WGET_TIMEOUT="{{ crl_wget_timeout | default('120') }}"
 
 
@@ -71,12 +72,14 @@ function checkCRL
   S_NOW=$(date +%s)
   S_CRL_MODIFIED=$(stat -c %Y "$1")
   S_DIFF_MODIFIED=$(expr "${S_NOW}" - "${S_CRL_MODIFIED}")
-  [ "${S_DIFF_MODIFIED}" -gt "${MAX_AGE}" ] && return 2;
-
+ 
   # nextUpdate=Feb  2 16:27:42 2017 GMT
   T_UPDATE=$(echo $NEXT_UPDATE|cut -d'=' -f2)
   S_UPDATE=$(date +%s --date="${T_UPDATE}")
-  S_DIFF=$(expr "${S_UPDATE}" - "${S_NOW}")
+  S_DIFF=$(expr "${S_UPDATE}" - "${S_NOW}") 
+  
+  [ "${S_DIFF_MODIFIED}" -gt "${MAX_AGE}" ] && return 2;
+
   [ "${S_DIFF}" -lt "${VALIDITY}" ] && return 3;
 
   # All checks passed, no need to update CRL

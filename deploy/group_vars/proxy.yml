@@ -14,3 +14,5 @@
   vtj_client_url: 'https://{{ int_router_host }}:{{ int_router_port }}'
   token_keystore: 'token-keystore.jks'
   token_keystore_alias: 'token-keystore'
+  # JWT token expiration time in minutes
+  token_expiration_time: '720'

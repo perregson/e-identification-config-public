@@ -20,9 +20,11 @@ sudo apt-get -y install docker-engine # docker
 sudo usermod -aG docker $USER # docker
  
 sudo apt-get -y install oracle-java8-installer oracle-java8-unlimited-jce-policy # oracle jdk
-sudo apt-get -y install maven git ansible
+sudo apt-get -y install maven git ansible curl
+
+curl -sL https://deb.nodesource.com/setup_8.x | sudo bash -
  
-sudo apt-get -y install nodejs npm gem ruby-sass ruby-compass # e-identification-static-ui 
+sudo apt-get -y install nodejs gem ruby-sass ruby-compass # e-identification-static-ui 
 sudo ln -s /usr/bin/nodejs /usr/bin/node # e-identification-static-ui
 ```
 Suositeltavaa on tehdä uudelleenkäynnistys (sudo reboot) tässä välissä, jotta päivitetyt paketit ja käyttöoikeudet tulevat varmasti voimaan.
@@ -43,6 +45,7 @@ Luo haluamasi hakemisto lähdekoodeille (tässä ohjeessa ~/build/src) sekä dep
 mkdir -p ~/build/src
 mkdir -p ~/build/deploy
 cd ~/build/src
+git clone https://github.com/vrk-kpa/e-identification-base-images-public.git
 git clone https://github.com/vrk-kpa/e-identification-config-public.git
 git clone https://github.com/vrk-kpa/e-identification-docker-images-public.git e-identification-docker-images
 git clone https://github.com/vrk-kpa/e-identification-fake-vtj-public.git e-identification-fake-vtj
@@ -50,7 +53,6 @@ git clone https://github.com/vrk-kpa/e-identification-feedback-service-public.gi
 git clone https://github.com/vrk-kpa/e-identification-hst-idp-public.git e-identification-hst-idp
 git clone https://github.com/vrk-kpa/e-identification-idp-service-public.git e-identification-idp-service
 git clone https://github.com/vrk-kpa/e-identification-metadata-service-public.git e-identification-metadata-service
-git clone https://github.com/vrk-kpa/e-identification-mobile-idp-public.git e-identification-mobile-idp
 git clone https://github.com/vrk-kpa/e-identification-proxy-service-public.git e-identification-proxy-service
 git clone https://github.com/vrk-kpa/e-identification-shared-api-public.git e-identification-shared-api
 git clone https://github.com/vrk-kpa/e-identification-sp-service-public.git e-identification-sp-service
@@ -72,48 +74,52 @@ sed --in-place "s/docker pull e-identification-docker-virtual/#docker pull e-ide
  e-identification-sp-service/script/build.sh \
  e-identification-test-service/script/build.sh \
  e-identification-feedback-service/script/build.sh \
- e-identification-mobile-idp/script/build.sh \
  e-identification-proxy-service/script/build.sh \
  e-identification-tupas-idp/script/build.sh \
  e-identification-vartti-client/script/build.sh \
  e-identification-test-idp/script/build.sh \
  e-identification-vtj-client/script/build.sh \
- e-identification-config-public/build/docker/tomcat/build_images.sh \
- e-identification-config-public/build/docker/tomcat-idp-3.2.1/build_images.sh \
- e-identification-config-public/build/docker/tomcat-apache2-shibd-sp/build_images.sh \
- e-identification-config-public/build/docker/centos7-shibd/build.sh
+ e-identification-base-images-public/tomcat/build_images.sh \
+ e-identification-base-images-public/tomcat-idp-3.2.1/build_images.sh \
+ e-identification-base-images-public/tomcat-idp-3.4.1/build_images.sh \
+ e-identification-base-images-public/tomcat-apache2-shibd-sp/build_images.sh \
+ e-identification-base-images-public/centos7-shibd/build.sh
 ```
 
-Lataa centos7-java8 base imagea varten tarvittava jdk-8u151-linux-x64.rpm:
+Lataa java base imageja varten tarvittavat jdk-8u151-linux-x64.rpm ja jdk-8u151-linux-x64.tar.gz:
 Sen saa Esimerkiksi täältä http://www.oracle.com/technetwork/java/javase/downloads/java-archive-javase8-2177648.html
 
-Siirrä ladattu jdk-8u151-linux-x64.rpm tiedosto oikeisiin paikkoihin: 
-cp jdk-8u151-linux-x64.rpm ~/build/src/e-identification-config-public/build/docker/centos7-java8
-cp jdk-8u151-linux-x64.rpm ~/build/src/e-identification-config-public/build/docker/java8
+Siirrä ladattu jdk-8u151-linux-x64.rpm tiedosto oikeean paikkaan: 
+mv jdk-8u151-linux-x64.rpm ~/build/src/e-identification-base-images-public/centos7-java8
 
+Siirrä ladattu jdk-8u151-linux-x64.tar.gz tiedosto oikeean paikkaan: 
+mv jdk-8u151-linux-x64.tar.gz ~/build/src/e-identification-base-images-public/java8
 
 Käännä kaikki komponentit:
 ```
 # Docker base imaget:
-cd ~/build/src/e-identification-config-public/build/docker/centos7-java8
+cd ~/build/src/e-identification-base-images-public/centos7-java8
 ./build.sh
 
-cd ~/build/src/e-identification-config-public/build/docker/centos7-shibd
+cd ~/build/src/e-identification-base-images-public/centos7-shibd
 ./build.sh
 
-cd ~/build/src/e-identification-config-public/build/docker/java8
+cd ~/build/src/e-identification-base-images-public/java8
 ./build.sh
 
-cd ~/build/src/e-identification-config-public/build/docker/node
+cd ~/build/src/e-identification-base-images-public/node
 ./build.sh
 
-cd ~/build/src/e-identification-config-public/build/docker/tomcat
+cd ~/build/src/e-identification-base-images-public/tomcat
 ./build_images.sh
 
-cd ~/build/src/e-identification-config-public/build/docker/tomcat-apache2-shibd-sp
+cd ~/build/src/e-identification-base-images-public/tomcat-apache2-shibd-sp
 ./build_images.sh
 
-cd ~/build/src/e-identification-config-public/build/docker/tomcat-idp-3.2.1
+cd ~/build/src/e-identification-base-images-public/tomcat-idp-3.2.1
+./build_images.sh
+
+cd ~/build/src/e-identification-base-images-public/tomcat-idp-3.4.1
 ./build_images.sh
 
 # Shared api:
@@ -140,9 +146,6 @@ cd ~/build/src/e-identification-idp-service
 script/build.sh -d local
 
 cd ~/build/src/e-identification-metadata-service
-script/build.sh -d local
-
-cd ~/build/src/e-identification-mobile-idp
 script/build.sh -d local
 
 cd ~/build/src/e-identification-proxy-service

@@ -14,4 +14,6 @@
 # Testing
   vtj_dummydata: 'false'
   vtj_dummydata_hetu: '010191-9630'
-  vtj_dummydata_sleep: '600'
+  vtj_dummydata_sleep: '700'
+  vtj_dummydata_sleep_deviation: '100'
+  vtj_dummydata_error_pct: '3'

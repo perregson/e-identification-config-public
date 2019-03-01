@@ -78,10 +78,10 @@ INSERT INTO "public"."metadata"   VALUES (nextval('hibernate_sequence'),0,'https
 INSERT INTO "public"."metadata"   VALUES (nextval('hibernate_sequence'),0,'https://htesti.katso.tunnistus.fi/ubitp/saml2/names/ac/otp.katso.1','Katso-otp','AUTHENTICATION_PROVIDER','katso.fi','KATSOOTP','KATSOOTP','VETUMA_SAML2' , 'https://htesti.katso.tunnistus.fi/uas/saml2/names/ac/otp.katso.1', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ');
 INSERT INTO "public"."metadata"   VALUES (nextval('hibernate_sequence'),0,'urn:oid:1.2.246.517.99.10.23.1','VRK-varmenne','AUTHENTICATION_PROVIDER','vrk.fi','fLoA2','HST','VETUMA_SAML2' , 'https://www.tunnistus.fi/ubitp/saml2/names/ac/pki.hst.3', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ');
 INSERT INTO "public"."metadata"   VALUES (nextval('hibernate_sequence'),0,'urn:oid:1.2.246.517.3002.110.999','Testi','AUTHENTICATION_PROVIDER','shib-idp.kapa.ware.fi','TESTI','TESTI','VETUMA_SAML2' , 'urn:oid:1.2.246.517.3002.110.999', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ');
-INSERT INTO "public"."metadata"   VALUES (nextval('hibernate_sequence'),0,'urn:oid:1.2.246.517.3002.110.3','Mobiilivarmenne','AUTHENTICATION_PROVIDER','mobiili2.fi','fLoA2','MOBIILI','VETUMA_SAML2' , 'urn:oasis:names:tc:SAML:2.0:ac:classes:MobileTwoFactorContract', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ');
-INSERT INTO "public"."metadata"   VALUES (nextval('hibernate_sequence'),0,'urn:oid:1.2.246.517.3002.110.3','Mobiilivarmenne','AUTHENTICATION_PROVIDER','tunnistus-pp.telia.fi','fLoA2','MOBIILI','VETUMA_SAML2' , 'https://tunnistus-pp.telia.fi/uas/saml2/names/ac/mpki.telia.test.1' , ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ');
+INSERT INTO "public"."metadata"   VALUES (nextval('hibernate_sequence'),0,'MOBIILI_TELIA','Mobiilivarmenne','AUTHENTICATION_PROVIDER','tunnistus-pp.telia.fi','fLoA2','MOBIILI','VETUMA_SAML2' , 'https://tunnistus-pp.telia.fi/uas/saml2/names/ac/mpki.telia.test.1' , ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ');
 INSERT INTO "public"."metadata"   VALUES (nextval('hibernate_sequence'),0,'urn:oid:1.2.246.517.3002.110.11','MPASS','AUTHENTICATION_PROVIDER','mpass.fi','MPASS1','MPASS1','VETUMA_SAML2' , 'urn:oid:1.2.246.517.3002.110.11', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ');
-INSERT INTO "public"."metadata"   VALUES (nextval('hibernate_sequence'),0,'http://eidas.europa.eu/LoA/high','Eidas','AUTHENTICATION_PROVIDER','suomi.fi','eLoA3','eLoA3','VETUMA_SAML2' , 'http://eidas.europa.eu/LoA/high', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ');
+INSERT INTO "public"."metadata"   VALUES (nextval('hibernate_sequence'),0,'EIDAS_HIGH','Eidas','AUTHENTICATION_PROVIDER','suomi.fi','eLoA3','eLoA3','VETUMA_SAML2' , 'http://eidas.europa.eu/LoA/high', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ');
+INSERT INTO "public"."metadata"   VALUES (nextval('hibernate_sequence'),0,'OP2','Osuuspankki','AUTHENTICATION_PROVIDER','op.fi','fLoA2','OP','VETUMA_SAML2' , 'https://tunnistus-pp.telia.fi/uas/saml2/names/ac/saml.op.fi', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ');
 
 -- some test values of service providing parties
 -- SSO/SLO test SP's
@@ -90,31 +90,67 @@ INSERT INTO "public"."metadata"   VALUES (nextval('hibernate_sequence'),0,'https
 
 COMMIT;
 
+DROP TABLE  IF EXISTS logincontext;
+
+CREATE TABLE logincontext(
+  id bigint NOT NULL,
+  authProviderEntityId CHARACTER VARYING(255) UNIQUE NOT NULL,
+  path CHARACTER VARYING(255) NOT NULL
+);
+
+ALTER TABLE logincontext OWNER TO vagrant;
+
+begin TRANSACTION;
+
+INSERT INTO "public"."logincontext"   SELECT nextval('hibernate_sequence'), m.entityid, '/Shibboleth.sso/LoginNordea'          FROM metadata m WHERE m.entityid='https://solo3.nordea.fi/cgi-bin/SOLO3011';
+INSERT INTO "public"."logincontext"   SELECT nextval('hibernate_sequence'), m.entityid, '/Shibboleth.sso/LoginOsuuspankki'     FROM metadata m WHERE m.entityid='https://kultaraha.osuuspankki.fi/cgi-bin/krcgi';
+INSERT INTO "public"."logincontext"   SELECT nextval('hibernate_sequence'), m.entityid, '/Shibboleth.sso/LoginSaastopankki'    FROM metadata m WHERE m.entityid='https://tupas.saastopankki.fi';
+INSERT INTO "public"."logincontext"   SELECT nextval('hibernate_sequence'), m.entityid, '/Shibboleth.sso/LoginAktia'           FROM metadata m WHERE m.entityid='https://tunnistepalvelu.samlink.fi/TupasTunnistus/TupasServlet';
+INSERT INTO "public"."logincontext"   SELECT nextval('hibernate_sequence'), m.entityid, '/Shibboleth.sso/LoginAlandsbanken'    FROM metadata m WHERE m.entityid='https://online.alandsbanken.fi/service/identify';
+INSERT INTO "public"."logincontext"   SELECT nextval('hibernate_sequence'), m.entityid, '/Shibboleth.sso/LoginSpankki'         FROM metadata m WHERE m.entityid='https://online.s-pankki.fi/service/identify';
+INSERT INTO "public"."logincontext"   SELECT nextval('hibernate_sequence'), m.entityid, '/Shibboleth.sso/LoginPoppankki'       FROM metadata m WHERE m.entityid='https://tupas.poppankki.fi';
+INSERT INTO "public"."logincontext"   SELECT nextval('hibernate_sequence'), m.entityid, '/Shibboleth.sso/LoginHandelsbanken'   FROM metadata m WHERE m.entityid='https://tupas.handelsbanken.fi';
+INSERT INTO "public"."logincontext"   SELECT nextval('hibernate_sequence'), m.entityid, '/Shibboleth.sso/LoginDanske-bank'     FROM metadata m WHERE m.entityid='https://verkkopankki.danskebank.fi/SP/tupaha/TupahaApp';
+INSERT INTO "public"."logincontext"   SELECT nextval('hibernate_sequence'), m.entityid, '/Shibboleth.sso/LoginOmasaastopankki' FROM metadata m WHERE m.entityid='https://tupas.omasp.fi';
+INSERT INTO "public"."logincontext"   SELECT nextval('hibernate_sequence'), m.entityid, '/Shibboleth.sso/LoginKatsoPWD'        FROM metadata m WHERE m.entityid='https://htesti.katso.tunnistus.fi/ubitp/saml2/names/ac/password.katso.1';
+INSERT INTO "public"."logincontext"   SELECT nextval('hibernate_sequence'), m.entityid, '/Shibboleth.sso/LoginKatsoPWD'        FROM metadata m WHERE m.entityid='https://yritys.tunnistus.fi/uas/saml2/names/ac/password.katso.1';
+INSERT INTO "public"."logincontext"   SELECT nextval('hibernate_sequence'), m.entityid, '/Shibboleth.sso/LoginKatsoOTP'        FROM metadata m WHERE m.entityid='https://htesti.katso.tunnistus.fi/ubitp/saml2/names/ac/otp.katso.1';
+INSERT INTO "public"."logincontext"   SELECT nextval('hibernate_sequence'), m.entityid, '/Shibboleth.sso/LoginKatsoOTP'        FROM metadata m WHERE m.entityid='https://yritys.tunnistus.fi/uas/saml2/names/ac/otp.katso.1';
+INSERT INTO "public"."logincontext"   SELECT nextval('hibernate_sequence'), m.entityid, '/Shibboleth.sso/LoginVrk'             FROM metadata m WHERE m.entityid='urn:oid:1.2.246.517.99.10.23.1';
+INSERT INTO "public"."logincontext"   SELECT nextval('hibernate_sequence'), m.entityid, '/Shibboleth.sso/LoginMobiili'         FROM metadata m WHERE m.entityid='urn:oid:1.2.246.517.3002.110.3';
+INSERT INTO "public"."logincontext"   SELECT nextval('hibernate_sequence'), m.entityid, '/Shibboleth.sso/LoginMobiili2'        FROM metadata m WHERE m.entityid='MOBIILI_TELIA';
+INSERT INTO "public"."logincontext"   SELECT nextval('hibernate_sequence'), m.entityid, '/Shibboleth.sso/LoginMPASS'           FROM metadata m WHERE m.entityid='urn:oid:1.2.246.517.3002.110.11';
+INSERT INTO "public"."logincontext"   SELECT nextval('hibernate_sequence'), m.entityid, '/Shibboleth.sso/LoginFakevetuma2'     FROM metadata m WHERE m.entityid='urn:oid:1.2.246.517.3002.110.999';
+INSERT INTO "public"."logincontext"   SELECT nextval('hibernate_sequence'), m.entityid, '/Shibboleth.sso/LoginTestIdP'         FROM metadata m WHERE m.entityid='urn:oid:1.2.246.517.3002.110.995';
+INSERT INTO "public"."logincontext"   SELECT nextval('hibernate_sequence'), m.entityid, '/Shibboleth.sso/LoginOsuuspankki2'    FROM metadata m WHERE m.entityid='OP2';
+
+COMMIT;
 
 DROP TABLE  IF EXISTS country;
 
 CREATE TABLE country(
   id bigint NOT NULL,
-  countryCode CHARACTER VARYING(2) NOT NULL,
+  countryCode CHARACTER VARYING(2) UNIQUE NOT NULL,
   imgSrc CHARACTER VARYING(255) NOT NULL,
   displayName_fi CHARACTER VARYING(255) NOT NULL,
   displayName_sv CHARACTER VARYING(255) NOT NULL,
   displayName_en CHARACTER VARYING(255) NOT NULL,
   levelOfAssurance CHARACTER VARYING(255) NOT NULL,
+  authProviderEntityId CHARACTER VARYING(255) NOT NULL,
   eidasLoginContext CHARACTER VARYING(255) NOT NULL,
   sortOrder bigint NOT NULL,
   enabled boolean DEFAULT true
 );
 
-ALTER TABLE country OWNER TO {{ jdbc_username }};
+ALTER TABLE country OWNER TO vagrant;
 
 begin TRANSACTION;
 
-INSERT INTO "public"."country"   VALUES (nextval('hibernate_sequence'), 'EE', '/resources/images/flags/ee.svg', 'Viro', 'Estland', 'Estonia', 'eLoA3', '/Shibboleth.sso/LoginTest', 1, TRUE);
-INSERT INTO "public"."country"   VALUES (nextval('hibernate_sequence'), 'DE', '/resources/images/flags/de.svg', 'Saksa', 'Tyskland', 'Germany', 'eLoA3', '/Shibboleth.sso/LoginTest', 2, TRUE);
-INSERT INTO "public"."country"   VALUES (nextval('hibernate_sequence'), 'PL', '/resources/images/flags/pl.svg', 'Puola', 'Polen', 'Poland', 'eLoA3', '/Shibboleth.sso/LoginTest', 3, TRUE);
-INSERT INTO "public"."country"   VALUES (nextval('hibernate_sequence'), 'FR', '/resources/images/flags/fr.svg', 'Ranska', 'Frankrike', 'France', 'eLoA3', '/Shibboleth.sso/LoginTest', 4, TRUE);
-INSERT INTO "public"."country"   VALUES (nextval('hibernate_sequence'), 'UK', '/resources/images/flags/uk.svg', 'Yhdistynyt kuningaskunta', 'Förenade kungariket', 'United Kingdom', 'eLoA3', '/Shibboleth.sso/LoginTest', 5, TRUE);
-INSERT INTO "public"."country"   VALUES (nextval('hibernate_sequence'), 'CX', '/resources/images/flags/cx.svg', 'Maa X', 'Land X', 'Country X', 'eLoA3', '/Shibboleth.sso/LoginTest', 6, TRUE);
+INSERT INTO "public"."country"   VALUES (nextval('hibernate_sequence'), 'EE', '/resources/images/flags/ee.svg', 'Viro', 'Estland', 'Estonia', 'eLoA3', 'EIDAS_HIGH', '/Shibboleth.sso/LoginTest', 1, TRUE);
+INSERT INTO "public"."country"   VALUES (nextval('hibernate_sequence'), 'DE', '/resources/images/flags/de.svg', 'Saksa', 'Tyskland', 'Germany', 'eLoA3', 'EIDAS_HIGH', '/Shibboleth.sso/LoginTest', 2, TRUE);
+INSERT INTO "public"."country"   VALUES (nextval('hibernate_sequence'), 'PL', '/resources/images/flags/pl.svg', 'Puola', 'Polen', 'Poland', 'eLoA3', 'EIDAS_HIGH', '/Shibboleth.sso/LoginTest', 3, TRUE);
+INSERT INTO "public"."country"   VALUES (nextval('hibernate_sequence'), 'FR', '/resources/images/flags/fr.svg', 'Ranska', 'Frankrike', 'France', 'eLoA3', 'EIDAS_HIGH', '/Shibboleth.sso/LoginTest', 4, TRUE);
+INSERT INTO "public"."country"   VALUES (nextval('hibernate_sequence'), 'UK', '/resources/images/flags/uk.svg', 'Yhdistynyt kuningaskunta', 'Förenade kungariket', 'United Kingdom', 'eLoA3', 'EIDAS_HIGH', '/Shibboleth.sso/LoginTest', 5, TRUE);
+INSERT INTO "public"."country"   VALUES (nextval('hibernate_sequence'), 'CX', '/resources/images/flags/cx.svg', 'Maa X', 'Land X', 'Country X', 'eLoA3', 'EIDAS_HIGH', '/Shibboleth.sso/LoginTest', 6, TRUE);
 
 COMMIT;

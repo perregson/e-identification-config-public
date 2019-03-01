@@ -3,7 +3,7 @@
   idpconf_keystore_pass: '{{ tupas_idpconf_idp_keystore_pass_value }}'
   idpconf_sealer_storepass: '{{ tupas_idpconf_sealer_keystore_pass_value }}'
   idpconf_sealer_keypass: '{{ tupas_idpconf_sealer_keystore_pass_value }}'
-  idpconf_shibboleth_version: 'shibboleth-identity-provider-3.2.1'
+  idpconf_shibboleth_version: 'shibboleth-identity-provider-3.4.1'
   idpconf_service_sp_metadata_url: 'https://{{ int_router_host }}:{{ int_router_port }}/static/metadata/service-sp-metadata.xml'
   idpconf_core_sp_metadata_url: 'https://{{ int_router_host }}:{{ int_router_port }}/static/metadata/sp-metadata.xml'
   idpconf_host: '{{ ext_router_host }}'

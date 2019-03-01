@@ -1,4 +1,4 @@
-  release_version: 'v4.0.0'
+  release_version: 'v5.0.0'
   sp_port: '8030'
   sp_target_port: '443'
   sp_ports: '-p {{ sp_port }}:{{ sp_target_port }}'

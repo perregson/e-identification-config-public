@@ -42,7 +42,7 @@
     mkdir -p {{ tempdir.stdout }}/ansible/group_vars/
     cp -r {{ playbook_dir }}/group_vars/all {{ tempdir.stdout }}/ansible/group_vars/
     cp {{ playbook_dir }}/group_vars/{{ varsfilename }} {{ tempdir.stdout }}/ansible/group_vars/all
-    ansible-playbook {{ tempdir.stdout }}/ansible/create_tar.yml -e conf_root={{ conf_root }} -e tempdir={{ tempdir.stdout }} -e local_variables={{ local_variables }} -e aprovarsfile={{ aprovarsfile }} -e infrafile={{ infrafile }} -e confdir={{ confdir }} -e host={{ host }} {{ ' -e version=' ~ version if version is defined else '' }} {{ ' -e internal_ip=' ~ internal_ip if internal_ip is defined else '' }}
+    ansible-playbook {{ tempdir.stdout }}/ansible/create_tar.yml {{ ' --vault-password-file=' ~ vault_pass_file if vault_pass_file is defined else '' }} -e conf_root={{ conf_root }} -e tempdir={{ tempdir.stdout }} -e local_variables={{ local_variables }} -e aprovarsfile={{ aprovarsfile }} -e infrafile={{ infrafile }} -e confdir={{ confdir }} -e host={{ host }} {{ ' -e version=' ~ version if version is defined else '' }} {{ ' -e internal_ip=' ~ internal_ip if internal_ip is defined else '' }}
   vars:
        ansible_become: no
 

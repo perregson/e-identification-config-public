@@ -37,3 +37,7 @@
   spconf_contact_email: 'admin@testipalvelu.test'
   shibgen_sp_id: "pub_test_service"
   login_id_prefix: "LoginKAPA"
+  testsp_host_cert_path: '{{ deploydir }}/certs'
+  testsp_ssl_cert: "ssl.crt"
+  testsp_ssl_key: "ssl.key"
+  testsp_ca_cert: "kapa-ca-pub-cert.pem"

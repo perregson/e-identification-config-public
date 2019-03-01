@@ -4,7 +4,7 @@
   testsp_host: 'tun-pub-router1'
   testsp_port: '443'
   testsp_ports: '-p 192.168.0.3:{{ testsp_port }}:443'
-  testsp_mounts: "-v {{ deploydir }}:/data00/deploy:z -v {{ logdir }}:/data00/logs:z"
+  testsp_mounts: "-v {{ deploydir }}:/data00/deploy:z -v {{ logdir }}:/data00/logs:z -v {{ testsp_host_cert_path }}:/etc/ssl/certs:z"
   testsp_directory: "test-service"
   testsp_imagename: "e-identification-test-service:local"
   testsp_container_name: 'test-service-container'
@@ -45,7 +45,7 @@
   ext_router_host: 'tunnistaminen.test'
   ext_router_internal_host: 'tun-pub-router1'
   ext_router_ports: '-p 192.168.0.1:{{ ext_router_port }}:443 -p 192.168.0.1:80:80'
-  ext_router_mounts: "-v {{ deploydir }}/nginx:/etc/nginx/conf.d:z -v {{ external_router_host_cert_path }}:/etc/nginx/ssl:z -v {{ deploydir }}/html:/etc/nginx/html:z -v {{ logdir }}:/var/log/nginx:z -v {{ deploydir }}/nginx_cache:/nginx_cache:Z"
+  ext_router_mounts: "-v {{ deploydir }}/nginx/nginx.conf:/etc/nginx/nginx.conf:z -v {{ deploydir }}/nginx/conf.d:/etc/nginx/conf.d:z -v {{ external_router_host_cert_path }}:/etc/nginx/ssl:z -v {{ deploydir }}/html:/etc/nginx/html:z -v {{ logdir }}:/var/log/nginx:z -v {{ deploydir }}/nginx_cache:/nginx_cache:Z"
   ext_router_imagename: "e-identification-external-router:local"
   ext_router_sp_metadata_config: 'allow 0.0.0.0/0;'
   hst_router_host: 'kortti.tunnistaminen.test'
@@ -86,7 +86,8 @@
   java_xmx_megabytes: "1024"
   tomcat_ciphers: "TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384,TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256,TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA,TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA,TLS_DHE_RSA_WITH_AES_256_CBC_SHA256,TLS_DHE_RSA_WITH_AES_128_GCM_SHA256,TLS_DHE_RSA_WITH_AES_128_CBC_SHA256,TLS_DHE_RSA_WITH_AES_256_CBC_SHA,TLS_DHE_RSA_WITH_AES_128_CBC_SHA,TLS_RSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_128_GCM_SHA256,TLS_RSA_WITH_AES_256_CBC_SHA256,TLS_RSA_WITH_AES_128_CBC_SHA256,TLS_RSA_WITH_AES_256_CBC_SHA,TLS_RSA_WITH_AES_128_CBC_SHA"
   phase_id_time_interval: '300'
-  phase_id_time_built_interval: '60'
+  phase_id_time_interval_auth: '600'
+  phase_id_time_built_interval: '10'
   apro_ca_cert: "kapa-ca-pub-cert.pem"
   apro_ssl_key: "ssl.key"
   apro_ssl_cert: "ssl.crt"

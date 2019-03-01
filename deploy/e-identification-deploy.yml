@@ -22,12 +22,29 @@
     - all-test
     - all-prod
 
+# clear nginx cache
+- hosts: external-router
+  sudo: yes
+  roles:
+    - e-identification-clear-cache
+  vars:
+    deploydir: "{{ deploy_root }}/{{ ext_router_directory }}/"
+    local_variables: "{{ conf_root }}/local_configs/local_variables.yml"
+  tags:
+    - static
+    - external-router
+    - metadata
+    - idp
+    - all
+    - mobile-idp
+  vars_files:
+    - "{{ local_variables }}"
+ 
 # Static content Nginx playbook
 
 - hosts: static
   sudo: yes
   roles:
-    - e-identification-clear-cache
     - e-identification-deploy
   vars:
     host: "{{ static_host }}"
@@ -96,9 +113,10 @@
 - hosts: external-router
   sudo: yes
   roles:
-    - e-identification-clear-cache
+    - e-identification-check-dhparams
     - e-identification-deploy
   vars:
+    dhparams_filepath: "{{ external_router_host_cert_path }}/dhparam.pem"
     host: "{{ ext_router_host }}"
     ports: "{{ ext_router_ports }}"
     container_name:  "{{ ext_router_container_name }}"
@@ -164,7 +182,6 @@
 - hosts: metadata
   sudo: yes
   roles:
-    - e-identification-clear-cache
     - e-identification-apro-certs
     - e-identification-deploy
   vars:
@@ -273,7 +290,6 @@
 - hosts: idp
   sudo: yes
   roles:
-    - e-identification-clear-cache
     - e-identification-apro-certs
     - e-identification-deploy
   vars:
@@ -544,7 +560,6 @@
 - hosts: mobile-idp
   sudo: yes
   roles: 
-    - e-identification-clear-cache
     - e-identification-apro-certs
     - e-identification-deploy
   vars:
@@ -722,9 +737,10 @@
 - hosts: eidas-router
   sudo: yes
   roles:
-    - e-identification-deploy
     - e-identification-check-dhparams
+    - e-identification-deploy
   vars:
+    dhparams_filepath: "{{ eidas_router_host_cert_path }}/dhparams.pem"
     host: "{{ eidas_router_host }}"
     ports: "{{ eidas_router_ports }}"
     container_name:  "{{ eidas_router_container_name }}"

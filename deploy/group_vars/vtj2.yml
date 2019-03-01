@@ -14,3 +14,5 @@
   client_member_class: 'GOV'
   client_member_code: '0245437-2'
   vtj_server_port: '{{ vtj_target_port }}'
+
+  vtj_client_id: 'vtj-client2'

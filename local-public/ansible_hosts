@@ -52,9 +52,6 @@ localhost ansible_connection=local
 [local]
 localhost ansible_connection=local
 
-[mobile-idp]
-localhost ansible_connection=local
-
 [test-service]
 localhost ansible_connection=local
 

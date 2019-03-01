@@ -1,0 +1,29 @@
+---
+- name: Check if apache dhparams exists 
+  stat: 
+    path: "{{ dhparams_filepath }}" 
+  when: env != "local"
+  register: result 
+
+- name: Creates directory if it doesn't exist 
+  file:
+    path: "{{ external_router_host_cert_path }}"
+    state: directory
+    mode: 0775
+    recurse: yes 
+  when: env != "local" and result.stat.exists == False 
+
+- name: Generate dhparams (This may take some time)
+  shell: openssl dhparam -out {{ dhparams_filepath }} 2048 
+  when: env != "local" and result.stat.exists == False 
+  async: 600
+  poll: 10
+  vars: 
+       ansible_become: yes
+
+- name: Set dhparams access rights
+  file: dest={{ dhparams_filepath }} owner=root group=root mode=0600
+  when: env != "local" and result.stat.exists == False 
+  vars:
+       ansible_become: yes
+

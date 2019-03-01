@@ -13,6 +13,7 @@
   spconf_location_nordea: '/LoginNordea'
   spconf_AuthnContextDeclRef_nordea: 'https://www.tunnistus.fi/ubitp/saml2/names/ac/tupas.nordea.3'
   spconf_location_osuuspankki: '/LoginOsuuspankki'
+  spconf_location_osuuspankki2: '/LoginOsuuspankki2'
   spconf_AuthnContextDeclRef_osuuspankki: 'https://www.tunnistus.fi/ubitp/saml2/names/ac/tupas.oko.3'
   spconf_location_alandsbanken: '/LoginAlandsbanken'
   spconf_AuthnContextDeclRef_alandsbanken: 'https://www.tunnistus.fi/ubitp/saml2/names/ac/tupas.alandsbanken.3'

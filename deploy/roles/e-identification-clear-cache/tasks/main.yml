@@ -1,0 +1,11 @@
+---
+- name: Check if nginx cache directory exists
+  stat:
+    path: "{{ deploy_root }}/external-router/nginx_cache/"
+  register: files_to_delete
+
+- name: Remove cache files 
+  shell: "find {{ deploy_root }}/external-router/nginx_cache/ -type f -delete"
+  vars: 
+       ansible_become: yes
+  when: files_to_delete.stat.exists and files_to_delete.stat.isdir
