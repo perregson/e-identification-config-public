@@ -33,7 +33,7 @@
   host_ca_dir_path: '{{ deploydir }}/crt/ca'
   host_crl_dir_path: '{{ deploydir }}/crt/crls'
   oc_ca_cn_name_list: "VRK TEST CA for Healthcare Professionals"
-  hst_ca_cn_name_list: "VRK CA for Test Purposes;VRK CA for Test Purposes - G2;VRK CA for Test Purposes - G3"
+  hst_ca_cn_name_list: "VRK CA for Test Purposes - G2;VRK CA for Test Purposes - G3"
   # DO NOT USE VALUE "0" FOR crl_updatetime_validation IN PRODUCTION 
   crl_updatetime_validation: "0"
 #Common certs, keys
@@ -46,3 +46,4 @@
   vrk_ca_cert: "test-bundle.crt"
   hst_router_apache_loglevel: "debug"
   hst_router_host_cert_path: '{{ deploydir }}/ssl'
+  content_security_policy: "default-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self'; connect-src 'self'; frame-src *"

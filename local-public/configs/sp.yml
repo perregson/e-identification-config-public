@@ -14,7 +14,6 @@
   spconf_entityid_fakevetuma: "https://shib-idp.kapa.ware.fi/idp/shibboleth"
   spconf_entityid_vrk: "https://kortti.tunnistaminen.test/hstidp/idp1"
   spconf_entityid_testidp: "https://tunnistaminen.test/testidp/idp1"
-  spconf_entityid_mobiili: "https://tunnistaminen.test/mobileidp/idp1"
   spconf_entityid_mobiili2: "https://tunnistus.notreal"
   spconf_AuthnContextDeclRef_mobiili2: "https://tunnistus.notreal"
   spconf_AuthnContextDeclRef_osuuspankki2: "https://tunnistus-pp.telia.fi/uas/saml2/names/ac/saml.op.fi"
@@ -26,6 +25,7 @@
   spconf_entityid_eidas1: "https://eidas-idp.test/idp/shibboleth"
   spconf_location_eidas2: "/LoginEIDAS2"
   spconf_entityid_eidas2: "http://eidas-router:8052/EidasNode/ConnectorResponderMetadata"
+  spconf_oidc_adapter_entityid: "https://oidc-test-idp.apro.tunnistus.fi/oidc-adapter/idp1"
   spconf_location_eidas_de: "/LoginEIDASDEeLoA3"
   spconf_location_eidas_low: "{{ spconf_location_eidas_base }}eLoA1"
   spconf_location_eidas_substantial: "{{ spconf_location_eidas_base }}eLoA2"
@@ -58,3 +58,14 @@
   spconf_contact_email: 'admin@tunnistaminen.test'
   shibgen_sp_id: "pub_core_sp"
   sp_apache_loglevel: "debug"
+
+  spconf_AuthnContextClassRef_nordea: 'https://tunnistus.fi/oidc.nordea.floatest2'
+  spconf_AuthnContextClassRef_alands: 'https://tunnistus.fi/oidc.alandsbanken.floatest2'
+  spconf_AuthnContextClassRef_handelsbanken: 'https://tunnistus.fi/oidc.handelsbanken.floatest2'
+  spconf_AuthnContextClassRef_spankki: 'https://tunnistus.fi/oidc.s-pankki.floatest2'
+  spconf_AuthnContextClassRef_aktia: 'https://tunnistus.fi/oidc.aktia.floatest2'
+  spconf_AuthnContextClassRef_pop: 'https://tunnistus.fi/oidc.pop.floatest2'
+  spconf_AuthnContextClassRef_haka: 'https://tunnistus.fi/oidc.haka.floatest2'
+  spconf_AuthnContextClassRef_saastopankki: 'https://tunnistus.fi/oidc.sp.floatest2'
+  spconf_AuthnContextClassRef_omasaastopankki: 'https://tunnistus.fi/oidc.omasp.floatest2'
+  spconf_AuthnContextClassRef_danske: 'https://tunnistus.fi/oidc.danskebank.floatest2'

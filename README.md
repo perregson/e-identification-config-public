@@ -11,20 +11,22 @@ Asennusohjeet on tehty juuri asennetun Ubuntu 16.04 LTS -käyttöjärjestelmän 
 sudo apt-get update # pakettilistausten päivitys
 sudo apt-get -y dist-upgrade # pakettien päivitys
 
-sudo add-apt-repository ppa:webupd8team/java # Oracle JDK
+sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 0xB1998361219BD9C9 # zulu jdk
+sudo apt-add-repository 'deb http://repos.azulsystems.com/ubuntu stable main' # zulu jdk
 sudo apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D # docker
 echo "deb https://apt.dockerproject.org/repo ubuntu-xenial main" | sudo tee /etc/apt/sources.list.d/docker.list # docker
 sudo apt-get update
- 
+
 sudo apt-get -y install docker-engine # docker
 sudo usermod -aG docker $USER # docker
- 
-sudo apt-get -y install oracle-java8-installer oracle-java8-unlimited-jce-policy # oracle jdk
+
+sudo apt-get install zulu-8 # zulu jdk
+
 sudo apt-get -y install maven git ansible curl
 
 curl -sL https://deb.nodesource.com/setup_8.x | sudo bash -
- 
-sudo apt-get -y install nodejs gem ruby-sass ruby-compass # e-identification-static-ui 
+
+sudo apt-get -y install nodejs gem ruby-sass ruby-compass # e-identification-static-ui
 sudo ln -s /usr/bin/nodejs /usr/bin/node # e-identification-static-ui
 ```
 Suositeltavaa on tehdä uudelleenkäynnistys (sudo reboot) tässä välissä, jotta päivitetyt paketit ja käyttöoikeudet tulevat varmasti voimaan.
@@ -57,11 +59,10 @@ git clone https://github.com/vrk-kpa/e-identification-proxy-service-public.git e
 git clone https://github.com/vrk-kpa/e-identification-shared-api-public.git e-identification-shared-api
 git clone https://github.com/vrk-kpa/e-identification-sp-service-public.git e-identification-sp-service
 git clone https://github.com/vrk-kpa/e-identification-test-service-public.git e-identification-test-service
-git clone https://github.com/vrk-kpa/e-identification-tupas-idp-public.git e-identification-tupas-idp
 git clone https://github.com/vrk-kpa/e-identification-vtj-client-public.git e-identification-vtj-client
 git clone https://github.com/vrk-kpa/e-identification-vartti-client-public.git e-identification-vartti-client
 git clone https://github.com/vrk-kpa/e-identification-static-ui-public.git e-identification-static-ui
-git clone https://github.com/vrk-kpa/e-identification-test-idp-public.git e-identification-test-idp-public
+git clone https://github.com/vrk-kpa/e-identification-test-idp-public.git e-identification-test-idp
 ```
 
 Osassa komponenteista build-skripteistä on poistettava käytöstä viittaukset sisäiseen docker-repoon:
@@ -75,25 +76,16 @@ sed --in-place "s/docker pull e-identification-docker-virtual/#docker pull e-ide
  e-identification-test-service/script/build.sh \
  e-identification-feedback-service/script/build.sh \
  e-identification-proxy-service/script/build.sh \
- e-identification-tupas-idp/script/build.sh \
  e-identification-vartti-client/script/build.sh \
  e-identification-test-idp/script/build.sh \
  e-identification-vtj-client/script/build.sh \
  e-identification-base-images-public/tomcat/build_images.sh \
  e-identification-base-images-public/tomcat-idp-3.2.1/build_images.sh \
  e-identification-base-images-public/tomcat-idp-3.4.1/build_images.sh \
+ e-identification-base-images-public/tomcat-idp-3.4.6/build_images.sh \
  e-identification-base-images-public/tomcat-apache2-shibd-sp/build_images.sh \
  e-identification-base-images-public/centos7-shibd/build.sh
 ```
-
-Lataa java base imageja varten tarvittavat jdk-8u151-linux-x64.rpm ja jdk-8u151-linux-x64.tar.gz:
-Sen saa Esimerkiksi täältä http://www.oracle.com/technetwork/java/javase/downloads/java-archive-javase8-2177648.html
-
-Siirrä ladattu jdk-8u151-linux-x64.rpm tiedosto oikeean paikkaan: 
-mv jdk-8u151-linux-x64.rpm ~/build/src/e-identification-base-images-public/centos7-java8
-
-Siirrä ladattu jdk-8u151-linux-x64.tar.gz tiedosto oikeean paikkaan: 
-mv jdk-8u151-linux-x64.tar.gz ~/build/src/e-identification-base-images-public/java8
 
 Käännä kaikki komponentit:
 ```
@@ -122,6 +114,9 @@ cd ~/build/src/e-identification-base-images-public/tomcat-idp-3.2.1
 cd ~/build/src/e-identification-base-images-public/tomcat-idp-3.4.1
 ./build_images.sh
 
+cd ~/build/src/e-identification-base-images-public/tomcat-idp-3.4.6
+./build_images.sh
+
 # Shared api:
 cd ~/build/src/e-identification-shared-api
 mvn clean install
@@ -131,6 +126,7 @@ cd ~/build/src/e-identification-docker-images
 e-identification-external-router/script/build.sh local
 e-identification-hst-router/script/build.sh local
 e-identification-internal-router/script/build.sh local
+e-identification-eidas-router/script/build.sh local
 
 # Loput imaget:
 cd ~/build/src/e-identification-fake-vtj
@@ -157,9 +153,6 @@ script/build.sh -d local
 cd ~/build/src/e-identification-test-service
 script/build.sh -d local
 
-cd ~/build/src/e-identification-tupas-idp
-script/build.sh -d local
-
 cd ~/build/src/e-identification-vtj-client
 script/build.sh -d local
 
@@ -181,4 +174,5 @@ cd ~/build/src/e-identification-config-public/local-public
 
 Deployn jälkeen paketin mukana tuleva testiasiointipalvelu löytyy osoitteesta https://testipalvelu.test/
 
-Huom! Selain varoittaa palvelinvarmenteista. Tämä on normaalia sillä julkaisussa on käytössä ns. self-signed varmenteet. Jotkin selaimet voivat vaatia yksityisen tilan käyttöä varoituksen ohittamiseksi.
+Huom! Selain varoittaa palvelinvarmenteista. Tämä on normaalia sillä julkaisussa on käytössä ns. self-signed varmenteet.  
+Jotkin selaimet voivat vaatia yksityisen tilan käyttöä varoituksen ohittamiseksi.  

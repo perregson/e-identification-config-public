@@ -4,7 +4,7 @@
   idpconf_keystore_pass: '{{ core_idpconf_idp_keystore_pass_value }}'
   idpconf_sealer_storepass: '{{ core_idpconf_sealer_keystore_pass_value }}'
   idpconf_sealer_keypass: '{{ core_idpconf_sealer_keystore_pass_value }}'
-  idpconf_shibboleth_version: 'shibboleth-identity-provider-3.4.1'
+  idpconf_shibboleth_version: 'shibboleth-identity-provider-3.4.6'
   idpconf_host: '{{ ext_router_host }}'
   idpconf_scope: '{{ ext_router_host }}'
   idpconf_logo_height: '70'

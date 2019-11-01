@@ -1,6 +1,3 @@
-[tupasidp]
-localhost ansible_connection=local
-
 [proxy]
 localhost ansible_connection=local
 

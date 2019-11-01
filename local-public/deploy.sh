@@ -85,17 +85,6 @@ if [ $APP = "hst-router" -o $APP = "all" -o $APP = "ifconfig" ]; then
   fi
 fi
 
-#Elisa mock IP for local SSH pipe
-
-if [ $APP = "mobile-idp" -o $APP = "all" -o $APP = "ifconfig" ]; then
-  ELISA_IP="192.168.0.10"
-  if ! ping -W 1 -c 1 ${ELISA_IP} > /dev/null
-  then
-    echo ${ELISA_IP} missing, running sudo ifconfig ${NET_IF}:2 ${ELISA_IP}
-    sudo ifconfig ${NET_IF}:2 ${ELISA_IP}
-  fi
-fi
-
 #test-service
 
 if [ $APP = "test-service" -o $APP = "all" -o $APP = "ifconfig" ]; then

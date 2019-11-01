@@ -1,5 +1,5 @@
   apache_ciphers: '-ALL:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-SHA384:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-SHA256:ECDHE-RSA-AES256-SHA:ECDHE-RSA-AES128-SHA:DHE-RSA-AES256-SHA256:DHE-RSA-AES128-GCM-SHA256:DHE-RSA-AES128-SHA256:DHE-RSA-AES256-SHA:DHE-RSA-AES128-SHA:AES256-GCM-SHA384:AES128-GCM-SHA256:AES256-SHA256:AES128-SHA256:AES256-SHA:AES128-SHA'
-  idpconf_shibboleth_version: 'shibboleth-identity-provider-3.4.1'
+  idpconf_shibboleth_version: 'shibboleth-identity-provider-3.4.6'
   idpconf_core_sp_metadata_url: 'https://{{ int_router_host }}:{{ int_router_port }}/static/metadata/sp-metadata.xml'
   idpconf_host: '{{ ext_router_host }}'
   idpconf_scope: '{{ ext_router_host }}'

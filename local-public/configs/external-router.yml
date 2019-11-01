@@ -1,4 +1,4 @@
-  content_security_policy: "default-src 'none'; script-src 'self'; style-src 'self' 'sha256-FSrwEHN8ynftTvveFXwg6vUfMRJHxHfaR/D4rQIsX0g=' 'sha256-CwE3Bg0VYQOIdNAkbB/Btdkhul49qZuwgNCMPgNY5zw=' 'sha256-MZKTI0Eg1N13tshpFaVW65co/LeICXq4hyVx6GWVlK0=' 'sha256-LpfmXS+4ZtL2uPRZgkoR29Ghbxcfime/CsD/4w5VujE=' 'sha256-YJO/M9OgDKEBRKGqp4Zd07dzlagbB+qmKgThG52u/Mk='; font-src 'self'; img-src 'self'; connect-src 'self' htesti.katso.tunnistus.fi; frame-src *"
+  content_security_policy: "default-src 'none'; script-src 'self'; style-src 'self' 'sha256-FSrwEHN8ynftTvveFXwg6vUfMRJHxHfaR/D4rQIsX0g=' 'sha256-CwE3Bg0VYQOIdNAkbB/Btdkhul49qZuwgNCMPgNY5zw=' 'sha256-MZKTI0Eg1N13tshpFaVW65co/LeICXq4hyVx6GWVlK0=' 'sha256-LpfmXS+4ZtL2uPRZgkoR29Ghbxcfime/CsD/4w5VujE=' 'sha256-YJO/M9OgDKEBRKGqp4Zd07dzlagbB+qmKgThG52u/Mk='; font-src 'self'; img-src 'self'; connect-src 'self' htesti.katso.tunnistus.fi {{discovery_page_check_host_csp}}; frame-src *"
   external_router_host_cert_path: '{{ deploydir }}/ssl'
   pub_ssl_cert: "pub_ssl.crt"
   pub_ssl_key: "pub_ssl.key"

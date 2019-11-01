@@ -2,7 +2,7 @@
   group: name=crl state=present system=yes
 
 - name: Add crl user
-  user: name=crl group=crl comment="VRK CRL Updater" shell=/usr/bin/bash createhome=no home=/data/crls
+  user: name=crl group=crl comment="VRK CRL Updater" shell=/usr/bin/bash home=/data/crl
 
 - name: Add /data/crls directory
   file: path=/data/crls owner=root group=crl mode=775 state=directory
@@ -23,28 +23,23 @@
   file: path=/data/logs/crl-updater/crl-updater.log owner=root group=crl mode=664 state=touch
 
 - name: Copy renew.sh file
-  template: src=renew.sh.template mode=755 dest=/data/crl-updater/renew.sh
+  template: src=renew.sh.template force=yes owner=crl group=crl mode=755 dest=/data/crl-updater/renew.sh
 
 - name: Copy renew.conf file (production environment)
-  copy: src=renew.prod.conf mode=755 dest=/data/crl-updater/renew.conf
+  copy: src=renew.prod.conf force=yes owner=crl group=crl mode=755 dest=/data/crl-updater/renew.conf
   when: env == "prod"
 
 - name: Copy renew.conf file (all test environments)
-  copy: src=renew.test.conf mode=755 dest=/data/crl-updater/renew.conf
+  copy: src=renew.test.conf force=yes owner=crl group=crl mode=755 dest=/data/crl-updater/renew.conf
   when: env == "local" or env == "dev" or env == "test" or env == "kete"
 
 - name: Copy renew.conf file (override prod)
-  copy: src=renew.prod.conf mode=755 dest=/data/crl-updater/renew.conf
+  copy: src=renew.prod.conf force=yes owner=crl group=crl mode=755 dest=/data/crl-updater/renew.conf
   when: crl_mode is defined and crl_mode == "prod"
 
 - name: Copy renew.conf file (override test)
-  copy: src=renew.test.conf mode=755 dest=/data/crl-updater/renew.conf
+  copy: src=renew.test.conf force=yes owner=crl group=crl mode=755 dest=/data/crl-updater/renew.conf
   when: crl_mode is defined and crl_mode == "test"
-
-- name: Remove old cronjob file from previous version (if exists)
-  cron: cron_file="VRK-CRL-Updater"
-        name="VRK CRL Updater (15 minutes schedule)"
-        state="absent"
 
 - name: Creates/updates cronjob for renew.sh
   cron: minute="*/10"
@@ -55,3 +50,26 @@
 
 - name: Add logrotate script for log file
   copy: src=crl-renew.logrotate mode=644 owner=root group=root dest=/etc/logrotate.d/crl-renew
+
+- name: list files in work directory for cleaning
+  find:
+    paths: /data/crls
+    hidden: true
+    file_type: any
+    patterns:
+      - '*'
+  register: files_to_delete
+
+- name: clean work directory
+  file:
+    path: "{{ item.path }}"
+    state: absent
+  with_items: "{{ files_to_delete.files }}"
+
+- name: Runs renew.sh to populate crl file directory (production environment)
+  command: sh /data/crl-updater/renew.sh
+  when: env == "prod"
+
+- name: Runs renew.sh to populate crl file directory (all test environments) 
+  script: /data/crl-updater/renew.sh
+  when: env == "local" or env == "dev" or env == "test" or env == "kete"

@@ -1,7 +1,7 @@
 ---
 # VRK CRL Updater
 
-- hosts: tupasidp
+- hosts: hst-idp
   sudo: yes
   roles:
     - e-identification-crl-updater
@@ -36,7 +36,6 @@
     - metadata
     - idp
     - all
-    - mobile-idp
   vars_files:
     - "{{ local_variables }}"
  
@@ -320,42 +319,6 @@
     - "{{ aprovarsfile }}"
     - "{{ infrafile }}"
 
-# Integration Identity Provider Playbook
-
-- hosts: tupasidp
-  sudo: yes
-  roles:
-    - e-identification-apro-certs
-    - e-identification-deploy
-
-  vars:
-    host: "{{ tupas_idp_host }}"
-    ports: "{{ tupas_idp_ports }}"
-    target_port: "{{ tupas_idp_target_port }}"
-    container_name:  "{{ tupas_idp_container_name }}"
-    deploydir: "{{ deploy_root }}/{{ tupas_idp_directory }}/"
-    confdir: "{{ conf_root }}/configs/{{ tupas_idp_directory }}/"
-    logdir: "{{ deploy_root }}/logs/identity-provider-tupasidp/"
-    imagename: "{{ tupas_idp_imagename }}"
-    varsfilename: "tupasidp.yml"
-    aprovarsfile: "{{ conf_root }}/configs/{{ varsfilename }}"
-    infrafile: "{{ conf_root }}/configs/infra.yml"
-    mounts: "{{ tupas_idp_mounts }}"
-    local_variables: "{{ conf_root }}/local_configs/local_variables.yml"
-  tags:
-    - integration-identity-provider-container
-    - tupasidp
-    - all-local
-    - all-dev
-    - all-kete
-    - all-test
-    - all-prod
-    - all
-  vars_files:
-    - "{{ local_variables }}"
-    - "{{ aprovarsfile }}"
-    - "{{ infrafile }}"
-
 # Vtj-client playbook
 - hosts: vtj
   sudo: yes
@@ -554,41 +517,6 @@
     - "{{ local_variables }}"
     - "{{ aprovarsfile }}"
     - "{{ infrafile }}"
-
-# Mobile IdP playbook
-
-- hosts: mobile-idp
-  sudo: yes
-  roles: 
-    - e-identification-apro-certs
-    - e-identification-deploy
-  vars:
-    host: "{{ mobile_idp_host }}"
-    ports: "{{ mobile_idp_ports }}"
-    target_port: "{{ mobile_idp_target_port }}"
-    container_name:  "{{ mobile_idp_container_name }}"
-    deploydir: "{{ deploy_root }}/{{ mobile_idp_directory }}/"
-    confdir: "{{ conf_root }}/configs/{{ mobile_idp_directory }}/"
-    logdir: "{{ deploy_root }}/logs/e-identification-mobile-idp/"
-    imagename: "{{ mobile_idp_imagename }}"
-    varsfilename: "mobile-idp.yml"
-    aprovarsfile: "{{ conf_root }}/configs/{{ varsfilename }}"
-    infrafile: "{{ conf_root }}/configs/infra.yml"
-    mounts: "{{ mobile_idp_mounts }}"
-    local_variables: "{{ conf_root }}/local_configs/local_variables.yml"
-  tags:
-    - mobile-idp
-    - all-local
-    - all-dev
-    - all-kete
-    - all-test
-    - all-prod
-    - all
-  vars_files:
-    - "{{ local_variables }}"
-    - "{{ aprovarsfile }}"
-    - "{{ infrafile }}"
-
 
 # Test service
 
