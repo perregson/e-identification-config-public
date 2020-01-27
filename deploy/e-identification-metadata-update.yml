@@ -2,7 +2,7 @@
 # Static content Nginx playbook
 
 - hosts: static
-  sudo: yes
+  become: yes
   vars:
     container_name:  "{{ static_container_name }}"
     deploydir: "{{ deploy_root }}/{{ static_directory }}/"
@@ -31,7 +31,7 @@
 # Metadata db
 
 - hosts: e-identification-metadata-db-servers
-  sudo: yes
+  become: yes
   roles:
     - e-identification-metadata-postgres
 
@@ -61,7 +61,7 @@
  # IdentityProvider Playbook
 
 - hosts: idp
-  sudo: yes
+  become: yes
   vars:
     container_name:  "{{ idp_container_name }}"
     deploydir: "{{ deploy_root }}/{{ idp_directory }}/"
@@ -86,7 +86,7 @@
         docker start {{ container_name }}
 
 - hosts: proxy
-  sudo: yes
+  become: yes
   vars:
     container_name:  "{{ proxy_container_name }}"
     infrafile: "{{ conf_root }}/configs/infra.yml"

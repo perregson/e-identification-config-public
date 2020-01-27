@@ -69,3 +69,5 @@
   spconf_AuthnContextClassRef_saastopankki: 'https://tunnistus.fi/oidc.sp.floatest2'
   spconf_AuthnContextClassRef_omasaastopankki: 'https://tunnistus.fi/oidc.omasp.floatest2'
   spconf_AuthnContextClassRef_danske: 'https://tunnistus.fi/oidc.danskebank.floatest2'
+
+  spconf_entityid_eidas_specificConnector: "TBA"

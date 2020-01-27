@@ -2,7 +2,7 @@
 # VRK CRL Updater
 
 - hosts: hst-idp
-  sudo: yes
+  become: yes
   roles:
     - e-identification-crl-updater
   vars:
@@ -24,7 +24,7 @@
 
 # clear nginx cache
 - hosts: external-router
-  sudo: yes
+  become: yes
   roles:
     - e-identification-clear-cache
   vars:
@@ -42,7 +42,7 @@
 # Static content Nginx playbook
 
 - hosts: static
-  sudo: yes
+  become: yes
   roles:
     - e-identification-deploy
   vars:
@@ -76,7 +76,7 @@
 # e-identification-internal-router playbook
 
 - hosts: internal-router
-  sudo: yes
+  become: yes
   roles:
     - e-identification-deploy
   vars:
@@ -110,7 +110,7 @@
 # e-identification-external-router playbook
 
 - hosts: external-router
-  sudo: yes
+  become: yes
   roles:
     - e-identification-check-dhparams
     - e-identification-deploy
@@ -146,7 +146,7 @@
 # e-identification-hst-router playbook
 
 - hosts: hst-router
-  sudo: yes
+  become: yes
   roles:
     - e-identification-deploy
   vars:
@@ -179,7 +179,7 @@
 
 
 - hosts: metadata
-  sudo: yes
+  become: yes
   roles:
     - e-identification-apro-certs
     - e-identification-deploy
@@ -215,7 +215,7 @@
 
 #- hosts: local
 - hosts: proxy
-  sudo: yes
+  become: yes
   roles:
     - e-identification-apro-certs
     - e-identification-deploy
@@ -251,7 +251,7 @@
 # Service Provider Playbook
 
 - hosts: sp
-  sudo: yes
+  become: yes
   roles:
     - e-identification-apro-certs
     - e-identification-deploy
@@ -287,7 +287,7 @@
 # Identity Provider Playbook
 
 - hosts: idp
-  sudo: yes
+  become: yes
   roles:
     - e-identification-apro-certs
     - e-identification-deploy
@@ -321,7 +321,7 @@
 
 # Vtj-client playbook
 - hosts: vtj
-  sudo: yes
+  become: yes
   roles:
     - e-identification-deploy
 
@@ -354,7 +354,7 @@
 
 # Vtj-client2 playbook
 - hosts: vtj2
-  sudo: yes
+  become: yes
   roles:
     - e-identification-deploy
 
@@ -387,7 +387,7 @@
 
 # Fake-Vtj playbook
 - hosts: fake-vtj
-  sudo: yes
+  become: yes
   roles:
     - e-identification-deploy
 
@@ -418,7 +418,7 @@
 # HST IdP playbook
 
 - hosts: hst-idp
-  sudo: yes
+  become: yes
   roles:
     - e-identification-apro-certs
     - e-identification-deploy
@@ -454,7 +454,7 @@
 # Feedback playbook
 
 - hosts: feedback
-  sudo: yes
+  become: yes
   roles:
     - e-identification-deploy
   vars:
@@ -489,7 +489,7 @@
 # Localisation Playbook
 
 - hosts: localisation
-  sudo: yes
+  become: yes
   roles:
     - e-identification-deploy
   vars:
@@ -521,7 +521,7 @@
 # Test service
 
 - hosts: test-service
-  sudo: yes
+  become: yes
   roles:
     - e-identification-apro-certs
     - e-identification-deploy
@@ -557,7 +557,7 @@
 # Test service 2
 
 - hosts: test-service2
-  sudo: yes
+  become: yes
   roles:
     - e-identification-apro-certs
     - e-identification-deploy
@@ -593,7 +593,7 @@
 
 # vartti-client
 - hosts: vartti
-  sudo: yes
+  become: yes
   roles:
     - e-identification-apro-certs
     - e-identification-deploy
@@ -627,7 +627,7 @@
 
 # eidas
 - hosts: eidas
-  sudo: yes
+  become: yes
   roles:
     - e-identification-deploy
 
@@ -663,7 +663,7 @@
 # e-identification-eidas-router playbook
 
 - hosts: eidas-router
-  sudo: yes
+  become: yes
   roles:
     - e-identification-check-dhparams
     - e-identification-deploy
@@ -701,7 +701,7 @@
 # Test IdP playbook
 
 - hosts: test-idp
-  sudo: yes
+  become: yes
   roles:
     - e-identification-apro-certs
     - e-identification-deploy

@@ -63,14 +63,13 @@ ALTER TABLE metadata OWNER TO vagrant;
 
 begin TRANSACTION;
 
-
 INSERT INTO "public"."metadata"   VALUES (nextval('hibernate_sequence'),0,'https://htesti.katso.tunnistus.fi/ubitp/saml2/names/ac/password.katso.1','Katso-pwd','AUTHENTICATION_PROVIDER','katso.fi','KATSOPWD','KATSOPWD','VETUMA_SAML2' , 'https://htesti.katso.tunnistus.fi/uas/saml2/names/ac/password.katso.1', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ');
 INSERT INTO "public"."metadata"   VALUES (nextval('hibernate_sequence'),0,'https://htesti.katso.tunnistus.fi/ubitp/saml2/names/ac/otp.katso.1','Katso-otp','AUTHENTICATION_PROVIDER','katso.fi','KATSOOTP','KATSOOTP','VETUMA_SAML2' , 'https://htesti.katso.tunnistus.fi/uas/saml2/names/ac/otp.katso.1', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ');
-INSERT INTO "public"."metadata"   VALUES (nextval('hibernate_sequence'),0,'urn:oid:1.2.246.517.99.10.23.1','VRK-varmenne','AUTHENTICATION_PROVIDER','vrk.fi','fLoA2','HST','VETUMA_SAML2' , 'https://www.tunnistus.fi/ubitp/saml2/names/ac/pki.hst.3', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ');
+INSERT INTO "public"."metadata"   VALUES (nextval('hibernate_sequence'),0,'VARMENNEKORTTI','VRK-varmenne','AUTHENTICATION_PROVIDER','vrk.fi','fLoA2','HST','VETUMA_SAML2' , 'https://www.tunnistus.fi/ubitp/saml2/names/ac/pki.hst.3', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ');
 INSERT INTO "public"."metadata"   VALUES (nextval('hibernate_sequence'),0,'urn:oid:1.2.246.517.3002.110.999','Testi','AUTHENTICATION_PROVIDER','shib-idp.kapa.ware.fi','TESTI','TESTI','VETUMA_SAML2' , 'urn:oid:1.2.246.517.3002.110.999', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ');
-INSERT INTO "public"."metadata"   VALUES (nextval('hibernate_sequence'),0,'MOBIILI_TELIA','Mobiilivarmenne','AUTHENTICATION_PROVIDER','tunnistus-pp.telia.fi','fLoA2','MOBIILI','VETUMA_SAML2' , 'https://tunnistus-pp.telia.fi/uas/saml2/names/ac/mpki.telia.test.1' , ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ');
+INSERT INTO "public"."metadata"   VALUES (nextval('hibernate_sequence'),0,'MOBIILI','Mobiilivarmenne','AUTHENTICATION_PROVIDER','tunnistus-pp.telia.fi','fLoA2','MOBIILI','VETUMA_SAML2' , 'https://tunnistus-pp.telia.fi/uas/saml2/names/ac/mpki.telia.test.1' , ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ');
 INSERT INTO "public"."metadata"   VALUES (nextval('hibernate_sequence'),0,'EIDAS_HIGH','Eidas','AUTHENTICATION_PROVIDER','suomi.fi','eLoA3','eLoA3','VETUMA_SAML2' , 'http://eidas.europa.eu/LoA/high', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ');
-INSERT INTO "public"."metadata"   VALUES (nextval('hibernate_sequence'),0,'OP2','Osuuspankki','AUTHENTICATION_PROVIDER','op.fi','fLoA2','OP','VETUMA_SAML2' , 'https://tunnistus-pp.telia.fi/uas/saml2/names/ac/saml.op.fi', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ');
+INSERT INTO "public"."metadata"   VALUES (nextval('hibernate_sequence'),0,'OSUUSPANKKI','Osuuspankki','AUTHENTICATION_PROVIDER','op.fi','fLoA2','OP','VETUMA_SAML2' , 'https://tunnistus-pp.telia.fi/uas/saml2/names/ac/saml.op.fi', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ');
 
 -- some test values of service providing parties
 -- SSO/SLO test SP's
@@ -93,10 +92,10 @@ begin TRANSACTION;
 
 INSERT INTO "public"."logincontext"   SELECT nextval('hibernate_sequence'), m.entityid, '/Shibboleth.sso/LoginKatsoPWD'        FROM metadata m WHERE m.entityid='https://htesti.katso.tunnistus.fi/ubitp/saml2/names/ac/password.katso.1';
 INSERT INTO "public"."logincontext"   SELECT nextval('hibernate_sequence'), m.entityid, '/Shibboleth.sso/LoginKatsoOTP'        FROM metadata m WHERE m.entityid='https://htesti.katso.tunnistus.fi/ubitp/saml2/names/ac/otp.katso.1';
-INSERT INTO "public"."logincontext"   SELECT nextval('hibernate_sequence'), m.entityid, '/Shibboleth.sso/LoginVrk'             FROM metadata m WHERE m.entityid='urn:oid:1.2.246.517.99.10.23.1';
-INSERT INTO "public"."logincontext"   SELECT nextval('hibernate_sequence'), m.entityid, '/Shibboleth.sso/LoginMobiili2'        FROM metadata m WHERE m.entityid='MOBIILI_TELIA';
+INSERT INTO "public"."logincontext"   SELECT nextval('hibernate_sequence'), m.entityid, '/Shibboleth.sso/LoginVrk'             FROM metadata m WHERE m.entityid='VARMENNEKORTTI';
+INSERT INTO "public"."logincontext"   SELECT nextval('hibernate_sequence'), m.entityid, '/Shibboleth.sso/LoginMobiili2'        FROM metadata m WHERE m.entityid='MOBIILI';
 INSERT INTO "public"."logincontext"   SELECT nextval('hibernate_sequence'), m.entityid, '/Shibboleth.sso/LoginFakevetuma2'     FROM metadata m WHERE m.entityid='urn:oid:1.2.246.517.3002.110.999';
-INSERT INTO "public"."logincontext"   SELECT nextval('hibernate_sequence'), m.entityid, '/Shibboleth.sso/LoginOsuuspankki2'    FROM metadata m WHERE m.entityid='OP2';
+INSERT INTO "public"."logincontext"   SELECT nextval('hibernate_sequence'), m.entityid, '/Shibboleth.sso/LoginOsuuspankki2'    FROM metadata m WHERE m.entityid='OSUUSPANKKI';
 
 COMMIT;
 

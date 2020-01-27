@@ -68,8 +68,8 @@
 
 - name: Runs renew.sh to populate crl file directory (production environment)
   command: sh /data/crl-updater/renew.sh
-  when: env == "prod"
+  when: env == "prod" or env == "test"
 
 - name: Runs renew.sh to populate crl file directory (all test environments) 
   script: /data/crl-updater/renew.sh
-  when: env == "local" or env == "dev" or env == "test" or env == "kete"
+  when: env == "local" or env == "dev" or env == "kete"
