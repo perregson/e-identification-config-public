@@ -4,3 +4,17 @@
   pub_ssl_key: "pub_ssl.key"
   external_router_workers: "1024"
   external_router_processes: "1"
+
+  # file name to include SameSite behavior from. Options are:
+  # - shibboleth_sso.samesitenone_behavior_1.j2
+  #   User agents matching user_agents_regex_for_samesite_behavior will served
+  #   with SameSite=None in Cookie header. Other user agents won't get SameSite=None.
+  #
+  # - shibboleth_sso.samesitenone_behavior_2.j2
+  #   User agents matching user_agents_regex_for_samesite_behavior will not be served
+  #   with SameSite=None in Cookie header. Other user agents will get SameSite=None.
+  nginx_shibboleth_sso_location_template: "shibboleth_sso.samesitenone_behavior_1.j2"
+
+  # Regular expression to target behavior in the template assigned by
+  # nginx_shibbolet_sso_location_template
+  user_agents_regex_for_samesite_behavior: "Chrome/[8-9][0-9].*"

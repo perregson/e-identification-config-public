@@ -31,8 +31,13 @@
   spconf_location_eidas_substantial: "{{ spconf_location_eidas_base }}eLoA2"
   spconf_location_eidas_high: "{{ spconf_location_eidas_base }}eLoA3"
   spconf_entityid_mw_de: "https://tun-kete-cache1:8037/static/metadata/service-idp-metadata.xml"
+
+  spconf_location_finnish_authenticator: "/LoginTestGemalto"
+  spconf_AuthnContextClassRef_finnish_authenticator: "https://tunnistus.fi/oidc.utu.loa0"
+
   spconf_status_acl: "127.0.0.1"
   spconf_provider_name: "DEMO-SP"
+  spconf_entityid_eidas_specificConnector: "https://nodefi1.apro.tunnistus.fi/specificConnector"
   spconf_entityid: "https://tunnistaminen.test/sp2"
   spconf_displayname: "KaPA DEV SP"
   spconf_displayname_fi: "KaPA DEV SP fi"
@@ -69,5 +74,3 @@
   spconf_AuthnContextClassRef_saastopankki: 'https://tunnistus.fi/oidc.sp.floatest2'
   spconf_AuthnContextClassRef_omasaastopankki: 'https://tunnistus.fi/oidc.omasp.floatest2'
   spconf_AuthnContextClassRef_danske: 'https://tunnistus.fi/oidc.danskebank.floatest2'
-
-  spconf_entityid_eidas_specificConnector: "TBA"

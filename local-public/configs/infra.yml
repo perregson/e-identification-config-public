@@ -1,5 +1,5 @@
 ---
-  sp_host: 'tun-pub-sp1'
+  sp_host: 'tun-pub-adap1'
   sp_imagename: "service-provider:local"
   testsp_host: 'tun-pub-router1'
   testsp_port: '443'

@@ -66,10 +66,10 @@
     state: absent
   with_items: "{{ files_to_delete.files }}"
 
-- name: Runs renew.sh to populate crl file directory (production environment)
+- name: Runs renew.sh to populate crl file directory (production and apro/test environments)
   command: sh /data/crl-updater/renew.sh
   when: env == "prod" or env == "test"
 
-- name: Runs renew.sh to populate crl file directory (all test environments) 
+- name: Runs renew.sh to populate crl file directory (all dev environments) 
   script: /data/crl-updater/renew.sh
   when: env == "local" or env == "dev" or env == "kete"

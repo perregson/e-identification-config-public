@@ -42,6 +42,9 @@
   spconf_AuthnContextDeclRef_danske_bank: 'https://www.tunnistus.fi/ubitp/saml2/names/ac/tupas.sampo.3'
   spconf_location_danske_oidc: '/LoginDanskeOIDC'
   spconf_location_mpass: '/LoginMPASS'
+
+  spconf_location_finnish_authenticator: '/LoginFinnishAuthenticator'
+
   apache_ciphers: '-ALL:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-SHA384:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-SHA256:ECDHE-RSA-AES256-SHA:ECDHE-RSA-AES128-SHA:DHE-RSA-AES256-SHA256:DHE-RSA-AES128-GCM-SHA256:DHE-RSA-AES128-SHA256:DHE-RSA-AES256-SHA:DHE-RSA-AES128-SHA:AES256-GCM-SHA384:AES128-GCM-SHA256:AES256-SHA256:AES128-SHA256:AES256-SHA:AES128-SHA'
   apache_server_name: 'https://{{ ext_router_host }}:{{ ext_router_port }}'
   success_redirect_url: 'https://{{ ext_router_host }}'
