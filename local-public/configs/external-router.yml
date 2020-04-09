@@ -18,3 +18,5 @@
   # Regular expression to target behavior in the template assigned by
   # nginx_shibbolet_sso_location_template
   user_agents_regex_for_samesite_behavior: "Chrome/[8-9][0-9].*"
+
+  user_agents_regex_for_samesite_none_on_sso: "Chrome/[8-9][0-9].*"

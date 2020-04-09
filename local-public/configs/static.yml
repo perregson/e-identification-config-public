@@ -1,1 +1,4 @@
 discovery_page_show_tls_warning: 'false'
+
+disruption_message_url: /disruption/disruption_message.json
+disruption_message_eidas_url: /disruption/disruption_message_eidas.json
