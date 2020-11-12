@@ -11,14 +11,15 @@ Asennusohjeet on tehty juuri asennetun Ubuntu 20.04 LTS -käyttöjärjestelmän 
 sudo apt-get update # pakettilistausten päivitys
 sudo apt-get -y dist-upgrade # pakettien päivitys
 
-#### Zulu8-jdk
+### Zulu8-jdk
 sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 0xB1998361219BD9C9 # zulu jdk
-Download the installation package from the Azul Systems site https://cdn.azul.com/zulu/bin/zulu-repo_1.0.0-2_all.deb
+# Download the installation package from the Azul Systems site 
+wget https://cdn.azul.com/zulu/bin/zulu-repo_1.0.0-2_all.deb
 sudo apt-get install ./zulu-repo_1.0.0-2_all.deb #Install Zulu repositories
 sudo apt-get update
 sudo apt-get install zulu8-jdk
 
-#### Docker
+### Docker
 sudo apt-get install \
     apt-transport-https \
     ca-certificates \
@@ -38,9 +39,9 @@ sudo apt-get -y install docker-ce docker-ce-cli containerd.io
 sudo usermod -aG docker $USER # docker
 sudo apt-get -y install maven git ansible
 
-curl -sL https://deb.nodesource.com/setup_8.x | sudo bash -
+curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
 
-sudo apt-get -y install nodejs gem ruby-sass ruby-compass # e-identification-static-ui
+sudo apt-get -y install nodejs gem ruby-sass compass-blueprint-plugin # e-identification-static-ui
 sudo ln -s /usr/bin/nodejs /usr/bin/node # e-identification-static-ui
 ```
 Suositeltavaa on tehdä uudelleenkäynnistys (sudo reboot) tässä välissä, jotta päivitetyt paketit ja käyttöoikeudet tulevat varmasti voimaan.
