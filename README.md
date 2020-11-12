@@ -5,24 +5,38 @@ Tämän ohjeen avulla saat käännettyä Suomi.fi-tunnistaminen lähdekoodit ja 
 
 ### Ympäristö
 
-Asennusohjeet on tehty juuri asennetun Ubuntu 16.04 LTS -käyttöjärjestelmän pohjalta. Aloitetaan asentamalla tarvittavat käännöstyökalut ja ajoympäristö.
+Asennusohjeet on tehty juuri asennetun Ubuntu 20.04 LTS -käyttöjärjestelmän pohjalta. Aloitetaan asentamalla tarvittavat käännöstyökalut ja ajoympäristö.
 
 ```
 sudo apt-get update # pakettilistausten päivitys
 sudo apt-get -y dist-upgrade # pakettien päivitys
 
+#### Zulu8-jdk
 sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 0xB1998361219BD9C9 # zulu jdk
-sudo apt-add-repository 'deb http://repos.azulsystems.com/ubuntu stable main' # zulu jdk
-sudo apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D # docker
-echo "deb https://apt.dockerproject.org/repo ubuntu-xenial main" | sudo tee /etc/apt/sources.list.d/docker.list # docker
+Download the installation package from the Azul Systems site https://cdn.azul.com/zulu/bin/zulu-repo_1.0.0-2_all.deb
+sudo apt-get install ./zulu-repo_1.0.0-2_all.deb #Install Zulu repositories
 sudo apt-get update
+sudo apt-get install zulu8-jdk
 
-sudo apt-get -y install docker-engine # docker
+#### Docker
+sudo apt-get install \
+    apt-transport-https \
+    ca-certificates \
+    curl \
+    gnupg-agent \
+    software-properties-common
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+\# Verify fingerprint
+sudo apt-key fingerprint 0EBFCD88
+sudo add-apt-repository \
+    "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+    $(lsb_release -cs) \
+    stable"
+sudo apt-get update
+sudo apt-get -y install docker-ce docker-ce-cli containerd.io
+
 sudo usermod -aG docker $USER # docker
-
-sudo apt-get install zulu-8 # zulu jdk
-
-sudo apt-get -y install maven git ansible curl
+sudo apt-get -y install maven git ansible
 
 curl -sL https://deb.nodesource.com/setup_8.x | sudo bash -
 
