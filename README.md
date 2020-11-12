@@ -119,6 +119,14 @@ cd ~/build/src/e-identification-base-images-public/node
 
 cd ~/build/src/e-identification-base-images-public/tomcat
 ./build_images.sh
+````
+Fetched 19.0 MB in 9s (1938 kB/s)
+Reading package lists...
+E: The method driver /usr/lib/apt/methods/https could not be found.
+E: Failed to fetch https://repos.azul.com/zulu/deb/dists/stable/InRelease  
+E: Some index files failed to download. They have been ignored, or old ones used instead.
+The command '/bin/sh -c set -x     && apt-get update     && apt-get -y upgrade && apt-get install -yq gcc make openssl libssl-dev libapr1 libapr1-dev less 	&& tar zxf /usr/share/tomcat/bin/tomcat-native.tar.gz -C /tmp 	&& cd /tmp/tomcat-native*-src/native/ 	&& ./configure --with-apr=/usr/bin/apr-1-config --with-java-home=/usr/lib/jvm/zulu-8-amd64 --with-ssl=yes --libdir=/usr/lib/ 	&& make && make install 	&& apt-get purge -y gcc make libssl-dev libapr1-dev 	&& apt-get -y autoremove 	&& rm -rf /tmp/tomcat-native* 	&& rm -rf /var/lib/apt/lists/*' returned a non-zero code: 100
+````
 
 cd ~/build/src/e-identification-base-images-public/tomcat-apache2-shibd-sp
 ./build_images.sh
