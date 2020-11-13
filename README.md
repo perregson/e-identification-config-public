@@ -43,6 +43,12 @@ curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
 
 sudo apt-get -y install nodejs gem ruby-sass compass-blueprint-plugin # e-identification-static-ui
 sudo ln -s /usr/bin/nodejs /usr/bin/node # e-identification-static-ui
+
+# ruby-compass ei asennu, kokeillaan näin
+sudo gem update --system
+sudo gem install compass
+
+
 ```
 Suositeltavaa on tehdä uudelleenkäynnistys (sudo reboot) tässä välissä, jotta päivitetyt paketit ja käyttöoikeudet tulevat varmasti voimaan.
 
