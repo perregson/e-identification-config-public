@@ -37,7 +37,7 @@ sudo apt-get update
 sudo apt-get -y install docker-ce docker-ce-cli containerd.io
 
 sudo usermod -aG docker $USER # docker
-sudo apt-get -y install maven git ansible
+sudo apt-get -y install maven git ansible build-essential
 
 curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
 
